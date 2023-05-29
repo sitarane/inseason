@@ -1,5 +1,6 @@
 volumes:
   db-data:
+  gems:
 
 services:
   db:
@@ -11,6 +12,7 @@ services:
     build: .
     volumes:
       - .:/app:z
+      - gems:/usr/local/bundle
     ports:
       - "3000:3000"
     depends_on:
@@ -18,3 +20,20 @@ services:
     env_file: .env
     stdin_open: true
     tty: true
+  test:
+    image: inseason_web
+    volumes:
+      - .:/app
+      - gems:/usr/local/bundle
+    depends_on:
+      - db
+      - chrome-server
+    environment:
+      RAILS_ENV: test
+    env_file: .env
+    stdin_open: true
+    tty: true
+  chrome-server:
+    image: selenium/standalone-chrome
+    ports:
+      - "7900:7900"
