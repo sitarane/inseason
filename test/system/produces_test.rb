@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class ProducesTest < ApplicationSystemTestCase
   setup do
-    @produce = produces(:one)
+    @produce = produces(:apple)
   end
 
   test "visiting the index" do
