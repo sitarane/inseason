@@ -1,7 +1,13 @@
 require "test_helper"
 
 class ProduceTest < ActiveSupport::TestCase
-  test "the truth" do
-    assert true
+  test "can't create nameless" do
+    produce = Produce.new
+    assert_not produce.valid?
+  end
+
+  test 'can save valid produce' do
+    produce = Produce.new(name: 'Banana')
+    assert produce.save
   end
 end
