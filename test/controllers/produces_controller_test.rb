@@ -1,7 +1,10 @@
 require "test_helper"
 
 class ProducesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    sign_in users(:john)
     @produce = produces(:apple)
   end
 
