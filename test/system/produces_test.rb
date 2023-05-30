@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class ProducesTest < ApplicationSystemTestCase
+
   setup do
     @produce = produces(:apple)
   end
@@ -11,6 +12,7 @@ class ProducesTest < ApplicationSystemTestCase
   end
 
   test "should create produce" do
+    login_as users(:john)
     visit produces_url
     click_on "New produce"
 
@@ -22,6 +24,7 @@ class ProducesTest < ApplicationSystemTestCase
   end
 
   test "should update Produce" do
+    login_as users(:john)
     visit produce_url(@produce)
     click_on "Edit this produce", match: :first
 
@@ -33,6 +36,7 @@ class ProducesTest < ApplicationSystemTestCase
   end
 
   test "should destroy Produce" do
+    login_as users(:john)
     visit produce_url(@produce)
     click_on "Destroy this produce", match: :first
 
