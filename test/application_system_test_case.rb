@@ -5,4 +5,5 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser: :remote,
     url: "http://chrome-server:4444/wd/hub"
   }
+  include Warden::Test::Helpers
 end

@@ -37,7 +37,10 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update produce" do
-    patch produce_url(@produce), params: { produce: { name: @produce.name } }
+    new_name = 'New name'
+    patch produce_url(@produce), params: { produce: { name: new_name } }
+    @produce.reload
+    assert_equal new_name, @produce.name
     assert_redirected_to produce_url(@produce)
   end
 
