@@ -16,10 +16,15 @@ services:
     ports:
       - "3000:3000"
     depends_on:
+      - maildev
       - db
     env_file: .env
     stdin_open: true
     tty: true
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
   test:
     image: inseason_web
     volumes:
