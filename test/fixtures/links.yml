@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  produce: one
-  from: 1
-  url: MyString
+apple_wiki_link:
+  produce: apple
+  from: 0
+  url: https://en.wikipedia.org/wiki/Apple
 
-two:
-  produce: two
-  from: 1
-  url: MyString
+# two:
+#   produce: two
+#   from: 1
+#   url: MyString
