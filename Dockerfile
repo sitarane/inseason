@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.1
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs postgresql-client
+RUN apt-get install -y nodejs postgresql-client libvips
 RUN npm install -g yarn
 WORKDIR /app
 COPY Gemfile /app/Gemfile

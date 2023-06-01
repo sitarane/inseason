@@ -1,4 +1,5 @@
 <div id="<%= dom_id produce %>">
+  <%= image_tag produce.picture.variant(:thumb) if produce.picture.attached? %>
   <p>
     <strong>Name:</strong>
     <%= produce.name %>

@@ -6,7 +6,7 @@ class ProduceTest < ActiveSupport::TestCase
     assert_not produce.valid?
   end
 
-  test 'can save valid produce' do
+  test 'can save without image' do
     produce = Produce.new(name: 'Banana')
     assert produce.save
   end

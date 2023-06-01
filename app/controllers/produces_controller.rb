@@ -65,6 +65,6 @@ class ProducesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def produce_params
-      params.require(:produce).permit(:name)
+      params.require(:produce).permit(:name, :picture)
     end
 end

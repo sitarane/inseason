@@ -26,6 +26,21 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to produce_url(Produce.last)
   end
 
+  test "should create produce with picture" do
+    picture = fixture_file_upload('test/fixtures/files/apple.jpg')
+    params = {
+      produce: {
+        name: @produce.name,
+        picture: picture
+      }
+    }
+    assert_difference("Produce.count") do
+      post produces_url, params: params
+    end
+
+    assert_redirected_to produce_url(Produce.last)
+  end
+
   test "should show produce" do
     get produce_url(@produce)
     assert_response :success
@@ -36,11 +51,19 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update produce" do
+  test "should change produce name" do
     new_name = 'New name'
     patch produce_url(@produce), params: { produce: { name: new_name } }
     @produce.reload
     assert_equal new_name, @produce.name
+    assert_redirected_to produce_url(@produce)
+  end
+
+  test "should add an image to produce" do
+    picture = fixture_file_upload('test/fixtures/files/apple.jpg')
+    patch produce_url(@produce), params: { produce: { picture: picture } }
+    @produce.reload
+    assert @produce.picture.attached?
     assert_redirected_to produce_url(@produce)
   end
 
