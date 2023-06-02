@@ -2,6 +2,9 @@
   <%= image_tag produce.picture.variant(:thumb), class: "card-img-top" if produce.picture.attached? %>
   <div class="card-body">
     <h2 class="card-title"><%= produce.name %></h2>
+    <p class="card-text">
+      <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
+    </p>
     <div class="btn-group" role="group" aria-label="Actions">
       <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-primary" %>
       <%= link_to "Destroy", produce_path(produce), data: { "turbo-method": :delete }, class: "btn btn-danger" %>

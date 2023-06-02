@@ -41,6 +41,22 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to produce_url(Produce.last)
   end
 
+  test "should create produce with wikipedia link" do
+    params = {
+      produce: {
+        name: @produce.name,
+        wikipedia_link: 'https://en.wikipedia.org/wiki/Apple'
+      }
+    }
+    assert_difference("Produce.count") do
+      post produces_url, params: params
+    end
+
+    assert_redirected_to produce_url(Produce.last)
+
+    assert Produce.last.links.any?
+  end
+
   test "should show produce" do
     get produce_url(@produce)
     assert_response :success
@@ -65,6 +81,39 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     @produce.reload
     assert @produce.picture.attached?
     assert_redirected_to produce_url(@produce)
+  end
+
+  test "should add a link to produce that doesn't have one" do
+    params = {
+      produce: {
+        wikipedia_link: 'https://en.wikipedia.org/wiki/Carrot'
+      }
+    }
+    carrot = produces(:no_link)
+    assert_not carrot.links.any?
+
+    patch produce_url(carrot), params: params
+    carrot.reload
+
+    assert carrot.links.any?
+    assert_redirected_to produce_url(carrot)
+  end
+
+  test "should edit link to produce that already has one" do
+    params = {
+      produce: {
+        wikipedia_link: 'https://en.wikipedia.org/wiki/Carrot'
+      }
+    }
+
+    assert_not @produce.main_link.include?('Carrot')
+
+    assert_no_difference("Link.count") do
+      patch produce_url(@produce), params: params
+    end
+    @produce.reload
+
+    assert @produce.main_link.include?('Carrot')
   end
 
   test "should destroy produce" do

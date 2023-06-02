@@ -10,4 +10,14 @@ class ProduceTest < ActiveSupport::TestCase
     produce = Produce.new(name: 'Banana')
     assert produce.save
   end
+
+  test '#main_link returns nil when no link' do
+    assert_nil produces(:no_link).main_link
+  end
+
+  test '#main_link returns a link when present' do
+    link = produces(:apple).main_link
+    assert_instance_of String, link
+    assert_match "wikipedia", link
+  end
 end

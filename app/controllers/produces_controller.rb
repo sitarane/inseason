@@ -21,7 +21,11 @@ class ProducesController < ApplicationController
 
   # POST /produces or /produces.json
   def create
-    @produce = Produce.new(produce_params)
+    @produce = Produce.new(produce_params.except(:wikipedia_link))
+
+    if produce_params[:wikipedia_link].present?
+      @produce.links.new(from: :wikipedia, url: produce_params[:wikipedia_link])
+    end
 
     respond_to do |format|
       if @produce.save
@@ -36,8 +40,17 @@ class ProducesController < ApplicationController
 
   # PATCH/PUT /produces/1 or /produces/1.json
   def update
+
+    if produce_params[:wikipedia_link]
+      if @produce.links.wikipedia.any?
+        @produce.links.wikipedia.first.update(url: produce_params[:wikipedia_link])
+      else
+        @produce.links.new(from: :wikipedia, url: produce_params[:wikipedia_link])
+      end
+    end
+
     respond_to do |format|
-      if @produce.update(produce_params)
+      if @produce.update(produce_params.except(:wikipedia_link))
         format.html { redirect_to produce_url(@produce), notice: "Produce was successfully updated." }
         format.json { render :show, status: :ok, location: @produce }
       else
@@ -65,6 +78,6 @@ class ProducesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def produce_params
-      params.require(:produce).permit(:name, :picture)
+      params.require(:produce).permit(:name, :picture, :wikipedia_link)
     end
 end
