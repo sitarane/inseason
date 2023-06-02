@@ -1,8 +1,19 @@
-<div id="<%= dom_id produce %>">
-  <%= image_tag produce.picture.variant(:thumb) if produce.picture.attached? %>
-  <p>
-    <strong>Name:</strong>
-    <%= produce.name %>
-  </p>
-
+<div id="<%= dom_id produce %>" class="card"style="width: 12rem;" >
+  <%= image_tag produce.picture.variant(:thumb), class: "card-img-top" if produce.picture.attached? %>
+  <div class="card-body">
+    <h2 class="card-title"><%= produce.name %></h2>
+    <div class="btn-group" role="group" aria-label="Actions">
+      <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-primary" %>
+      <%= link_to "Destroy", produce_path(produce), data: { "turbo-method": :delete }, class: "btn btn-danger" %>
+    </div>
+  </div>
 </div>
+
+<!-- <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> -->
