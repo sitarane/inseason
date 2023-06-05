@@ -3,11 +3,21 @@
 <h1>Produces</h1>
 
 <div id="produces">
+  <% counter = 0 %>
   <% @produces.each do |produce| %>
-    <%= render produce %>
-    <p>
-      <%= link_to "Show this produce", produce %>
-    </p>
+    <% if counter % 3 == 0 %>
+      <div class="row">
+    <% end %>
+      <div class="col-md-4">
+        <%= render produce %>
+        <p>
+          <%= link_to "Show this produce", produce %>
+        </p>
+      </div>
+    <% if (counter + 1 ) % 3 == 0 %>
+      </div>
+    <% end %>
+    <% counter += 1 %>
   <% end %>
 </div>
 
