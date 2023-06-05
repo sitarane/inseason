@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   resources :produces do
     resources :links
@@ -7,4 +6,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "produces#index"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end
