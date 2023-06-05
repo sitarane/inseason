@@ -5,6 +5,8 @@ class Produce < ApplicationRecord
     picture.variant :thumb, resize_to_limit: [200, 200]
   end
 
+  accepts_nested_attributes_for :links
+
   def main_link
     wikilinks = links.wikipedia
     wikilinks.first.url if wikilinks.any?

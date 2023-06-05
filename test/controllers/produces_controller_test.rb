@@ -24,6 +24,9 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to produce_url(Produce.last)
+
+    # Don't create a link
+    assert Produce.last.links.empty?
   end
 
   test "should create produce with picture" do
@@ -45,9 +48,15 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     params = {
       produce: {
         name: @produce.name,
-        wikipedia_link: 'https://en.wikipedia.org/wiki/Apple'
+        links_attributes: {
+          0 => {
+            from: :wikipedia,
+            url: 'https://en.wikipedia.org/wiki/Apple'
+            }
+          }
+        }
       }
-    }
+
     assert_difference("Produce.count") do
       post produces_url, params: params
     end
@@ -84,27 +93,40 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should add a link to produce that doesn't have one" do
-    params = {
-      produce: {
-        wikipedia_link: 'https://en.wikipedia.org/wiki/Carrot'
-      }
-    }
     carrot = produces(:no_link)
     assert_not carrot.links.any?
 
-    patch produce_url(carrot), params: params
-    carrot.reload
+    params = {
+      produce: {
+        name: carrot.name,
+        links_attributes: {
+          0 => {
+            from: :wikipedia,
+            url: 'https://en.wikipedia.org/wiki/Carrot'
+            }
+          }
+        }
+      }
+    assert_difference("carrot.links.count") do
+      patch produce_url(carrot), params: params
+    end
 
-    assert carrot.links.any?
     assert_redirected_to produce_url(carrot)
   end
 
   test "should edit link to produce that already has one" do
     params = {
       produce: {
-        wikipedia_link: 'https://en.wikipedia.org/wiki/Carrot'
+        name: @produce.name,
+        links_attributes: {
+          0 => {
+            id: @produce.links.wikipedia.first.id,
+            from: :wikipedia,
+            url: 'https://en.wikipedia.org/wiki/Carrot'
+            }
+          }
+        }
       }
-    }
 
     assert_not @produce.main_link.include?('Carrot')
 

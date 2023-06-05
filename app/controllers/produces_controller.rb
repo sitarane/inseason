@@ -13,6 +13,7 @@ class ProducesController < ApplicationController
   # GET /produces/new
   def new
     @produce = Produce.new
+    @produce.links.wikipedia.new
   end
 
   # GET /produces/1/edit
@@ -21,11 +22,7 @@ class ProducesController < ApplicationController
 
   # POST /produces or /produces.json
   def create
-    @produce = Produce.new(produce_params.except(:wikipedia_link))
-
-    if produce_params[:wikipedia_link].present?
-      @produce.links.new(from: :wikipedia, url: produce_params[:wikipedia_link])
-    end
+    @produce = Produce.new(produce_params)
 
     respond_to do |format|
       if @produce.save
@@ -40,17 +37,8 @@ class ProducesController < ApplicationController
 
   # PATCH/PUT /produces/1 or /produces/1.json
   def update
-
-    if produce_params[:wikipedia_link]
-      if @produce.links.wikipedia.any?
-        @produce.links.wikipedia.first.update(url: produce_params[:wikipedia_link])
-      else
-        @produce.links.new(from: :wikipedia, url: produce_params[:wikipedia_link])
-      end
-    end
-
     respond_to do |format|
-      if @produce.update(produce_params.except(:wikipedia_link))
+      if @produce.update(produce_params)
         format.html { redirect_to produce_url(@produce), notice: "Produce was successfully updated." }
         format.json { render :show, status: :ok, location: @produce }
       else
@@ -71,13 +59,13 @@ class ProducesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_produce
-      @produce = Produce.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_produce
+    @produce = Produce.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def produce_params
-      params.require(:produce).permit(:name, :picture, :wikipedia_link)
-    end
+  # Only allow a list of trusted parameters through.
+  def produce_params
+    params.require(:produce).permit(:name, :picture, links_attributes: [:id, :from, :url])
+  end
 end

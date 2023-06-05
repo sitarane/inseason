@@ -23,10 +23,11 @@
 
   <div>
     <%= form.label :wikipedia_link, style: "display: block" %>
-    <%= form.text_field :wikipedia_link %>
+    <%= form.fields_for :links, produce.links.wikipedia.first do |link_form| %>
+      <%= link_form.hidden_field :from, value: :wikipedia %>
+      <%= link_form.text_field :url %>
+    <% end %>
   </div>
-
-
 
   <div>
     <%= form.submit %>
