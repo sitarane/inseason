@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+apples-in-poland:
+  latitude: 52.969725643907445
+  longitude: 15.519995214296932
+  produce: apple
+  start_time: 30
+  end_time: 40
+
+# two:
+#   latitude: 1.5
+#   longitude: 1.5
+#   produce: two
+#   start_time: 1
+#   end_time: 1

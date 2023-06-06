@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :seasons
   devise_for :users
   resources :produces do
     resources :links, except: [:show, :edit, :update, :destroy, :index, :new, :create]
