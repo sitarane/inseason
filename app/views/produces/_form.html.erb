@@ -11,25 +11,33 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label", style: "display: block" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
 
-  <div>
-    <%= form.label :picture, style: "display: block" %>
-    <%= form.file_field :picture %>
-  </div>
+      <div class="mb-3">
+        <%= image_tag produce.picture.variant(:thumb) if produce.picture.attached? %>
+      </div>
 
-  <div>
-    <%= form.label :wikipedia_link, style: "display: block" %>
-    <%= form.fields_for :links, produce.links.wikipedia.first do |link_form| %>
-      <%= link_form.hidden_field :from, value: :wikipedia %>
-      <%= link_form.text_field :url %>
-    <% end %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :picture, 'Change picture', class: "form-label", style: "display: block" %>
+        <%= form.file_field :picture, class: "form-control" %>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="mb-3">
+        <%= form.label :links, 'Wikipedia link', class: "form-label", style: "display: block" %>
+        <%= form.fields_for :links, produce.links.wikipedia.first do |link_form| %>
+          <%= link_form.hidden_field :from, value: :wikipedia %>
+          <%= link_form.text_field :url, class: "form-control" %>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 <% end %>
