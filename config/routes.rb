@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :seasons
+
   devise_for :users
   resources :produces do
+    resources :seasons, shallow: true
     resources :links, except: [:show, :edit, :update, :destroy, :index, :new, :create]
   end
 
