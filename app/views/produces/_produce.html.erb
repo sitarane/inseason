@@ -5,8 +5,11 @@
     <p class="card-text">
       <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
     </p>
+    <p class="card-text">
+      <%= link_to "Add season", new_produce_season_path(produce), class: "btn btn-primary" %>
+    </p>
     <div class="btn-group" role="group" aria-label="Actions">
-      <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-primary" %>
+      <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-info" %>
       <%= link_to "Destroy",
             produce_path(produce),
             data: {

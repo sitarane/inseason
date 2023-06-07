@@ -1,5 +1,6 @@
 class SeasonsController < ApplicationController
   before_action :set_season, only: %i[ show edit update destroy ]
+  before_action :set_produce, only: %i[ new create ]
 
   # GET /seasons or /seasons.json
   def index
@@ -12,7 +13,7 @@ class SeasonsController < ApplicationController
 
   # GET /seasons/new
   def new
-    @season = Season.new
+    @season = @produce.seasons.new
   end
 
   # GET /seasons/1/edit
@@ -21,11 +22,11 @@ class SeasonsController < ApplicationController
 
   # POST /seasons or /seasons.json
   def create
-    @season = Season.new(season_params)
+    @season = @produce.seasons.new(season_params)
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to season_url(@season), notice: "Season was successfully created." }
+        format.html { redirect_to produces_url(@season), notice: "Season was successfully created." }
         format.json { render :show, status: :created, location: @season }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,8 +64,12 @@ class SeasonsController < ApplicationController
       @season = Season.find(params[:id])
     end
 
+    def set_produce
+      @produce = Produce.find(params[:produce_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def season_params
-      params.require(:season).permit(:latitude, :longitude, :produce_id, :start_time, :end_time)
+      params.require(:season).permit(:latitude, :longitude, :place, :produce_id, :start_time, :end_time)
     end
 end

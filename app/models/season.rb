@@ -5,5 +5,5 @@ class Season < ApplicationRecord
   validates :longitude, inclusion: { in: -180..180 }
 
   geocoded_by :place
-  after_validation :geocode
+  before_validation :geocode
 end
