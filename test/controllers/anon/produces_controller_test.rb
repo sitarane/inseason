@@ -1,6 +1,7 @@
 require "test_helper"
 
 class AnonProducesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
 
   setup do
     @produce = produces(:apple)

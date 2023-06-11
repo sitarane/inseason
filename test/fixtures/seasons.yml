@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-apples-in-poland:
+apples_in_poland:
   latitude: 52.969
   longitude: 15.519
   produce: apple
