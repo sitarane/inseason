@@ -1,0 +1,29 @@
+<div id="<%= dom_id produce %>" class="card" >
+  <%=
+    if produce.picture.attached?
+      link_to(
+        image_tag(produce.picture.variant(:thumb), class: "card-img-top"),
+        produce_path(produce)
+      )
+    end
+  %>
+  <div class="card-body">
+    <h2 class="card-title"><%= link_to produce.name, produce_path(produce) %></h2>
+    <p class="card-text">
+      <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
+    </p>
+    <p class="card-text">
+      <%= link_to "Add season", new_produce_season_path(produce), class: "btn btn-primary" %>
+    </p>
+    <div class="btn-group" role="group" aria-label="Actions">
+      <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-info" %>
+      <%= link_to "Destroy",
+            produce_path(produce),
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Delete this produce?"
+            },
+            class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

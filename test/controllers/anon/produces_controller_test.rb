@@ -10,6 +10,7 @@ class AnonProducesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get produces_url
     assert_response :success
+    assert_select 'div', 'You are located in New York.'
   end
 
   test "should not get new" do

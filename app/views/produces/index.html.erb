@@ -9,7 +9,7 @@
       <div class="row mb-4">
     <% end %>
       <div class="col-md-4">
-        <%= render produce %>
+        <%= render partial: 'produce_card', locals: { produce: produce } %>
       </div>
     <% if (counter + 1 ) % 3 == 0 %>
       </div>
@@ -17,5 +17,7 @@
     <% counter += 1 %>
   <% end %>
 </div>
+
+<div>You are located in <%=@state%>.</div>
 
 <%= link_to "New produce", new_produce_path %>

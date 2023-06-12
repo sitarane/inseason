@@ -4,6 +4,7 @@ class ProducesController < ApplicationController
   # GET /produces or /produces.json
   def index
     @produces = Produce.all
+    @state = current_location.state
   end
 
   # GET /produces/1 or /produces/1.json
