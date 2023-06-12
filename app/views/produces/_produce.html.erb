@@ -1,7 +1,14 @@
 <div id="<%= dom_id produce %>" class="card" >
-  <%= image_tag produce.picture.variant(:thumb), class: "card-img-top" if produce.picture.attached? %>
+  <%=
+    if produce.picture.attached?
+      link_to(
+        image_tag(produce.picture.variant(:thumb), class: "card-img-top"),
+        produce_path(produce)
+      )
+    end
+  %>
   <div class="card-body">
-    <h2 class="card-title"><%= produce.name %></h2>
+    <h2 class="card-title"><%= link_to produce.name, produce_path(produce) %></h2>
     <p class="card-text">
       <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
     </p>
