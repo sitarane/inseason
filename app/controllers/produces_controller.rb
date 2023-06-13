@@ -4,7 +4,9 @@ class ProducesController < ApplicationController
   # GET /produces or /produces.json
   def index
     @produces = Produce.all
-    @state = current_location.state
+
+    # Only the first one should be necessary...
+    @state = current_location.try(:state) || current_location['data']['address']['state']
   end
 
   # GET /produces/1 or /produces/1.json
