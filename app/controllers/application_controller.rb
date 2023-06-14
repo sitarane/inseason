@@ -4,16 +4,15 @@ class ApplicationController < ActionController::Base
   private
 
   def current_location
-    session[:location].presence || set_location
+    session[:location].presence || set_location_from_ip
   end
 
-  def set_location
+  def set_location_from_ip
     if Rails.env.development?
       location = Geocoder.search("Leipzig, Germany").first
     else
       location = request.location
     end
-    session[:location] = location
-    location
+    session[:location] = location.display_name
   end
 end

@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "location_form" do %>
+  <%= form_with url: user_location_path, method: :put do |form| %>
+    <%= form.label :location, "My location:" %>
+    <%= form.text_field :location %>
+    <%= form.submit %>
+  <% end %>
+<% end %>

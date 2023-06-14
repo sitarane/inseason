@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  resource :user_location, only: %i(edit update)
 
   devise_for :users
+
   resources :produces do
     resources :seasons, shallow: true
-    resources :links, except: [:show, :edit, :update, :destroy, :index, :new, :create]
+    resources :links, except: %i(show edit update destroy index new create)
   end
 
   # Defines the root path route ("/")

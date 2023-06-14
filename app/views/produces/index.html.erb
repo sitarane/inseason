@@ -18,6 +18,12 @@
   <% end %>
 </div>
 
-<div class="alert alert-warning">You are located in <%=@state%>.</div>
+<div class="alert alert-warning">
+  <%= turbo_frame_tag "location_form" do %>
+      <span>You are located in <%=@state%>.</span>
+      <%= link_to "That's not right", edit_user_location_path, class: 'btn btn-light' %>
+  <% end %>
+</div>
 
-<%= link_to "New produce", new_produce_path %>
+
+<%= link_to "Add produce", new_produce_path, class: 'btn btn-primary' %>
