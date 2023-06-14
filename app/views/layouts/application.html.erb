@@ -14,7 +14,31 @@
     <!-- Devise insisted on this. -->
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
-
+    <div class=container>
+      <nav class='navbar d-flex flex-wrap py-3 border-bottom'>
+        <%= link_to 'In Season', root_path, class: 'navbar-brand' %>
+        <ul class='navbar-nav'>
+          <li class='nav-item'>
+            <% if current_user %>
+              <%= link_to 'Sign out', destroy_user_session_path,
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Sign out?"
+                    },
+                    class: 'btn btn-warning' %>
+            <% else %>
+              <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-success' %>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+      <div class="alert alert-warning">
+        <%= turbo_frame_tag "location_form" do %>
+            <span>You are located in <%=@state%>.</span>
+            <%= link_to "That's not right", edit_user_location_path, class: 'btn btn-light' %>
+        <% end %>
+      </div>
+    </div>
     <main class='container'>
     	<%= yield %>
     </main>
