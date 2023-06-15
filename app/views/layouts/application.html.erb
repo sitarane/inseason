@@ -11,9 +11,6 @@
   </head>
 
   <body>
-    <!-- Devise insisted on this. -->
-    <!-- <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> -->
     <div class=container>
       <nav class='navbar d-flex py-3 border-bottom'>
         <%= link_to 'In Season', root_path, class: 'navbar-brand' %>
@@ -33,6 +30,14 @@
           </li>
         </ul>
       </nav>
+      <% if notice || alert %>
+        <div class='row'>
+          <div class="alert alert-<%= notice ? 'warning' : 'danger' %> alert-dismissible fade show" role="alert">
+            <%= notice %><%= alert %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      <% end %>
     </div>
     <main class='container'>
     	<%= yield %>
