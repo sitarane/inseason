@@ -1,10 +1,6 @@
 class UserLocationsController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def show
-    @state = current_location
-  end
-
   def update
     location = Geocoder.search(params[:location]).first
     respond_to do |format|

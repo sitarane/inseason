@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: %i[ show index ]
+  before_action :load_location
 
   private
 
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
       location = request.location
     end
     session[:location] = location.display_name
+  end
+
+  def load_location
+    @state = current_location
   end
 end
