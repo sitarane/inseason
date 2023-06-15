@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :user_location, only: %i(edit update)
+  resource :user_location, only: %i(show edit update)
 
   devise_for :users
 
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :links, except: %i(show edit update destroy index new create)
   end
 
-  # Defines the root path route ("/")
+  # Defines the root path route ("/"
   root "produces#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end
