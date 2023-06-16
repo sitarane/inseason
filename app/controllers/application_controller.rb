@@ -14,10 +14,25 @@ class ApplicationController < ActionController::Base
     else
       location = request.location
     end
-    session[:location] = location.display_name
+    session[:location] = location_hash(location)
+  end
+
+  def location_hash(location)
+    {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      state: location.state,
+      country: location.country,
+      display_name: location.display_name
+    }
   end
 
   def load_location
-    @state = current_location
+    current_location.transform_keys!(&:to_sym)
+    if current_location[:state] && current_location[:country]
+      @location = "#{current_location[:state]}, #{current_location[:country]}"
+    else
+      @location = current_location[:display_name]
+    end
   end
 end

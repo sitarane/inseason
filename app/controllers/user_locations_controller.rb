@@ -6,7 +6,7 @@ class UserLocationsController < ApplicationController
     respond_to do |format|
       if location
         # current_uset.update(location: location) if current_user
-        session[:location] = location.display_name
+        session[:location] = location_hash(location)
         format.html { redirect_to user_location_path }
       else
         format.html { render :edit, status: :unprocessable_entity }
