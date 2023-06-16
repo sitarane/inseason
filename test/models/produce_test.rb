@@ -1,9 +1,17 @@
 require "test_helper"
 
 class ProduceTest < ActiveSupport::TestCase
+  setup do
+    @produce = produces(:apple)
+  end
+
   test "can't create nameless" do
     produce = Produce.new
     assert_not produce.valid?
+  end
+
+  test 'cant create same name' do
+    assert_not Produce.new(name: @produce.name).valid?
   end
 
   test 'can save without image' do

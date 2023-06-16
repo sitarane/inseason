@@ -20,7 +20,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create produce" do
     assert_difference("Produce.count") do
-      post produces_url, params: { produce: { name: @produce.name } }
+      post produces_url, params: { produce: { name: 'Potato' } }
     end
 
     assert_redirected_to produce_url(Produce.last)
@@ -33,7 +33,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     picture = fixture_file_upload('test/fixtures/files/apple.jpg')
     params = {
       produce: {
-        name: @produce.name,
+        name: 'Potato',
         picture: picture
       }
     }
@@ -47,7 +47,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   test "should create produce with wikipedia link" do
     params = {
       produce: {
-        name: @produce.name,
+        name: 'Potato',
         links_attributes: {
           0 => {
             from: :wikipedia,
