@@ -22,7 +22,9 @@
       </div>
     <% end %>
     <h3> Currently in season - make dynamic </h3>
-    <%= link_to "Add season", new_produce_season_path(produce), class: "btn btn-primary" %>
+    <%= turbo_frame_tag "season_form" do %>
+      <%= link_to "Add season", new_produce_season_path(produce), class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
 <div class="row mb-4">
