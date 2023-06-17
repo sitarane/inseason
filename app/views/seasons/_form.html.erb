@@ -13,6 +13,8 @@
     <% end %>
 
     <div class="row mb-3">
+      <%= form.hidden_field :latitude, value: @latitude %>
+      <%= form.hidden_field :longitude, value: @longitude %>
       <div class="col">
         <%= form.label :start_time, class: "form-label" %>
         <%= form.select :start_time, seasons_time_pairs, {}, { class: "form-select" } %>

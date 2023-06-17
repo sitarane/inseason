@@ -14,6 +14,8 @@ class SeasonsController < ApplicationController
   # GET /seasons/new
   def new
     @season = @produce.seasons.new
+    @latitude = current_location[:latitude].to_s
+    @longitude = current_location[:longitude].to_s
   end
 
   # GET /seasons/1/edit
