@@ -8,8 +8,10 @@ class ProducesController < ApplicationController
 
   # GET /produces/1 or /produces/1.json
   def show
-    # Change this to nearby
-    @season = @produce.seasons.last
+    @season = @produce.seasons.near(
+      [current_location[:latitude], current_location[:longitude]],
+      500
+    ).first
   end
 
   # GET /produces/new
