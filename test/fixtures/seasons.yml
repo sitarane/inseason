@@ -6,7 +6,6 @@ apples_in_poland:
   produce: apple
   start_time: 30
   end_time: 40
-  place: Poland
 
 # two:
 #   latitude: 1.5
