@@ -27,4 +27,15 @@ module SeasonsHelper
       ['Late December'  , 52]
     ]
   end
+
+  def months_list
+    %w(January February March April May June July August September October
+      November December)
+  end
+
+  # Not using it yet
+  # def abbreviated_months_list
+  #   %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct
+  #     Nov Dec)
+  # end
 end

@@ -27,5 +27,8 @@
     <% end %>
   </div>
 </div>
-<div class="row mb-4">
-</div>
+<% if @season %>
+  <div class="row mb-4">
+    <%= render @season %>
+  </div>
+<% end %>
