@@ -9,7 +9,7 @@ class ProducesController < ApplicationController
   # GET /produces/1 or /produces/1.json
   def show
     # Change this to nearby
-    @season = @produce.seasons.first
+    @season = @produce.seasons.last
   end
 
   # GET /produces/new
