@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  season: apples_in_poland
+  user: john
+  value: true
+
+# two:
+#   season: two
+#   user: two
