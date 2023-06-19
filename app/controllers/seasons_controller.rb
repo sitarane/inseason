@@ -72,6 +72,13 @@ class SeasonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def season_params
-      params.require(:season).permit(:latitude, :longitude, :place, :produce_id, :start_time, :end_time)
+      params.require(:season).permit(
+        :latitude,
+        :longitude,
+        :place,
+        :produce_id,
+        :start_time,
+        :end_time
+      )
     end
 end

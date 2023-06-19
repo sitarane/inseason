@@ -4,7 +4,7 @@
       <div class="small border-start border-end border-secondary text-center" style="width:<%=100.0/12%>%"><%= month %></div>
     <% end %>
   </div>
-  <div id="timeline" class="h-5rem d-flex">
+  <div id="timeline" class="h-5rem d-flex mb-4">
     <% if season.end_time > season.start_time %>
       <div id="before-season" class="h-100 bg-secondary bg-gradient" style="width:<%=(season.start_time - 1).to_f * 100/52%>%;">&nbsp;</div>
       <div id="in-season" class="h-100 bg-success bg-gradient" style="width:<%=( season.end_time - season.start_time + 1 ) * 100/52%>%;">&nbsp;</div>
@@ -14,5 +14,29 @@
       <div id="after-season" class="h-100 bg-secondary bg-gradient flex-fill">&nbsp;</div>
       <div id="in-season-second" class="h-100 bg-success bg-gradient" style="width:<%=( 52 - season.start_time + 1 ) * 100/52%>%;">&nbsp;</div>
     <% end %>
+  </div>
+
+  <div class="row mb-4">
+    <h3>Trustworthiness</h3>
+    <div class="row mb-4">
+      <% if @season_distance > 100 %>
+        <p>
+          <%= "This season was recorded #{@season_distance} km from this location." %>
+        </p>
+        <%= render partial: 'seasons/add_season', locals: { produce: season.produce} %>
+      <% end %>
+      </div>
+      <div class="row mb-4">
+      <p>
+        <% if season.confirmed? %>
+          This season was confirmed by other users.
+        <% else %>
+          This season is yet unconfirmed by other users.
+        <% end %>
+      </p>
+      <p>Score: <%=season.score%></p>
+      <%= button_to('Upvote', produce_vouches_path(season.produce),
+            { params: { vouch: {value: true, user_id: current_user.id, season_id: season.id}}, class: 'btn btn-success' }) %>
+    </div>
   </div>
 </div>

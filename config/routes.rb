@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :produces do
     resources :seasons, shallow: true
+      resources :vouches, shallow: true, only: :create
     resources :links, except: %i(show edit update destroy index new create)
   end
 

@@ -9,4 +9,52 @@ john:
   encrypted_password: <%= User.new.send(:password_digest, '1234567890') %>
   confirmed_at: <%= Time.zone.now - 1.hour %>
 
-# two: {}
+one:
+  email: 'one@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+two:
+  email: 'two@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+three:
+  email: 'three@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+four:
+  email: 'four@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+five:
+  email: 'five@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+six:
+  email: 'six@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+seven:
+  email: 'seven@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+eight:
+  email: 'eight@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+nine:
+  email: 'nine@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+
+ten:
+  email: 'ten@email.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>

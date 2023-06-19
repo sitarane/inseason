@@ -2,7 +2,8 @@ require "test_helper"
 
 class SeasonTest < ActiveSupport::TestCase
   setup do
-    @produce = produces(:apple)
+    @produce = produces :apple
+    @apples_in_poland = seasons :apples_in_poland
   end
 
   test 'good season is valid' do
@@ -22,5 +23,16 @@ class SeasonTest < ActiveSupport::TestCase
     assert valid_season.valid?
     invalid_season = @produce.seasons.new(latitude: -163.5658, longitude: 78.5658, start_time: 6, end_time: 23)
     assert_not invalid_season.valid?
+  end
+
+  test '#score' do
+    assert @apples_in_poland.vouches.upvoted.count == 9
+    assert @apples_in_poland.vouches.downvoted.count == 2
+    assert @apples_in_poland.score == 7
+  end
+
+  test '#confirmed' do
+    assert @apples_in_poland.confirmed?
+    assert_not seasons(:apples_in_mumbai).confirmed?
   end
 end

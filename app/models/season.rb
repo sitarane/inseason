@@ -7,4 +7,24 @@ class Season < ApplicationRecord
   validates :longitude, inclusion: { in: -180..180 }
 
   reverse_geocoded_by :latitude, :longitude
+
+  def confirmed?
+    if vouches.count > 10
+      score > 5
+    else
+      score > 0
+    end
+  end
+
+  def score
+    score = 0
+    vouches.each do |vouch|
+      if vouch.value
+        score += 1
+      else
+        score -= 1
+      end
+    end
+    score
+  end
 end

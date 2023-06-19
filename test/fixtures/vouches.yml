@@ -1,10 +1,58 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+# Poland
+
+john_in_poland:
   season: apples_in_poland
   user: john
   value: true
 
-# two:
-#   season: two
-#   user: two
+one_in_poland:
+  season: apples_in_poland
+  user: one
+  value: true
+
+two_in_poland:
+  season: apples_in_poland
+  user: two
+  value: true
+
+three_in_poland:
+  season: apples_in_poland
+  user: three
+  value: true
+
+four_in_poland:
+  season: apples_in_poland
+  user: four
+  value: true
+
+five_in_poland:
+  season: apples_in_poland
+  user: five
+  value: true
+
+six_in_poland:
+  season: apples_in_poland
+  user: six
+  value: false
+
+seven_in_poland:
+  season: apples_in_poland
+  user: seven
+  value: true
+
+eight_in_poland:
+  season: apples_in_poland
+  user: eight
+  value: false
+
+nine_in_poland:
+  season: apples_in_poland
+  user: nine
+  value: true
+
+ten_in_poland:
+  season: apples_in_poland
+  user: ten
+  value: true

@@ -3,15 +3,14 @@ class ProducesController < ApplicationController
 
   # GET /produces or /produces.json
   def index
-    @produces = Produce.all
+    @produces = Produce.includes(:links).all
   end
 
   # GET /produces/1 or /produces/1.json
   def show
-    @season = @produce.seasons.near(
-      [current_location[:latitude], current_location[:longitude]],
-      500
-    ).first
+    coordinates = [current_location[:latitude], current_location[:longitude]]
+    @season = @produce.seasons.includes(:vouches).near(coordinates, 500).first
+    @season_distance = @season.distance_to(coordinates).round
   end
 
   # GET /produces/new
@@ -70,6 +69,10 @@ class ProducesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def produce_params
-    params.require(:produce).permit(:name, :picture, links_attributes: [:id, :from, :url])
+    params.require(:produce).permit(
+      :name,
+      :picture,
+      links_attributes: [:id, :from, :url]
+    )
   end
 end
