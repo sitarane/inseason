@@ -23,7 +23,7 @@
         <p>
           <%= "This season was recorded #{@season_distance} km from this location." %>
         </p>
-        <%= render partial: 'seasons/add_season', locals: { produce: season.produce} %>
+        <%= render 'seasons/add_season', produce: season.produce %>
       <% end %>
       </div>
       <div class="row mb-4">
@@ -37,8 +37,6 @@
       <p>Score: <%=season.score%></p>
       <%= render @vouch if @vouch %>
       <%= render 'vouches/form', vouch: @vouch, season: @season %>
-      <%= button_to('Upvote', produce_vouches_path(season.produce),
-            { params: { vouch: {value: true, user_id: current_user.id, season_id: season.id}}, class: 'btn btn-success' }) %>
     </div>
   </div>
 </div>
