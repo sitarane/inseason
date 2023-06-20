@@ -1,0 +1,13 @@
+<%= button_to(
+      "#{vouch.value ? 'Down' : 'Up'}vote".capitalize,
+      vouch_path(vouch),
+      {
+        method: :patch,
+        params: {
+           vouch: {
+             value: !vouch.value
+           }
+         },
+         class: "btn btn-#{vouch.value ? 'danger' : 'success' }"
+      }
+    ) %>

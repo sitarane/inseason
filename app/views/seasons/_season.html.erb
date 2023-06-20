@@ -35,6 +35,8 @@
         <% end %>
       </p>
       <p>Score: <%=season.score%></p>
+      <%= render @vouch if @vouch %>
+      <%= render 'vouches/form', vouch: @vouch, season: @season %>
       <%= button_to('Upvote', produce_vouches_path(season.produce),
             { params: { vouch: {value: true, user_id: current_user.id, season_id: season.id}}, class: 'btn btn-success' }) %>
     </div>

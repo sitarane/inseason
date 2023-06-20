@@ -10,7 +10,10 @@ class ProducesController < ApplicationController
   def show
     coordinates = [current_location[:latitude], current_location[:longitude]]
     @season = @produce.seasons.includes(:vouches).near(coordinates, 500).first
-    @season_distance = @season.distance_to(coordinates).round
+    if @season
+      @season_distance = @season.distance_to(coordinates).round
+      @vouch = @season.vouches.find_by(user: current_user)
+    end
   end
 
   # GET /produces/new
