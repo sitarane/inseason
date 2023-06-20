@@ -1,28 +1,30 @@
-<%= button_to(
-      'Upvote',
-      produce_vouches_path(season.produce),
-      {
-        params: {
-          vouch: {
-            value: true,
-            user_id: current_user.id,
-            season_id: season.id
-          }
-        },
-        class: 'btn btn-success'
-      }
-    ) %>
-<%= button_to(
-      'Downvote',
-      produce_vouches_path(season.produce),
-      {
-        params: {
-          vouch: {
-            value: false,
-            user_id: current_user.id,
-            season_id: season.id
-          }
-        },
-        class: 'btn btn-danger'
-      }
-    ) %>
+<div class="d-flex" aria-label="Upvote season">
+  <%= button_to(
+        'Upvote',
+        produce_vouches_path(season.produce),
+        {
+          params: {
+            vouch: {
+              value: true,
+              user_id: current_user.id,
+              season_id: season.id
+            }
+          },
+          class: 'btn btn-success me-2'
+        }
+      ) %>
+  <%= button_to(
+        'Downvote',
+        produce_vouches_path(season.produce),
+        {
+          params: {
+            vouch: {
+              value: false,
+              user_id: current_user.id,
+              season_id: season.id
+            }
+          },
+          class: 'btn btn-danger'
+        }
+      ) %>
+</div>
