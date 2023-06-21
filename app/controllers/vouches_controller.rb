@@ -10,9 +10,9 @@ class VouchesController < ApplicationController
     respond_to do |format|
       if @vouch.save
         format.html { redirect_to produces_url(@season.produce), notice: "Vouch was successfully created." }
-        #format.json { render :show, status: :created, location: @vouch } # There's no #show
+        format.json { render :show, status: :created, location: @vouch }
       else
-        format.html { redirect_to produces_url(@season.produce), status: :unprocessable_entity }
+        format.html { redirect_to produces_url(@season.produce), status: :unprocessable_entity, alert: 'Vouch failed.' }
         format.json { render json: @vouch.errors, status: :unprocessable_entity }
       end
     end

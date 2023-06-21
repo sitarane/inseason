@@ -13,4 +13,8 @@ class VouchTest < ActiveSupport::TestCase
     vouch = @season.vouches.new(user: @john, value: true)
     assert vouch.valid?
   end
+  test '#prefix' do
+    assert vouches(:john_in_poland).prefix == 'up'
+    assert vouches(:six_in_poland).prefix == 'down'
+  end
 end
