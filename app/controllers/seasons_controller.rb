@@ -28,7 +28,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to produces_url(@produce), notice: "Season was successfully created." }
+        format.html { redirect_to season_path(@season), notice: "Season was successfully created." }
         format.json { render :show, status: :created, location: @season }
       else
         format.html { render :new, status: :unprocessable_entity }
