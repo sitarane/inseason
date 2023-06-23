@@ -19,7 +19,7 @@
   <div class="row mb-4">
     <h3>Trustworthiness</h3>
     <div class="row mb-4">
-      <% if @season_distance > 100 %>
+      <% if @season_distance && @season_distance > 100 %>
         <p>
           <%= "This season was recorded #{@season_distance} km from this location." %>
         </p>
