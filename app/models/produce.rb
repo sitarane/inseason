@@ -4,7 +4,6 @@ class Produce < ApplicationRecord
   has_many :seasons, dependent: :destroy
   has_one_attached :picture do |picture|
     picture.variant :thumb, resize_to_limit: [300, 300]
-    picture.variant :profile, resize_to_limit: [500, 500]
   end
 
   accepts_nested_attributes_for :links

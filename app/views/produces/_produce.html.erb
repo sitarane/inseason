@@ -1,9 +1,4 @@
 <div id="<%= dom_id produce %>" class="row mb-4" >
-  <% if produce.picture.attached? %>
-    <div class="col-5">
-      <%= image_tag produce.picture.variant(:profile), class: "img-fluid" %>
-    </div>
-  <% end %>
   <div class="col-7">
     <h2 class="display-2"><%= produce.name %></h2>
     <p>
@@ -22,8 +17,13 @@
       </div>
     <% end %>
   </div>
+  <% if produce.picture.attached? %>
+    <div class="col-5">
+      <%= image_tag produce.picture.variant(:thumb), class: "img-fluid rounded float-end" %>
+    </div>
+  <% end %>
 </div>
-<div class="row mb-4">
+<div class="row mb-4 highlight">
 <% if @season %>
     <%= render @season %>
 <% else %>
