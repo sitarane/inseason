@@ -1,0 +1,18 @@
+volumes:
+  db-data:
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file: .env
+  web:
+    image: sitarane/inseason:0.1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file: .env
+    environment:
+      RAILS_ENV: production
