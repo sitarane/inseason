@@ -31,7 +31,7 @@
         <%= form.label :links, 'Wikipedia link', class: "form-label", style: "display: block" %>
         <%= form.fields_for :links, produce.links.wikipedia.first do |link_form| %>
           <%= link_form.hidden_field :from, value: :wikipedia %>
-          <%= link_form.text_field :url, class: "form-control" %>
+          <%= link_form.text_field :url, class: "form-control", id: "produce_links" %>
         <% end %>
       </div>
 

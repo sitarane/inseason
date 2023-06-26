@@ -71,9 +71,9 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'produce action buttons not visible' do
+  test 'produce action buttons visible' do
     get produce_url(@produce)
-    assert_select 'h2', @produce.name
+    assert_select 'h1', @produce.name
     assert_select 'div#produce-actions a'
   end
 

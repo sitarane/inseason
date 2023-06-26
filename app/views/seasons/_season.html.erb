@@ -34,9 +34,8 @@
           This season is yet unconfirmed by other users.
         <% end %>
       </p>
-      <p>Score: <%=season.score%></p>
       <%= render @vouch if @vouch %>
-      <%= render 'vouches/form', vouch: @vouch, season: @season %>
+      <%= render 'vouches/form', vouch: @vouch, season: @season if current_user%>
     </div>
   </div>
 </div>

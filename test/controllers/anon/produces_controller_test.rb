@@ -1,7 +1,6 @@
 require "test_helper"
 
 class AnonProducesControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
 
   setup do
     @produce = produces(:apple)
@@ -29,11 +28,12 @@ class AnonProducesControllerTest < ActionDispatch::IntegrationTest
   test "should show produce" do
     get produce_url(@produce)
     assert_response :success
+    assert_select 'h1', @produce.name
   end
 
   test 'produce action buttons not visible' do
     get produce_url(@produce)
-    assert_select 'h2', @produce.name
+    assert_select 'h1', @produce.name
     assert_select 'div#produce-actions a', false
   end
 
