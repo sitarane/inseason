@@ -14,8 +14,6 @@ class SeasonsController < ApplicationController
   # GET /seasons/new
   def new
     @season = @produce.seasons.new
-    @latitude = current_location[:latitude].to_s
-    @longitude = current_location[:longitude].to_s
   end
 
   # GET /seasons/1/edit
@@ -28,7 +26,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to season_path(@season), notice: "Season was successfully created." }
+        format.html { redirect_to season_path(@season) }
         format.json { render :show, status: :created, location: @season }
       else
         format.html { render :new, status: :unprocessable_entity }

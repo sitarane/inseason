@@ -27,7 +27,7 @@
 <% if @season %>
     <%= render @season %>
 <% else %>
-  <h3>No season recorded nearby</h3>
-  <%= render 'seasons/add_season', produce: produce if current_user %>
+  <h3><%= "No season recorded near #{@location}" %></h3>
+  <%= render 'seasons/form', season: Season.new(produce: @produce) if current_user %>
 </div>
 <% end %>
