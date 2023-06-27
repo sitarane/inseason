@@ -1,6 +1,7 @@
 class VouchesController < ApplicationController
   before_action :load_season, only: :create
   before_action :load_vouch, only: :update
+  before_action :authorize_vouch
 
 
 
@@ -32,6 +33,10 @@ class VouchesController < ApplicationController
   end
 
   private
+
+  def authorize_vouch
+    authorize @vouch || Vouch
+  end
 
   def load_vouch
     @vouch = Vouch.find(params[:id])

@@ -1,5 +1,6 @@
 class ProducesController < ApplicationController
   before_action :set_produce, only: %i[ show edit update destroy ]
+  before_action :authorize_produce
 
   # GET /produces or /produces.json
   def index
@@ -68,6 +69,11 @@ class ProducesController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
+
+  def authorize_produce
+    authorize @produce || Produce
+  end
+
   def set_produce
     @produce = Produce.find(params[:id])
   end

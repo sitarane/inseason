@@ -1,6 +1,7 @@
 class SeasonsController < ApplicationController
   before_action :set_season, only: %i[ show update destroy ]
   before_action :set_produce, only: :create
+  before_action :authorize_season
 
   # GET /seasons/1 or /seasons/1.json
   def show
@@ -46,6 +47,10 @@ class SeasonsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def authorize_season
+      authorize @season || Season
+    end
     def set_season
       @season = Season.find(params[:id])
     end

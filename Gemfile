@@ -77,3 +77,5 @@ group :test do
   gem "selenium-webdriver"
   # gem "webdrivers" # we run selenium in its own container
 end
+
+gem "pundit", "~> 2.3"

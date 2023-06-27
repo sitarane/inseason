@@ -1,6 +1,8 @@
 class UserLocationsController < ApplicationController
   skip_before_action :authenticate_user!
 
+  before_action :authorize_user_location
+
   def update
     location = Geocoder.search(params[:location]).first
     respond_to do |format|
@@ -15,5 +17,11 @@ class UserLocationsController < ApplicationController
   end
 
   def edit
+  end
+
+  private
+
+  def authorize_user_location
+    authorize Produce # this sucks
   end
 end
