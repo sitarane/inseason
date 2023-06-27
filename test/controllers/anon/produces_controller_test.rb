@@ -29,6 +29,8 @@ class AnonProducesControllerTest < ActionDispatch::IntegrationTest
     get produce_url(@produce)
     assert_response :success
     assert_select 'h1', @produce.name
+    # shows nearest season
+    assert_select "div#season_#{seasons(:apples_in_newyork).id}"
   end
 
   test 'produce action buttons not visible' do
