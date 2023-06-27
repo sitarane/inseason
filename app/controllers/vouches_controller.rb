@@ -1,15 +1,14 @@
 class VouchesController < ApplicationController
   before_action :load_season, only: :create
-  before_action :load_vouch, only: %i(show update)
+  before_action :load_vouch, only: :update
 
-  def show
-  end
+
 
   def create
     @vouch = @season.vouches.new(vouch_params)
     respond_to do |format|
       if @vouch.save
-        format.html { redirect_to produce_url(@season.produce), notice: "Vouch was successfully created." }
+        format.html { redirect_to produce_url(@season.produce) }
         format.json { render :show, status: :created, location: @vouch }
       else
         format.html { redirect_to produces_url(@season.produce), status: :unprocessable_entity, alert: 'Vouch failed.' }
@@ -21,7 +20,7 @@ class VouchesController < ApplicationController
   def update
     respond_to do |format|
       if @vouch.update(vouch_params)
-        format.html { redirect_to produce_url(@vouch.season.produce), notice: "Vouch was successfully updated." }
+        format.html { redirect_to produce_url(@vouch.season.produce) }
         format.json { render :show, status: :ok, location: @vouch }
       else
         format.html { redirect_to produce_url(@vouch.season.produce),

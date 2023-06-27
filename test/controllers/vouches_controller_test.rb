@@ -9,11 +9,6 @@ class VouchesControllerTest < ActionDispatch::IntegrationTest
     @vouch = vouches :john_in_poland
     sign_in @user
   end
-  test '#show' do
-    get vouch_path(@vouch)
-    assert_response :success
-    assert_select 'p', 'You have upvoted this season.'
-  end
   test '#create' do
     assert_difference("Vouch.count") do
       post produce_vouches_path(@produce), params: { vouch: { value: false, user_id: @user.id, season_id: @season.id }}

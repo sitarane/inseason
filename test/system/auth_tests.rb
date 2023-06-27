@@ -15,11 +15,9 @@ class SeasonsTest < ApplicationSystemTestCase
     click_on "Create Produce"
     assert_text "Produce was successfully created."
     assert_selector "h1", text: "Space beetroots"
-    click_on "Add season"
     select 'Early February', from: 'Start time'
     select 'Late March', from: 'End time'
     click_on "Create Season"
-    assert_text "Season was successfully created."
     assert_selector 'div#in-season'
   end
 
@@ -29,7 +27,6 @@ class SeasonsTest < ApplicationSystemTestCase
     assert_selector 'button', text: 'Downvote'
     assert_no_text 'You have upvoted this season.'
     click_on 'Upvote'
-    assert_text 'Vouch was successfully created.'
     assert_no_selector 'button', text: 'Upvote'
     assert_selector 'button', text: 'Downvote'
     assert_text 'You have upvoted this season.'
