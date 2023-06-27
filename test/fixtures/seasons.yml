@@ -13,3 +13,10 @@ apples_in_mumbai:
   produce: apple
   start_time: 48
   end_time: 7
+
+apples_in_newyork:
+  latitude: 40.730
+  longitude: -73.935
+  produce: apple
+  start_time: 25
+  end_time: 29
