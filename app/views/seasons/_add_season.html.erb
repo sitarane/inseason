@@ -1,6 +1,0 @@
-<p>
-  <%= "Do you know the season for #{produce.name.downcase.pluralize} in #{@location} ?" %>
-</p>
-<%= turbo_frame_tag "season_form" do %>
-  <%= link_to "Add season", new_produce_season_path(produce), class: "btn btn-primary" %>
-<% end %>
