@@ -1,18 +1,9 @@
 class SeasonsController < ApplicationController
-  before_action :set_season, only: %i[ show edit update destroy ]
-  before_action :set_produce, only: %i[ new create ]
+  before_action :set_season, only: %i[ show update destroy ]
+  before_action :set_produce, only: :create
 
   # GET /seasons/1 or /seasons/1.json
   def show
-  end
-
-  # GET /seasons/new
-  def new
-    @season = @produce.seasons.new
-  end
-
-  # GET /seasons/1/edit
-  def edit
   end
 
   # POST /seasons or /seasons.json
