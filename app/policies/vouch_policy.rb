@@ -1,6 +1,10 @@
 class VouchPolicy < ApplicationPolicy
   def create?
     return false unless user
-    model.season.user != user
+    record.season.user != user
+  end
+
+  def update?
+    user.present?
   end
 end

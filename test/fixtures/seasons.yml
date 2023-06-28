@@ -6,6 +6,7 @@ apples_in_poland:
   produce: apple
   start_time: 30
   end_time: 40
+  user: john
 
 apples_in_mumbai:
   latitude: 19.121
@@ -13,6 +14,7 @@ apples_in_mumbai:
   produce: apple
   start_time: 48
   end_time: 7
+  user: alice
 
 apples_in_newyork:
   latitude: 40.730
@@ -20,3 +22,4 @@ apples_in_newyork:
   produce: apple
   start_time: 25
   end_time: 29
+  user: john

@@ -22,6 +22,6 @@ class UserLocationsController < ApplicationController
   private
 
   def authorize_user_location
-    authorize Produce # this sucks
+    authorize :user_location
   end
 end

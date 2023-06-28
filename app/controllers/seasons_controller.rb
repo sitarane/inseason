@@ -16,7 +16,7 @@ class SeasonsController < ApplicationController
         format.html { redirect_to season_path(@season) }
         format.json { render :show, status: :created, location: @season }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to produces_url(@produce), status: :unprocessable_entity }
         format.json { render json: @season.errors, status: :unprocessable_entity }
       end
     end
@@ -26,10 +26,10 @@ class SeasonsController < ApplicationController
   def update
     respond_to do |format|
       if @season.update(season_params)
-        format.html { redirect_to produces_url(@produce), notice: "Season was successfully updated." }
+        format.html { redirect_to season_path(@season), notice: "Season was successfully updated." }
         format.json { render :show, status: :ok, location: @season }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to season_path(@season), status: :unprocessable_entity }
         format.json { render json: @season.errors, status: :unprocessable_entity }
       end
     end
@@ -40,7 +40,7 @@ class SeasonsController < ApplicationController
     @season.destroy
 
     respond_to do |format|
-      format.html { redirect_to seasons_url, notice: "Season was successfully destroyed." }
+      format.html { redirect_to produces_url(@produce), notice: "Season was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +66,7 @@ class SeasonsController < ApplicationController
         :longitude,
         :place,
         :produce_id,
+        :user_id,
         :start_time,
         :end_time
       )

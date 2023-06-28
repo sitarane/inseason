@@ -1,12 +1,13 @@
 class VouchesController < ApplicationController
   before_action :load_season, only: :create
   before_action :load_vouch, only: :update
-  before_action :authorize_vouch
+  before_action :authorize_vouch, except: :create
 
 
 
   def create
     @vouch = @season.vouches.new(vouch_params)
+    authorize @vouch
     respond_to do |format|
       if @vouch.save
         format.html { redirect_to produce_url(@season.produce) }
