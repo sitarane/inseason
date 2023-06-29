@@ -5,9 +5,13 @@ apple:
   user: john
 
 no_link:
-  name: Carrot
-  user: alice
+  name: No link
+  user: john
 
 no_season:
   name: Plum
+  user: alice
+
+carrot:
+  name: Carrot
   user: alice

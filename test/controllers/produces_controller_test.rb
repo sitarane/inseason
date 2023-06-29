@@ -7,6 +7,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     @user = users(:john)
     sign_in @user
     @produce = produces(:apple)
+    @carrot = produces(:carrot)
   end
 
   test "should get index" do
@@ -85,6 +86,12 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'shouldnt get edit on non-own produce' do
+    assert_raise Pundit::NotAuthorizedError do
+      get edit_produce_url(@carrot)
+    end
+  end
+
   test "should change produce name" do
     new_name = 'New name'
     patch produce_url(@produce), params: { produce: { name: new_name } }
@@ -153,5 +160,13 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to produces_url
+  end
+
+  test 'shouldnt destroy non-own produce' do
+    assert_no_difference("Produce.count") do
+      assert_raise Pundit::NotAuthorizedError do
+        delete produce_url(@carrot)
+      end
+    end
   end
 end
