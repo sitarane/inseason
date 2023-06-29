@@ -4,7 +4,7 @@ class SeasonsTest < ApplicationSystemTestCase
   include Devise::Test::IntegrationHelpers
 
   setup do
-    sign_in users(:john)
+    sign_in users(:alice)
   end
 
   test 'create a produce and a season' do
