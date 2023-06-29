@@ -83,6 +83,7 @@ class ProducesController < ApplicationController
     params.require(:produce).permit(
       :name,
       :picture,
+      :user_id,
       links_attributes: [:id, :from, :url]
     )
   end

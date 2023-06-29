@@ -3,7 +3,8 @@ require "test_helper"
 class AnonProducesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @produce = produces(:apple)
+    @produce = produces :apple
+    @user = users :john
   end
 
   test "should get index" do
@@ -19,7 +20,7 @@ class AnonProducesControllerTest < ActionDispatch::IntegrationTest
 
   test "unable to create produce" do
     assert_no_difference("Produce.count") do
-      post produces_url, params: { produce: { name: @produce.name } }
+      post produces_url, params: { produce: { name: @produce.name, user_id: @user.id } }
     end
 
     assert_redirected_to new_user_session_path

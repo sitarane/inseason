@@ -1,5 +1,6 @@
 class Produce < ApplicationRecord
   validates :name, presence: true, uniqueness: true
+  belongs_to :user
   has_many :links, dependent: :destroy
   has_many :seasons, dependent: :destroy
   has_one_attached :picture do |picture|
@@ -7,6 +8,8 @@ class Produce < ApplicationRecord
   end
 
   accepts_nested_attributes_for :links
+
+  validates :user, presence: true
 
   def main_link
     wikilinks = links.wikipedia

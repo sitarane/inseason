@@ -2,7 +2,8 @@ require "test_helper"
 
 class ProduceTest < ActiveSupport::TestCase
   setup do
-    @produce = produces(:apple)
+    @produce = produces :apple
+    @user = users :john
   end
 
   test "can't create nameless" do
@@ -14,8 +15,12 @@ class ProduceTest < ActiveSupport::TestCase
     assert_not Produce.new(name: @produce.name).valid?
   end
 
+  test 'cant create no user' do
+    assert_not Produce.new(name: 'Banana').valid?
+  end
+
   test 'can save without image' do
-    produce = Produce.new(name: 'Banana')
+    produce = Produce.new(name: 'Banana', user: @user)
     assert produce.save
   end
 

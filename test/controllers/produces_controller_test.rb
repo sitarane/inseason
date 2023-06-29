@@ -4,7 +4,8 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    sign_in users(:john)
+    @user = users(:john)
+    sign_in @user
     @produce = produces(:apple)
   end
 
@@ -20,7 +21,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create produce" do
     assert_difference("Produce.count") do
-      post produces_url, params: { produce: { name: 'Potato' } }
+      post produces_url, params: { produce: { name: 'Potato', user_id: @user.id } }
     end
 
     assert_redirected_to produce_url(Produce.last)
@@ -34,6 +35,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     params = {
       produce: {
         name: 'Potato',
+        user_id: @user.id,
         picture: picture
       }
     }
@@ -48,6 +50,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     params = {
       produce: {
         name: 'Potato',
+        user_id: @user.id,
         links_attributes: {
           0 => {
             from: :wikipedia,
