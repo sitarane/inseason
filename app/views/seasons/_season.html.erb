@@ -36,7 +36,7 @@
           <% end %>
         </p>
         <%= render @vouch if @vouch %>
-        <%= render 'vouches/form', vouch: @vouch, season: @season if current_user%>
+        <%= render 'vouches/form', vouch: @vouch, season: @season if current_user && current_user != @season.user %>
       </div>
     </div>
   </div>

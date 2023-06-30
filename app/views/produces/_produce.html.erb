@@ -4,7 +4,7 @@
     <p>
       <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
     </p>
-    <% if current_user == produce.user %>
+    <% if current_user && current_user == produce.user %>
       <div id='produce-actions' class="btn-group" role="group" aria-label="Actions">
         <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-info" %>
         <%= link_to "Destroy",
