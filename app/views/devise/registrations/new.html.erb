@@ -23,7 +23,13 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <%= turbo_frame_tag 'recaptcha' do %>
+        <div class="mb-3">
+          <%= recaptcha_v3 action: 'signup', site_key: ENV['RECAPTCHA_KEY_V3'], turbolinks: true %>
+        </div>
+      <% end %>
+
+      <div>
         <%= f.submit "Sign up", class: "btn btn-primary" %>
       </div>
     </div>
