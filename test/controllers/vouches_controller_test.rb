@@ -13,7 +13,7 @@ class VouchesControllerTest < ActionDispatch::IntegrationTest
 
   test 'can vote' do
     assert_difference("Vouch.count") do
-      post produce_vouches_path(@produce), params: { vouch: { value: false, user_id: @user.id, season_id: @alices_season.id }}
+      post produce_vouches_path(@produce), params: { vouch: { value: true, user_id: @user.id, season_id: @alices_season.id }}
     end
   end
 

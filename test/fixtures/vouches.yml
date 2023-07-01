@@ -12,10 +12,20 @@ one_in_poland:
   user: one
   value: true
 
+one_in_mumbai:
+  season: apples_in_mumbai
+  user: one
+  value: false
+
 two_in_poland:
   season: apples_in_poland
   user: two
   value: true
+
+two_in_mumbai:
+  season: apples_in_mumbai
+  user: two
+  value: false
 
 three_in_poland:
   season: apples_in_poland
