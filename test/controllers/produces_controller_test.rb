@@ -8,6 +8,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     @produce = produces(:apple)
     @carrot = produces(:carrot)
+    @no_season = produces :no_link
   end
 
   test "should get index" do
@@ -154,14 +155,6 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert @produce.main_link.include?('Carrot')
   end
 
-  test "should destroy produce" do
-    assert_difference("Produce.count", -1) do
-      delete produce_url(@produce)
-    end
-
-    assert_redirected_to produces_url
-  end
-
   test 'shouldnt destroy non-own produce' do
     assert_no_difference("Produce.count") do
       assert_raise Pundit::NotAuthorizedError do
@@ -169,4 +162,22 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  test "shouldn't destroy produce with seasons" do
+    assert_no_difference("Produce.count") do
+      assert_raise Pundit::NotAuthorizedError do
+        delete produce_url(@produce)
+      end
+    end
+  end
+
+  test "should destroy produce" do
+    assert_difference("Produce.count", -1) do
+      delete produce_url(@no_season)
+    end
+
+    assert_redirected_to produces_url
+  end
+
+
 end

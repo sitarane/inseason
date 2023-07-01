@@ -7,6 +7,7 @@ class ProducePolicy < ApplicationPolicy
     update?
   end
   def destroy?
-    update?
+    return false unless update?
+    record.seasons.empty?
   end
 end

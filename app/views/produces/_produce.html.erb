@@ -5,7 +5,7 @@
       <%= link_to "Wikipedia", produce.main_link, target: '_blank' if produce.main_link %>
     </p>
     <% if current_user && current_user == produce.user %>
-      <div id='produce-actions' class="btn-group" role="group" aria-label="Actions">
+      <div id='produce-actions' class="btn-group mb-3" role="group" aria-label="Actions">
         <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-info" %>
         <%= link_to "Destroy",
               produce_path(produce),
@@ -13,8 +13,11 @@
                 turbo_method: :delete,
                 turbo_confirm: "Delete this produce?"
               },
-              class: "btn btn-danger" %>
+              class: "btn btn-danger" if produce.seasons.empty? %>
       </div>
+      <% if produce.seasons.any? %>
+        <p>This produce can't be deleted as some seasons have been recorded for it.</p>
+      <% end %>
     <% end %>
   </div>
   <% if produce.picture.attached? %>
