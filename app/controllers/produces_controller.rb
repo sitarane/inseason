@@ -75,7 +75,7 @@ class ProducesController < ApplicationController
   end
 
   def set_produce
-    @produce = Produce.find(params[:id])
+    @produce = Produce.friendly.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

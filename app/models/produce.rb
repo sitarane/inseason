@@ -1,4 +1,7 @@
 class Produce < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   validates :name, presence: true, uniqueness: true
   belongs_to :user
   has_many :links, dependent: :destroy
