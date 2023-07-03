@@ -56,7 +56,7 @@ class SeasonsController < ApplicationController
     end
 
     def set_produce
-      @produce = Produce.find(params[:produce_id])
+      @produce = Produce.friendly.find(params[:produce_id])
     end
 
     # Only allow a list of trusted parameters through.
