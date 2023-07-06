@@ -9,6 +9,12 @@ class ProducesController < ApplicationController
       current_location[:longitude]
     )
     # TODO pagination with lazy loading
+
+    if params[:query].present?
+      @other_produces = Produce.where("name LIKE ?", "%#{params[:query]}%")
+    else
+      @other_produces = Produce.all - @in_season_produces
+    end
   end
 
   # GET /produces/1 or /produces/1.json

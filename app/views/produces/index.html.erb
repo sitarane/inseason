@@ -1,30 +1,26 @@
 <h1>In season now</h1>
 
-<% if @in_season_produces %>
-  <div id="in-season-now">
-    <% counter = 0 %>
-    <% @in_season_produces.each do |produce| %>
-      <% if counter % 3 == 0 %>
-        <div class="row mb-4">
-      <% end %>
-        <div class="col-md-4">
-          <%= render 'produce_card', produce: produce %>
-        </div>
-      <% if (counter + 1 ) % 3 == 0 %>
-        </div>
-      <% end %>
-      <% counter += 1 %>
-    <% end %>
+<% if @in_season_produces.any? %>
+  <div id="in-season-now" class="mb-4">
+    <%= render 'produces', produces: @in_season_produces %>
   </div>
 <% end %>
 
-<!-- <div id="search">
+<div id="search">
+  <div class="row mb-4">
+    <%= render 'search_form' %>
+  </div>
+  <div class="row mb-4">
+    <% if @other_produces.any? %>
+      <div id="produces">
+        <%= render 'produces', produces: @other_produces %>
+      </div>
+    <% else %>
+      <p>We don't have that produce. Would you like to create it?</p>
+    <% end %>
+  </div>
+</div>
 
-</div> -->
-
-<!-- Search -->
-
-<!-- In no search, 5 random produces with no season in your area -->
-
+<!-- Season unknown in your area, please add if you know -->
 
 <%= link_to "Add produce", new_produce_path, class: 'btn btn-primary' %>

@@ -1,0 +1,5 @@
+<%= form_with(url: produces_path, method: :get) do |form| %>
+  <%= form.label :query, "Search produce:" %>
+  <%= form.text_field :query %>
+  <%= form.submit %>
+<% end %>
