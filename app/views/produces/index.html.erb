@@ -8,7 +8,7 @@
         <div class="row mb-4">
       <% end %>
         <div class="col-md-4">
-          <%= render partial: 'produce_card', locals: { produce: produce } %>
+          <%= render 'produce_card', produce: produce %>
         </div>
       <% if (counter + 1 ) % 3 == 0 %>
         </div>
@@ -17,6 +17,10 @@
     <% end %>
   </div>
 <% end %>
+
+<!-- <div id="search">
+
+</div> -->
 
 <!-- Search -->
 
