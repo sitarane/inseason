@@ -33,4 +33,23 @@ class ProduceTest < ActiveSupport::TestCase
     assert_instance_of String, link
     assert_match "wikipedia", link
   end
+
+  #in_season?
+  test 'in season in Poland' do
+    travel_to Time.zone.local(2000, 8, 5) do
+      assert @produce.in_season?(50,17)
+    end
+  end
+
+  test 'not in season in France' do
+    travel_to Time.zone.local(2000, 8, 5) do
+      assert_not @produce.in_season?(48,5)
+    end
+  end
+
+  test 'no in season in Mumbai' do
+    travel_to Time.zone.local(2000, 8, 5) do
+      assert_not @produce.in_season?(19,72)
+    end
+  end
 end

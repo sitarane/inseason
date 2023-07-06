@@ -18,4 +18,16 @@ class Produce < ApplicationRecord
     wikilinks = links.wikipedia
     wikilinks.first.url if wikilinks.any?
   end
+
+  def self.in_season(lat, lon)
+    Produce.all.select { |produce| produce.in_season?(lat, lon) }
+  end
+
+  def in_season?(lat, lon)
+    seasons.near([lat, lon], 500).each do |season|
+      next unless season.ripe?
+      return true
+    end
+    return false
+  end
 end

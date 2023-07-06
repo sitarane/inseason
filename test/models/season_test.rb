@@ -4,6 +4,7 @@ class SeasonTest < ActiveSupport::TestCase
   setup do
     @produce = produces :apple
     @apples_in_poland = seasons :apples_in_poland
+    @apples_in_mumbai = seasons :apples_in_mumbai
     @user = users(:john)
   end
 
@@ -40,5 +41,36 @@ class SeasonTest < ActiveSupport::TestCase
   test '#confirmed' do
     assert @apples_in_poland.confirmed?
     assert_not seasons(:apples_in_mumbai).confirmed?
+  end
+
+  # ripe?
+  test 'stradle season, ripe' do
+    travel_to Time.zone.local(2000, 12, 25) do
+      assert @apples_in_mumbai.ripe?
+    end
+    travel_to Time.zone.local(2000, 02, 5) do
+      assert @apples_in_mumbai.ripe?
+    end
+  end
+
+  test 'stradle season, unripe' do
+    travel_to Time.zone.local(2000, 6, 4) do
+      assert_not @apples_in_mumbai.ripe?
+    end
+  end
+
+  test 'solid season, ripe' do
+    travel_to Time.zone.local(2000, 8, 5) do
+      assert @apples_in_poland.ripe?
+    end
+  end
+
+  test 'solid season, unripe' do
+    travel_to Time.zone.local(2000, 2, 18) do
+      assert_not @apples_in_poland.ripe?
+    end
+    travel_to Time.zone.local(2000, 11, 22) do
+      assert_not @apples_in_poland.ripe?
+    end
   end
 end

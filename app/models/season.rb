@@ -30,4 +30,15 @@ class Season < ApplicationRecord
     end
     score
   end
+
+  def ripe?
+    current_week = DateTime.now.cweek # TODO check if timezone-proof
+    if start_time <= end_time
+      return true if current_week.between?(start_time, end_time)
+      return false
+    else
+      return false if current_week.between?(end_time, start_time)
+      return true
+    end
+  end
 end

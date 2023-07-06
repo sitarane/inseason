@@ -1,20 +1,26 @@
-<h1>Produces</h1>
+<h1>In season now</h1>
 
-<div id="produces">
-  <% counter = 0 %>
-  <% @produces.each do |produce| %>
-    <% if counter % 3 == 0 %>
-      <div class="row mb-4">
+<% if @in_season_produces %>
+  <div id="in-season-now">
+    <% counter = 0 %>
+    <% @in_season_produces.each do |produce| %>
+      <% if counter % 3 == 0 %>
+        <div class="row mb-4">
+      <% end %>
+        <div class="col-md-4">
+          <%= render partial: 'produce_card', locals: { produce: produce } %>
+        </div>
+      <% if (counter + 1 ) % 3 == 0 %>
+        </div>
+      <% end %>
+      <% counter += 1 %>
     <% end %>
-      <div class="col-md-4">
-        <%= render partial: 'produce_card', locals: { produce: produce } %>
-      </div>
-    <% if (counter + 1 ) % 3 == 0 %>
-      </div>
-    <% end %>
-    <% counter += 1 %>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
+<!-- Search -->
+
+<!-- In no search, 5 random produces with no season in your area -->
 
 
 <%= link_to "Add produce", new_produce_path, class: 'btn btn-primary' %>

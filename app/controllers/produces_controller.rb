@@ -4,7 +4,11 @@ class ProducesController < ApplicationController
 
   # GET /produces or /produces.json
   def index
-    @produces = Produce.includes(:links).all
+    @in_season_produces = Produce.in_season(
+      current_location[:latitude],
+      current_location[:longitude]
+    )
+    # TODO pagination with lazy loading
   end
 
   # GET /produces/1 or /produces/1.json
