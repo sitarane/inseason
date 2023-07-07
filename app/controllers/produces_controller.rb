@@ -4,8 +4,13 @@ class ProducesController < ApplicationController
 
   # GET /produces or /produces.json
   def index
-    # TODO Limit this
-    @in_season_produces = Produce.in_season(
+    # TODO Limit these
+    @in_season_produces = Produce.order("RANDOM()").in_season(
+      current_location[:latitude],
+      current_location[:longitude]
+    )
+
+    @unknow_season_produce = Produce.order("RANDOM()").season_unknown(
       current_location[:latitude],
       current_location[:longitude]
     )
@@ -13,7 +18,7 @@ class ProducesController < ApplicationController
     if params[:query].present?
       @other_produces = Produce.where("name LIKE ?", "%#{params[:query]}%")
     else
-      @other_produces = Produce.order("RANDOM()").limit(10) - @in_season_produces
+      @other_produces = Produce.order("RANDOM()").limit(20) - @in_season_produces - @unknow_season_produce
     end
   end
 

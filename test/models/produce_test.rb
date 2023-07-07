@@ -52,4 +52,13 @@ class ProduceTest < ActiveSupport::TestCase
       assert_not @produce.in_season?(19,72)
     end
   end
+
+  # has_season?
+  test 'apple has no season in Antartica' do
+    assert_not @produce.has_season?(-71,18)
+  end
+
+  test 'apple has season in Poland' do
+    assert @produce.has_season?(50,17)
+  end
 end

@@ -30,4 +30,12 @@ class Produce < ApplicationRecord
     end
     return false
   end
+
+  def self.season_unknown(lat, lon)
+    Produce.all.select { |produce| !produce.has_season?(lat, lon) }
+  end
+
+  def has_season?(lat, lon)
+    seasons.near([lat, lon], 500).any?
+  end
 end
