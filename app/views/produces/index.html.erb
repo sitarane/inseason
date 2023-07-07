@@ -1,11 +1,11 @@
 <% if @in_season_produces.any? %>
-  <div id="in-season-now" class="mb-4">
+  <section id="in-season-now" class="mb-4">
     <h1>In season now</h1>
     <%= render 'produces', produces: @in_season_produces %>
-  </div>
+  </section>
 <% end %>
 
-<div id="search">
+<section id="search">
   <h1>Other produce</h1>
   <div class="row mb-4">
     <%= render 'search_form' %>
@@ -19,14 +19,14 @@
       <p>We don't have that produce. Would you like to create it?</p>
     <% end %>
   </div>
-</div>
+</section>
 
 <% if @unknow_season_produce.any? %>
-  <div id="season-unknown" class="row mb-4">
+  <section id="season-unknown" class="row mb-4">
     <h1>Season unknown</h1>
     <%= render 'produces', produces: @unknow_season_produce %>
     <p>If you know the season for some of these, please add them.</p>
-  </div>
+  </section>
 <% end %>
 
 <%= link_to "Add produce", new_produce_path, class: 'btn btn-primary' %>
