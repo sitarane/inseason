@@ -4,16 +4,16 @@ class ProducesController < ApplicationController
 
   # GET /produces or /produces.json
   def index
+    # TODO Limit this
     @in_season_produces = Produce.in_season(
       current_location[:latitude],
       current_location[:longitude]
     )
-    # TODO pagination with lazy loading
 
     if params[:query].present?
       @other_produces = Produce.where("name LIKE ?", "%#{params[:query]}%")
     else
-      @other_produces = Produce.all - @in_season_produces
+      @other_produces = Produce.order("RANDOM()").limit(10) - @in_season_produces
     end
   end
 
