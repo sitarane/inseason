@@ -16,7 +16,7 @@ class ProducesController < ApplicationController
     )
 
     if params[:query].present?
-      @other_produces = Produce.where("name LIKE ?", "%#{params[:query]}%")
+      @other_produces = Produce.where("LOWER(name) LIKE ?", "%#{params[:query].downcase}%")
     else
       @other_produces = Produce.order("RANDOM()").limit(20) - @in_season_produces - @unknow_season_produce
     end
