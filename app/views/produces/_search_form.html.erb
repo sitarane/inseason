@@ -1,5 +1,8 @@
 <%= form_with(url: root_path, method: :get) do |form| %>
-  <%= form.label :query, "Search produce:" %>
-  <%= form.text_field :query %>
-  <%= form.submit %>
+  <div class="input-group">
+    <%= form.text_field :query, class: "form-control" %>
+    <div class="input-group-append">
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>
