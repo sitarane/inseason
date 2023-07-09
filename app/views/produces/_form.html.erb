@@ -18,13 +18,32 @@
         <%= form.label :name, class: "form-label", style: "display: block" %>
         <%= form.text_field :name, class: "form-control" %>
       </div>
-
       <div class="mb-3">
         <%= image_tag produce.picture.variant(:thumb) if produce.picture.attached? %>
       </div>
+    </div>
+  </div>
 
+  <div class="row">
+    <label for="image_select" class="form-label"><%= produce.picture.attached? ? "Change" : "Select a" %>  picture</label>
+    <div class="mb-3 d-flex col-6" id="image-select">
+      <% thumbnail_counter = 1 %>
+      <% @thumbnail_urls.each do |url| %>
+        <% image_id = "image_#{thumbnail_counter}" %>
+        <div id=<%=image_id%> class="d-flex flex-column my-2">
+          <%= image_tag url %>
+          <%= form.radio_button :image, thumbnail_counter, class: "btn-check", autocomplete: "off" %>
+          <%= form.label image_id.to_sym, "Use", class: "btn btn-outline-primary" %>
+        </div>
+        <% thumbnail_counter += 1 %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
       <div class="mb-3">
-        <%= form.label :picture, 'Change picture', class: "form-label", style: "display: block" %>
+        <%= form.label :picture, 'Upload picture', class: "form-label", style: "display: block" %>
         <%= form.file_field :picture, class: "form-control" %>
       </div>
 

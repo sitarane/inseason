@@ -40,6 +40,7 @@ class ProducesController < ApplicationController
       wiki_page = Wikipedia.find(params[:name])
       @produce = Produce.new(name: wiki_page.title)
       @produce.links.wikipedia.new(url: wiki_page.fullurl)
+      @thumbnail_urls = wiki_page.image_thumburls.sample(5)
     else
       @produce = Produce.new
       @produce.links.wikipedia.new
@@ -48,6 +49,8 @@ class ProducesController < ApplicationController
 
   # GET /produces/1/edit
   def edit
+    wiki_page = Wikipedia.find(@produce.name)
+    @thumbnail_urls = wiki_page.image_thumburls.sample(5)
   end
 
   # POST /produces or /produces.json
