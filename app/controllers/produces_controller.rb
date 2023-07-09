@@ -36,7 +36,7 @@ class ProducesController < ApplicationController
 
   # GET /produces/new
   def new
-    @produce = Produce.new
+    @produce = Produce.new(name: params[:name])
     @produce.links.wikipedia.new
   end
 

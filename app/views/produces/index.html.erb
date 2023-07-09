@@ -16,7 +16,12 @@
         <%= render 'produces', produces: @other_produces %>
       </div>
     <% else %>
-      <p>We don't have that produce. Would you like to create it?</p>
+      <p>We don't have a produce called <strong><%= params[:query] %></strong>.
+        Would you like to <%= link_to(
+          "create it?",
+          new_produce_path(name: params[:query].try(:capitalize)),
+          class: 'btn btn-primary'
+        ) %></p>
     <% end %>
   </div>
 </section>
@@ -28,5 +33,3 @@
     <p>If you know the season for some of these, please add them.</p>
   </section>
 <% end %>
-
-<%= link_to "Add produce", new_produce_path, class: 'btn btn-primary' %>
