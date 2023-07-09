@@ -36,8 +36,14 @@ class ProducesController < ApplicationController
 
   # GET /produces/new
   def new
-    @produce = Produce.new(name: params[:name])
-    @produce.links.wikipedia.new
+    if params[:name]
+      wiki_page = Wikipedia.find(params[:name])
+      @produce = Produce.new(name: wiki_page.title)
+      @produce.links.wikipedia.new(url: wiki_page.fullurl)
+    else
+      @produce = Produce.new
+      @produce.links.wikipedia.new
+    end
   end
 
   # GET /produces/1/edit
