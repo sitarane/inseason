@@ -40,7 +40,7 @@ class ProducesController < ApplicationController
       wiki_page = Wikipedia.find(params[:name])
       @produce = Produce.new(name: wiki_page.title)
       @produce.links.wikipedia.new(url: wiki_page.fullurl)
-      @thumbnail_urls = wiki_page.image_thumburls.sample(5)
+      @image_url = wiki_page.main_image_url
     else
       @produce = Produce.new
       @produce.links.wikipedia.new
@@ -49,13 +49,18 @@ class ProducesController < ApplicationController
 
   # GET /produces/1/edit
   def edit
-    wiki_page = Wikipedia.find(@produce.name)
-    @thumbnail_urls = wiki_page.image_thumburls.sample(5)
   end
 
   # POST /produces or /produces.json
   def create
-    @produce = Produce.new(produce_params)
+    @produce = Produce.new(produce_params.except(:wiki_image))
+
+    if produce_params[:wiki_image].present? && produce_params[:picture].blank?
+      @produce.picture.attach(
+        io: URI.parse(produce_params[:wiki_image]).open,
+        filename: produce_params[:wiki_image]
+      )
+    end
 
     respond_to do |format|
       if @produce.save
@@ -108,6 +113,7 @@ class ProducesController < ApplicationController
       :name,
       :picture,
       :user_id,
+      :wiki_image,
       links_attributes: [:id, :from, :url]
     )
   end

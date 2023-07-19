@@ -18,34 +18,26 @@
         <%= form.label :name, class: "form-label", style: "display: block" %>
         <%= form.text_field :name, class: "form-control" %>
       </div>
-      <div class="mb-3">
-        <%= image_tag produce.picture.variant(:thumb) if produce.picture.attached? %>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <label for="image_select" class="form-label"><%= produce.picture.attached? ? "Change" : "Select a" %>  picture</label>
-    <div class="mb-3 d-flex col-6" id="image-select">
-      <% thumbnail_counter = 1 %>
-      <% @thumbnail_urls.each do |url| %>
-        <% image_id = "image_#{thumbnail_counter}" %>
-        <div id=<%=image_id%> class="d-flex flex-column my-2">
-          <%= image_tag url %>
-          <%= form.radio_button :image, thumbnail_counter, class: "btn-check", autocomplete: "off" %>
-          <%= form.label image_id.to_sym, "Use", class: "btn btn-outline-primary" %>
+      <% theres_a_picture = produce.picture.attached? || @image_url %>
+      <% if theres_a_picture %>
+        <div class="mb-3">
+          <% if produce.picture.attached? %>
+            <%= image_tag produce.picture.variant(:thumb)  %>
+          <% elsif @image_url %>
+            <%= image_tag @image_url, class: "img-fluid" %>
+            <!-- THIS DOESN'T WORK -->
+            <%= form.hidden_field :wiki_image, value: @image_url %>
+          <% end %>
         </div>
-        <% thumbnail_counter += 1 %>
       <% end %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-3">
-      <div class="mb-3">
-        <%= form.label :picture, 'Upload picture', class: "form-label", style: "display: block" %>
-        <%= form.file_field :picture, class: "form-control" %>
-      </div>
+      <% unless @image_url %>
+        <div class="mb-3">
+          <%= form.label :picture, "#{theres_a_picture ? 'Change' : 'Add a'} picture", class: "form-label", style: "display: block" %>
+          <%= form.file_field :picture, class: "form-control" %>
+        </div>
+      <% end %>
 
       <div class="mb-3">
         <%= form.label :links, 'Wikipedia link', class: "form-label", style: "display: block" %>
