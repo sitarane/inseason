@@ -15,24 +15,31 @@
       <nav class='navbar d-flex py-3 border-bottom'>
         <%= link_to 'In Season', root_path, class: 'navbar-brand' %>
         <%= render partial: 'user_locations/form' %>
-        <ul class='navbar-nav ms-auto'>
-          <li class='nav-item'>
+        <ul class='navbar-nav ms-auto d-flex hstack'>
+          <li class='nav-item mx-2'>
+            <% if I18n.locale == :en %>
+              <%= link_to 'FR', { locale: :fr }, class: "nav-link"  %>
+            <% else %>
+              <%= link_to 'EN', { locale: :en }, class: "nav-link"  %>
+            <% end %>
+          </li>
+          <li class='nav-item mx-2'>
             <% if current_user %>
-              <%= link_to 'Sign out', destroy_user_session_path,
+              <%= link_to t(:sign_out), destroy_user_session_path,
                     data: {
                       turbo_method: :delete,
-                      turbo_confirm: "Sign out?"
+                      turbo_confirm: t(:confirm_sign_out)
                     },
                     class: 'btn btn-warning' %>
             <% else %>
-              <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-success' %>
+              <%= link_to t(:sign_in), new_user_session_path, class: 'btn btn-success' %>
             <% end %>
           </li>
         </ul>
       </nav>
       <% if notice || alert %>
         <div class='row'>
-          <div class="alert alert-<%= notice ? 'warning' : 'danger' %> alert-dismissible fade show" role="alert">
+          <div class="alert alert-<%= alert ? 'danger' : 'warning' %> alert-dismissible fade show" role="alert">
             <%= notice %><%= alert %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
@@ -47,7 +54,7 @@
     <footer class="bg-light container-fluid mt-3">
       <div class="row p-3">
         <div class="col-sm-6">
-          Made of open source goodness
+          <%= t :footer_note %>
         </div>
         <div class="col-sm-6 text-sm-end">
           <%= link_to 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0/'%>

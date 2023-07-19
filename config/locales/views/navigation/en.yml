@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  sign_in: Sign in
+  sign_out: Sign out
+  confirm_sign_out: Sign out?
+  footer_note: Made of open source goodness
