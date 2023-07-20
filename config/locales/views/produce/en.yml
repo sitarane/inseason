@@ -1,2 +1,5 @@
 en:
-  
+  add_picture: Add a
+  change_picture: Change
+  change_or_add_a_picture: "%{coa} picture"
+  wikipedia_link: Wikipedia link

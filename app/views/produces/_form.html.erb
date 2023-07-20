@@ -15,7 +15,7 @@
     <div class="col-sm-6">
       <%= form.hidden_field :user_id, value: current_user.id %>
       <div class="mb-3">
-        <%= form.label :name, class: "form-label", style: "display: block" %>
+        <%= form.label :name, t(:name), class: "form-label", style: "display: block" %>
         <%= form.text_field :name, class: "form-control" %>
       </div>
 
@@ -34,13 +34,13 @@
 
       <% unless @image_url %>
         <div class="mb-3">
-          <%= form.label :picture, "#{theres_a_picture ? 'Change' : 'Add a'} picture", class: "form-label", style: "display: block" %>
+          <%= form.label :picture, t(:change_or_add_a_picture, coa: theres_a_picture ? t(:change_picture) : t(:add_picture)), class: "form-label", style: "display: block" %>
           <%= form.file_field :picture, class: "form-control" %>
         </div>
       <% end %>
 
       <div class="mb-3">
-        <%= form.label :links, 'Wikipedia link', class: "form-label", style: "display: block" %>
+        <%= form.label :links, t(:wikipedia_link), class: "form-label", style: "display: block" %>
         <%= form.fields_for :links, produce.links.wikipedia.first do |link_form| %>
           <%= link_form.hidden_field :from, value: :wikipedia %>
           <%= link_form.text_field :url, class: "form-control", id: "produce_links" %>
@@ -48,7 +48,7 @@
       </div>
 
       <div class="mb-3">
-        <%= form.submit class: "btn btn-primary" %>
+        <%= form.submit t(:update), class: "btn btn-primary" %>
       </div>
     </div>
   </div>

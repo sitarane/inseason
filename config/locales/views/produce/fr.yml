@@ -1,2 +1,5 @@
 fr:
-  
+  add_picture: Ajouter une
+  change_picture: Changer l'
+  change_or_add_a_picture: "%{coa}image"
+  wikipedia_link: Lien Wikipedia
