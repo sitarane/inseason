@@ -1,7 +1,9 @@
 fr:
   activerecord:
     models:
-      user: Produit
+      produce:
+        one: Produit
+        other: Produits
     attributes:
       produce:
         name: Nom

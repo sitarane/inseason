@@ -1,10 +1,16 @@
-<h1>Editing produce</h1>
+<h1><%= t(:editing_model, model_name: @produce.model_name.human.downcase) %></h1>
 
 <%= render "form", produce: @produce %>
 
 <br>
 
 <div>
-  <%= link_to "Show this produce", @produce %> |
-  <%= link_to "Back to produces", produces_path %>
+  <%= link_to t(
+        :show_model,
+        model_name: @produce.model_name.human.downcase
+      ), @produce %> |
+  <%= link_to t(
+        :back_to_models,
+        models_name: @produce.model_name.human(count: 2).downcase
+      ), produces_path %>
 </div>

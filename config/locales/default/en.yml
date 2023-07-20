@@ -1,6 +1,9 @@
 en:
   update: Update
   edit: Edit
+  editing_model: Editing %{model_name}
+  show_model: Show this %{model_name}
+  back_to_models: Back to %{models_name}
   destroy: Delete
   destroy_confirm: Delete this produce?
   search: Search

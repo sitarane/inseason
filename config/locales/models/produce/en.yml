@@ -1,7 +1,9 @@
 en:
   activerecord:
     models:
-      produce: Produce
+      produce:
+        one: Produce
+        other: Produces
     attributes:
       produce:
         name: Name

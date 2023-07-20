@@ -1,6 +1,9 @@
 fr:
   update: Modifier
   edit: Modifier
+  editing_model: Modification du %{model_name}
+  show_model: Afficher ce %{model_name}
+  back_to_models: Retourner aux %{models_name}
   destroy: Supprimer
   destroy_confirm: Supprimer ce produit ?
   search: Rechercher
