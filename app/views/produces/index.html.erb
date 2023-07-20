@@ -1,12 +1,12 @@
 <% if @in_season_produces.any? %>
   <section id="in-season-now" class="mb-5">
-    <h1>In season now</h1>
+    <h1><%= t :in_season_now %></h1>
     <%= render 'produces', produces: @in_season_produces %>
   </section>
 <% end %>
 
 <section id="search" class="mb-5">
-  <h1>Other produce</h1>
+  <h1><%= t :other_produces %></h1>
   <div class="row mb-3">
     <%= render 'search_form' %>
   </div>
@@ -16,20 +16,22 @@
         <%= render 'produces', produces: @other_produces %>
       </div>
     <% else %>
-      <p>We don't have a produce called <strong><%= params[:query] %></strong>.
-        Would you like to <%= link_to(
-          "create it?",
-          new_produce_path(name: params[:query].try(:capitalize)),
-          class: 'btn btn-primary'
-        ) %></p>
+      <p><%= t(
+               :search_fail_html,
+               query: params[:query],
+               link: link_to(
+                 t(:create_it),
+                 new_produce_path(name: params[:query].try(:capitalize))
+               )
+             ) %></p>
     <% end %>
   </div>
 </section>
 
 <% if @unknow_season_produce.any? %>
   <section id="season-unknown" class="row mb-5">
-    <h1>Season unknown</h1>
+    <h1><%= t :season_unknown %></h1>
     <%= render 'produces', produces: @unknow_season_produce %>
-    <p>If you know the season for some of these, please add them.</p>
+    <p><%= t :please_add_season %></p>
   </section>
 <% end %>

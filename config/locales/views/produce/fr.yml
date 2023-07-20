@@ -1,4 +1,14 @@
 fr:
+  in_season_now: De saison maintenant
+  other_produces: Autres produits
+  season_unknown: Saison inconnue
+  search_fail_html: >-
+    Nous n'avont pas de produit appelé <strong>%{query}</strong>.
+    Voulez-vous le %{link} ?
+  create_it: créer
+  please_add_season: >-
+    Si vous connaissez la saison de certains de ces produits,
+    merci de l'ajouter.
   add_picture: Ajouter une
   change_picture: Changer l'
   change_or_add_a_picture: "%{coa}image"

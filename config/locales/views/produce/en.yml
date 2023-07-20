@@ -1,4 +1,11 @@
 en:
+  in_season_now: In season now
+  other_produces: Other produces
+  season_unknown: Season unknown
+  search_fail_html: >-
+    We don't have a produce called <strong>%{query}</strong>.
+    Would you like to %{link}?
+  create_it: create it
   add_picture: Add a
   change_picture: Change
   change_or_add_a_picture: "%{coa} picture"
