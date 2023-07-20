@@ -1,0 +1,7 @@
+fr:
+  activerecord:
+    models:
+      user: Produit
+    attributes:
+      produce:
+        name: Nom

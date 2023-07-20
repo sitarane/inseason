@@ -1,3 +1,5 @@
 en:
-  name: Name
   update: Update
+  edit: Edit
+  destroy: Delete
+  destroy_confirm: Delete this produce?

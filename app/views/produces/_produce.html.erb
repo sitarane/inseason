@@ -6,17 +6,17 @@
     </p>
     <% if current_user && current_user == produce.user %>
       <div id='produce-actions' class="btn-group mb-3" role="group" aria-label="Actions">
-        <%= link_to "Edit", edit_produce_path(produce), class: "btn btn-info" %>
-        <%= link_to "Destroy",
+        <%= link_to t(:edit), edit_produce_path(produce), class: "btn btn-info" %>
+        <%= link_to t(:destroy),
               produce_path(produce),
               data: {
                 turbo_method: :delete,
-                turbo_confirm: "Delete this produce?"
+                turbo_confirm: t(:destroy_confirm)
               },
               class: "btn btn-danger" if produce.seasons.empty? %>
       </div>
       <% if produce.seasons.any? %>
-        <p>This produce can't be deleted as some seasons have been recorded for it.</p>
+        <p><%= t(:cant_destroy_produce) %></p>
       <% end %>
     <% end %>
   </div>

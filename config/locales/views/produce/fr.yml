@@ -3,3 +3,6 @@ fr:
   change_picture: Changer l'
   change_or_add_a_picture: "%{coa}image"
   wikipedia_link: Lien Wikipedia
+  cant_destroy_produce: >-
+    Ce produit ne peut pas être supprimé car des
+    saisons y ont été créées.

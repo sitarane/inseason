@@ -3,3 +3,6 @@ en:
   change_picture: Change
   change_or_add_a_picture: "%{coa} picture"
   wikipedia_link: Wikipedia link
+  cant_destroy_produce: >-
+    This produce can't be deleted as some seasons have been recorded
+    for it.
