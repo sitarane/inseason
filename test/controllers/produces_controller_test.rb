@@ -26,7 +26,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
       post produces_url, params: { produce: { name: 'Potato', user_id: @user.id } }
     end
 
-    assert_redirected_to produce_url(Produce.last)
+    assert_redirected_to produce_url(Produce.last, locale: :en)
 
     # Don't create a link
     assert Produce.last.links.empty?
@@ -45,7 +45,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
       post produces_url, params: params
     end
 
-    assert_redirected_to produce_url(Produce.last)
+    assert_redirected_to produce_url(Produce.last, locale: :en)
   end
 
   test "should create produce with wikipedia link" do
@@ -66,7 +66,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
       post produces_url, params: params
     end
 
-    assert_redirected_to produce_url(Produce.last)
+    assert_redirected_to produce_url(Produce.last, locale: :en)
 
     assert Produce.last.links.any?
   end
@@ -98,7 +98,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     patch produce_url(@produce), params: { produce: { name: new_name } }
     @produce.reload
     assert_equal new_name, @produce.name
-    assert_redirected_to produce_url(@produce)
+    assert_redirected_to produce_url(@produce, locale: :en)
   end
 
   test "should add an image to produce" do
@@ -106,7 +106,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     patch produce_url(@produce), params: { produce: { picture: picture } }
     @produce.reload
     assert @produce.picture.attached?
-    assert_redirected_to produce_url(@produce)
+    assert_redirected_to produce_url(@produce, locale: :en)
   end
 
   test "should edit link to produce that already has one" do
@@ -154,7 +154,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
       delete produce_url(@no_season)
     end
 
-    assert_redirected_to produces_url
+    assert_redirected_to produces_url(locale: :en)
   end
 
 
