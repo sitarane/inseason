@@ -4,6 +4,12 @@ en:
       produce:
         one: Produce
         other: Produces
+      season:
+        one: Season
+        other: Seasons
     attributes:
       produce:
         name: Name
+      season:
+        start_time: Start time
+        end_time: End time

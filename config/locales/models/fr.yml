@@ -4,6 +4,12 @@ fr:
       produce:
         one: Produit
         other: Produits
+      season:
+        one: Saison
+        other: Saisons
     attributes:
       produce:
         name: Nom
+      season:
+        start_time: Début
+        end_time: Fin
