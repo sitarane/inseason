@@ -1,6 +1,10 @@
 class Produce < ApplicationRecord
   extend FriendlyId
+  extend Mobility
+
   friendly_id :name, use: :slugged
+
+  translates :name
 
   validates :name, presence: true, uniqueness: true
   belongs_to :user
