@@ -1,6 +1,9 @@
 class Link < ApplicationRecord
-  belongs_to :produce
+  extend Mobility
 
+  translates :url
+
+  belongs_to :produce
 
   validates :from, presence: true
   validates :url, presence: true
