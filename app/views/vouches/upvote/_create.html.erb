@@ -1,6 +1,6 @@
 <div class="d-flex" aria-label="Upvote season">
   <%= button_to(
-        'Upvote',
+        t :upvote,
         produce_vouches_path(season.produce),
         {
           params: {
@@ -14,7 +14,7 @@
         }
       ) %>
   <%= button_to(
-        'Downvote',
+        t :downvote,
         produce_vouches_path(season.produce),
         {
           params: {

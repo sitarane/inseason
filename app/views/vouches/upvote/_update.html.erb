@@ -1,5 +1,5 @@
 <%= button_to(
-      "#{vouch.value ? 'Down' : 'Up'}vote".capitalize,
+      vouch.value ? t(:downvote) : t(:upvote),
       vouch_path(vouch),
       {
         method: :patch,

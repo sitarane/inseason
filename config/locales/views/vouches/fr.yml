@@ -2,3 +2,5 @@ fr:
   you_have_voted: Vous avez voté %{prefix} cette saison.
   upvote_prefix: pour
   downvote_prefix: contre
+  upvote: Voter pour
+  downvote: Voter contre
