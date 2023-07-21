@@ -1,6 +1,7 @@
 en:
   update: Update
   edit: Edit
+  new_model: New %{model_name}
   editing_model: Editing %{model_name}
   show_model: Show this %{model_name}
   back_to_models: Back to %{models_name}

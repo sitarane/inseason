@@ -9,7 +9,7 @@ fr:
   please_add_season: >-
     Si vous connaissez la saison de certains de ces produits,
     merci de l'ajouter.
-  add_picture: Ajouter une
+  add_picture: "Ajouter une "
   change_picture: Changer l'
   change_or_add_a_picture: "%{coa}image"
   wikipedia_link: Lien Wikipedia
