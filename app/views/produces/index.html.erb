@@ -16,14 +16,18 @@
         <%= render 'produces', produces: @other_produces %>
       </div>
     <% else %>
-      <p><%= t(
-               :search_fail_html,
-               query: params[:query],
-               link: link_to(
-                 t(:create_it),
-                 new_produce_path(name: params[:query].try(:capitalize))
-               )
-             ) %></p>
+      <% if params[:query] %>
+        <p><%= t(
+                 :search_fail_html,
+                 query: params[:query],
+                 link: link_to(
+                   t(:create_it),
+                   new_produce_path(name: params[:query].try(:capitalize))
+                 )
+               ) %></p>
+      <% else %>
+        <%= t(:nothing_to_show) %>
+      <% end %>
     <% end %>
   </div>
 </section>
