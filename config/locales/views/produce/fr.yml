@@ -16,3 +16,4 @@ fr:
   cant_destroy_produce: >-
     Ce produit ne peut pas être supprimé car des
     saisons y ont été créées.
+  no_season_nearby: Pas de saison enregistrée près de %{location}

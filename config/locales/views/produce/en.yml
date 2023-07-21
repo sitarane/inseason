@@ -15,3 +15,4 @@ en:
   cant_destroy_produce: >-
     This produce can't be deleted as some seasons have been recorded
     for it.
+  no_season_nearby: No season recorded near %{location}
