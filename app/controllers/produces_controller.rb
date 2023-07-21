@@ -1,6 +1,6 @@
 class ProducesController < ApplicationController
   before_action :set_produce, only: %i[ show edit update destroy ]
-  before_action :set_wiki_client, only: %i[new create]
+  before_action :set_wiki_client, only: %i[new]
   before_action :authorize_produce
 
   # GET /produces or /produces.json
@@ -42,6 +42,10 @@ class ProducesController < ApplicationController
       @produce = Produce.new(name: wiki_page.title)
       @produce.links.wikipedia.new(url: wiki_page.fullurl)
       @image_url = wiki_page.main_image_url
+      other_languages = I18n.available_locales - [I18n.locale]
+      other_languages.each do |language|
+        session[:"wikiname_#{language}"] = wiki_page.langlinks[language.to_s]
+      end
     else
       @produce = Produce.new
       @produce.links.wikipedia.new
@@ -61,6 +65,19 @@ class ProducesController < ApplicationController
         io: URI.parse(produce_params[:wiki_image]).open,
         filename: produce_params[:wiki_image]
       )
+    end
+
+    other_languages = I18n.available_locales - [I18n.locale]
+
+    other_languages.each do |language|
+      next unless session[:"wikiname_#{language}"]
+      wiki_config = Wikipedia::Configuration.new(domain: "#{language}.wikipedia.org")
+      wiki_client = Wikipedia::Client.new(wiki_config)
+      wiki_page = wiki_client.find(session[:"wikiname_#{language}"])
+      Mobility.with_locale(language) do
+        @produce.name = wiki_page.title
+        @produce.links.first.url = wiki_page.fullurl
+      end
     end
 
     respond_to do |format|
