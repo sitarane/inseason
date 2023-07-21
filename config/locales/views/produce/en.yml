@@ -6,6 +6,8 @@ en:
     We don't have a produce called <strong>%{query}</strong>.
     Would you like to %{link}?
   create_it: create it
+  please_add_season: >-
+    If you know the season for some of these, please add them.
   add_picture: Add a
   change_picture: Change
   change_or_add_a_picture: "%{coa} picture"
