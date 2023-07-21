@@ -1,5 +1,6 @@
 class ProducesController < ApplicationController
   before_action :set_produce, only: %i[ show edit update destroy ]
+  before_action :set_wiki_client, only: %i[new create]
   before_action :authorize_produce
 
   # GET /produces or /produces.json
@@ -37,7 +38,7 @@ class ProducesController < ApplicationController
   # GET /produces/new
   def new
     if params[:name]
-      wiki_page = Wikipedia.find(params[:name])
+      wiki_page = @wiki_client.find(params[:name])
       @produce = Produce.new(name: wiki_page.title)
       @produce.links.wikipedia.new(url: wiki_page.fullurl)
       @image_url = wiki_page.main_image_url
@@ -105,6 +106,12 @@ class ProducesController < ApplicationController
 
   def set_produce
     @produce = Produce.friendly.find(params[:id])
+  end
+
+  def set_wiki_client
+    @wiki_client = Wikipedia::Client.new(
+      Wikipedia::Configuration.new(domain: "#{I18n.locale}.wikipedia.org")
+    )
   end
 
   # Only allow a list of trusted parameters through.
