@@ -10,7 +10,7 @@ class Vouch < ApplicationRecord
   scope :downvoted, -> { where(value: false) }
 
   def prefix
-    value ? 'up' : 'down'
+    value ? I18n.t(:upvote_prefix) : I18n.t(:downvote_prefix)
   end
 
   def should_delete_season?

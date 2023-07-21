@@ -1,0 +1,4 @@
+en:
+  you_have_voted: You have %{prefix}voted this season.
+  upvote_prefix: up
+  downvote_prefix: down
