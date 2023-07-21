@@ -1,3 +1,6 @@
 <%= render @produce %>
 
-<%= link_to "Back to produces", produces_path %>
+<%= link_to t(
+      :back_to_models,
+      models_name: @produce.model_name.human(count: 2).downcase
+    ), produces_path %>
