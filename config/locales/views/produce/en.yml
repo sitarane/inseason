@@ -1,4 +1,11 @@
 en:
+  produces:
+    create:
+      notice: Produce was successfully created.
+    update:
+      notice: Produce was successfully updated.
+    destroy:
+      notice: Produce was successfully destroyed.
   in_season_now: In season now
   other_produces: Other produces
   season_unknown: Season unknown

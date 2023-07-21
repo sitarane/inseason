@@ -1,5 +1,4 @@
 en:
-  update: Update
   edit: Edit
   new_model: New %{model_name}
   editing_model: Editing %{model_name}

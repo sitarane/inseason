@@ -64,7 +64,7 @@ class ProducesController < ApplicationController
 
     respond_to do |format|
       if @produce.save
-        format.html { redirect_to produce_url(@produce), notice: "Produce was successfully created." }
+        format.html { redirect_to produce_url(@produce), notice: t('.notice') }
         format.json { render :show, status: :created, location: @produce }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -77,7 +77,7 @@ class ProducesController < ApplicationController
   def update
     respond_to do |format|
       if @produce.update(produce_params)
-        format.html { redirect_to produce_url(@produce), notice: "Produce was successfully updated." }
+        format.html { redirect_to produce_url(@produce), notice: t('.notice') }
         format.json { render :show, status: :ok, location: @produce }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -91,7 +91,7 @@ class ProducesController < ApplicationController
     @produce.destroy
 
     respond_to do |format|
-      format.html { redirect_to produces_url, notice: "Produce was successfully destroyed." }
+      format.html { redirect_to produces_url, notice: t('.notice') }
       format.json { head :no_content }
     end
   end

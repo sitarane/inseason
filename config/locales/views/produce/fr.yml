@@ -1,4 +1,11 @@
 fr:
+  produces:
+    create:
+      notice: Produit créé.
+    update:
+      notice: Ce produit à été mis à jour.
+    destroy:
+      notice: Produit supprimé.
   in_season_now: De saison maintenant
   other_produces: Autres produits
   season_unknown: Saison inconnue

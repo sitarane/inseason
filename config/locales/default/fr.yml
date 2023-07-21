@@ -1,5 +1,4 @@
 fr:
-  update: Modifier
   edit: Modifier
   new_model: Nouveau %{model_name}
   editing_model: Modification du %{model_name}
