@@ -8,3 +8,5 @@ en:
   destroy: Delete
   destroy_confirm: Delete this produce?
   search: Search
+  in: in
+  change: Change
