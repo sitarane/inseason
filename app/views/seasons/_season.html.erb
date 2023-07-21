@@ -18,7 +18,7 @@
     </div>
 
     <div class="row mb-4">
-      <h3>Trustworthiness</h3>
+      <h3><%= t :trustworthiness %></h3>
       <div class="row mb-4">
         <% if @season_distance && @season_distance > 100 %>
           <p>
@@ -30,9 +30,9 @@
         <div class="row mb-4">
         <p>
           <% if season.confirmed? %>
-            This season was confirmed by other users.
+            <%= t :confirmed %>
           <% else %>
-            This season is yet unconfirmed by other users.
+            <%= t :unconfirmed %>
           <% end %>
         </p>
         <%= render @vouch if @vouch %>
