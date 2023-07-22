@@ -2,7 +2,7 @@ class Produce < ApplicationRecord
   extend FriendlyId
   extend Mobility
 
-  friendly_id :english_name, use: :slugged
+  friendly_id :name, use: :slugged
 
   translates :name
 
@@ -17,12 +17,6 @@ class Produce < ApplicationRecord
   accepts_nested_attributes_for :links
 
   validates :user, presence: true
-
-  def english_name
-    I18n.with_locale(:en) do
-      self.name
-    end
-  end
 
   def main_link
     wikilinks = links.wikipedia
