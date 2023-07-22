@@ -14,9 +14,20 @@ class Produce < ApplicationRecord
     picture.variant :thumb, resize_to_limit: [300, 300]
   end
 
+  after_create :make_sure_the_slug_is_english
+
   accepts_nested_attributes_for :links
 
   validates :user, presence: true
+
+  def make_sure_the_slug_is_english
+    # This is ugly. But friendly_id behaves unexpectedly when I try to use
+    # a setter method before the produce is saved
+    self.slug = nil
+    I18n.with_locale(:en) do
+      self.save
+    end
+  end
 
   def main_link
     wikilinks = links.wikipedia
