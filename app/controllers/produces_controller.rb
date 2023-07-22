@@ -43,8 +43,10 @@ class ProducesController < ApplicationController
       @produce.links.wikipedia.new(url: wiki_page.fullurl)
       @image_url = wiki_page.main_image_url
       other_languages = I18n.available_locales - [I18n.locale]
-      other_languages.each do |language|
-        session[:"wikiname_#{language}"] = wiki_page.langlinks[language.to_s]
+      if wiki_page.langlinks
+        other_languages.each do |language|
+          session[:"wikiname_#{language}"] = wiki_page.langlinks[language.to_s]
+        end
       end
     else
       @produce = Produce.new
