@@ -5,6 +5,9 @@
 
   <div class="row">
     <div class="col-md-6">
+
+      <%= invisible_captcha visual_honeypots: true, sentence_for_humans: "hey! leave this input empty!" %>
+
       <div class="mb-3">
         <%= f.label :email, class: "form-label" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>

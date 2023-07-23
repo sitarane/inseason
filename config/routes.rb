@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resource :user_location, only: %i(show edit update)
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :produces do
     resources :seasons, shallow: true, only: %i(create show destroy)
