@@ -1,0 +1,35 @@
+apple_en_translation:
+  translatable_id: 1
+  translatable_type: Produce
+  locale: en
+  key: name
+  value: Apple
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+apple_fr_translation:
+  translatable_id: 1
+  translatable_type: Produce
+  locale: fr
+  key: name
+  value: Pomme
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+apple_en_wikilink_translation:
+  translatable_id: 1
+  translatable_type: Link
+  locale: en
+  key: url
+  value: https://en.wikipedia.org/wiki/Apple
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+apple_fr_wikilink_translation:
+  translatable_id: 1
+  translatable_type: Link
+  locale: fr
+  key: url
+  value: https://fr.wikipedia.org/wiki/Pomme
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

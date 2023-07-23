@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 apple:
-  name: Apple
+  # see translation table for name
   user: john
 
 no_link:

@@ -3,4 +3,4 @@
 apple_wiki_link:
   produce: apple
   from: 0
-  url: https://en.wikipedia.org/wiki/Apple
+  # see translation table for url
