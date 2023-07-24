@@ -1,5 +1,6 @@
 volumes:
   db-data:
+  storage:
 
 services:
   db:
@@ -7,8 +8,11 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     env_file: .env
+
   web:
     image: sitarane/inseason:0.1
+    volumes:
+      - storage:/app/storage
     ports:
       - "3000:3000"
     depends_on:
