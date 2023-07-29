@@ -1,1 +1,7 @@
+.git
+.gitignore
 .env
+config/master.key
+Makefile
+.dockerignore
+.env.sample
