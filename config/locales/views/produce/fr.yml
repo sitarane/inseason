@@ -1,4 +1,16 @@
 fr:
+  how_it_works: Comment ça marche
+  introduction_1: Trouvez la saison des fruits et légumes où que vous soyez.
+  introduction_2: >-
+    Ce projet à été lancé le 29 juillet 2013 avec une base de données vide.
+    C'est pour ça qu'il n'y a pas encore grand chose. Vous pouvez aider en
+    ajoutant vos produits préféré, s'il manque. S'il est déjà là, vous pourriez
+    ajouter sa saison dans votre région.
+  introduction_3: >-
+    Vous pouvez confirmer les saisons qui sont correctes et infirmer celles
+    qui sont erronées.
+  introduction_4: >-
+    Merci de ne seulement ajouter des saisons dont vous êtes relativement sûr.
   produces:
     create:
       notice: Produit créé.

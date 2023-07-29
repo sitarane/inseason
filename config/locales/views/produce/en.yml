@@ -1,4 +1,15 @@
 en:
+  how_it_works: How it works
+  introduction_1: Find the season for produce around the world.
+  introduction_2: >-
+    This project was launched on the 29th of July 2023 with an empty database.
+    That's why it's currently quite scarce. You can help by adding
+    your favourite produce, if it isn't there already. If it is, you could add
+    the season for it in your region.
+  introduction_3: >-
+    You can upvote seasons that are correct and downvotes those that are
+    mistaken.
+  introduction_4: Please only add seasons you're quite sure about.
   produces:
     create:
       notice: Produce was successfully created.

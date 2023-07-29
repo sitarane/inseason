@@ -1,3 +1,21 @@
+<div class="d-flex justify-content-center mb-3">
+  <%= link_to t(:how_it_works),
+        "#introduction",
+        class: "btn btn-info btn-lg",
+        'data-bs-toggle' => "collapse",
+        role: "button",
+        'aria-expanded' => false,
+        'aria-controls' => "collapseExample" %>
+</div>
+<div id="introduction" class="collapse mb-3">
+  <div class="card card-body">
+    <p><%= t :introduction_1 %></p>
+    <p><%= t :introduction_2 %></p>
+    <p><%= t :introduction_3 %></p>
+    <p><%= t :introduction_4 %></p>
+  </div>
+</div>
+
 <% if @in_season_produces.any? %>
   <section id="in-season-now" class="mb-5">
     <h1><%= t :in_season_now %></h1>
