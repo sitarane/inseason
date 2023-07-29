@@ -5,6 +5,9 @@ config/master.key
 Makefile
 .dockerignore
 .env.sample
+Dockerfile
+docker-compose.yml
+production.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
