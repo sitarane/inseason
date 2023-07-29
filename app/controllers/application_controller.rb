@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
       longitude: location.longitude,
       state: location.state,
       country: location.country,
-      display_name: location.display_name
+      display_name: location.try(:display_name)
     }
   end
 
