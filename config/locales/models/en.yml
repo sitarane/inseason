@@ -1,9 +1,7 @@
 en:
   activerecord:
     models:
-      produce:
-        one: Produce
-        other: Produces
+      produce: Produce
       season:
         one: Season
         other: Seasons
