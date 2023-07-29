@@ -6,7 +6,6 @@
 <% end %>
 
 <section id="search" class="mb-5">
-  <h1><%= t :other_produces %></h1>
   <div class="row mb-3">
     <%= render 'search_form' %>
   </div>
@@ -25,8 +24,6 @@
                    new_produce_path(name: params[:query].try(:capitalize))
                  )
                ) %></p>
-      <% else %>
-        <%= t(:nothing_to_show) %>
       <% end %>
     <% end %>
   </div>
