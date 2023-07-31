@@ -26,7 +26,7 @@ services:
     ports:
       - "1080:1080"
   test:
-    image: inseason_web
+    build: .
     volumes:
       - .:/app
       - gems:/usr/local/bundle
