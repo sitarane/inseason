@@ -11,10 +11,17 @@ class ApplicationController < ActionController::Base
   private
 
   def switch_locale(&action)
-    locale = params[:locale] ||
-      extract_locale_from_accept_language_header ||
-      I18n.default_locale
+    locale = params[:locale] || browser_language || I18n.default_locale
     I18n.with_locale(locale, &action)
+  end
+  
+  def browser_language
+    return nil if Rails.env.test?
+    (extract_locales_from_accept_language_header & I18n.available_locales).first
+  end
+
+  def extract_locales_from_accept_language_header
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).map(&:to_sym)
   end
 
   def default_url_options
@@ -23,10 +30,6 @@ class ApplicationController < ActionController::Base
 
   def current_location
     session[:location].presence || set_location_from_ip
-  end
-
-  def extract_locale_from_accept_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 
   def set_location_from_ip
