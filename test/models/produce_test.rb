@@ -29,7 +29,7 @@ class ProduceTest < ActiveSupport::TestCase
   end
 
   test '#main_link returns a link when present' do
-    link = produces(:apple).main_link
+    link = @produce.main_link
     assert_instance_of String, link
     assert_match "wikipedia", link
   end

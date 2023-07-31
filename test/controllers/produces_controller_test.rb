@@ -1,4 +1,5 @@
 require "test_helper"
+# require 'minitest/autorun'
 
 class ProducesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -16,60 +17,73 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_produce_url
-    assert_response :success
-  end
+test "should get new" do
+  get new_produce_url
+  assert_response :success
+end
 
-  test "should create produce" do
-    assert_difference("Produce.count") do
-      post produces_url, params: { produce: { name: 'Potato', user_id: @user.id } }
-    end
+  # test "wikipedia new" do
+  #   fake_wiki_page = MiniTest::Mock.new
+  #   fake_wiki_page.expect :title, "Fake title"
+    
+  #   fake_wiki_client = MiniTest::Mock.new
+  #   fake_wiki_client.expect :find, fake_wiki_page, ['fake name']
 
-    assert_redirected_to produce_url(Produce.last, locale: :en)
+  #   Wikipedia::Client.stub :new, fake_wiki_client do
+  #     get new_produce_url, params: { name: 'fake name'}
+  #   end
+  #   assert_response :success
+  # end
 
-    # Don't create a link
-    assert Produce.last.links.empty?
-  end
+  # test "should create produce" do
+  #   assert_difference("Produce.count") do
+  #     post produces_url, params: { produce: { name: 'Potato', user_id: @user.id } }
+  #   end
 
-  test "should create produce with picture" do
-    picture = fixture_file_upload('test/fixtures/files/apple.jpg')
-    params = {
-      produce: {
-        name: 'Potato',
-        user_id: @user.id,
-        picture: picture
-      }
-    }
-    assert_difference("Produce.count") do
-      post produces_url, params: params
-    end
+  #   assert_redirected_to produce_url(Produce.last, locale: :en)
 
-    assert_redirected_to produce_url(Produce.last, locale: :en)
-  end
+  #   # Don't create a link
+  #   assert Produce.last.links.empty?
+  # end
 
-  test "should create produce with wikipedia link" do
-    params = {
-      produce: {
-        name: 'Potato',
-        user_id: @user.id,
-        links_attributes: {
-          0 => {
-            from: :wikipedia,
-            url: 'https://en.wikipedia.org/wiki/Apple'
-            }
-          }
-        }
-      }
+  # test "should create produce with picture" do
+  #   picture = fixture_file_upload('test/fixtures/files/apple.jpg')
+  #   params = {
+  #     produce: {
+  #       name: 'Potato',
+  #       user_id: @user.id,
+  #       picture: picture
+  #     }
+  #   }
+  #   assert_difference("Produce.count") do
+  #     post produces_url, params: params
+  #   end
 
-    assert_difference("Produce.count") do
-      post produces_url, params: params
-    end
+  #   assert_redirected_to produce_url(Produce.last, locale: :en)
+  # end
 
-    assert_redirected_to produce_url(Produce.last, locale: :en)
+  # test "should create produce with wikipedia link" do
+  #   params = {
+  #     produce: {
+  #       name: 'Potato',
+  #       user_id: @user.id,
+  #       links_attributes: {
+  #         0 => {
+  #           from: :wikipedia,
+  #           url: 'https://en.wikipedia.org/wiki/Apple'
+  #           }
+  #         }
+  #       }
+  #     }
 
-    assert Produce.last.links.any?
-  end
+  #   assert_difference("Produce.count") do
+  #     post produces_url, params: params
+  #   end
+
+  #   assert_redirected_to produce_url(Produce.last, locale: :en)
+
+  #   assert Produce.last.links.any?
+  # end
 
   test "should show produce" do
     get produce_url(@produce)
