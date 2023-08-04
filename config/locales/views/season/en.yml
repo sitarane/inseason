@@ -2,3 +2,6 @@ en:
   trustworthiness: Trustworthiness
   confirmed: This season was confirmed by other users.
   unconfirmed: This season is yet unconfirmed by other users.
+  season_far: >-
+   This season was recorded %{distance} km from %{location}.
+   If you know the local season, could you add it?
