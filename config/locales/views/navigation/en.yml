@@ -33,4 +33,5 @@ en:
   sign_in: Sign in
   sign_out: Sign out
   confirm_sign_out: Sign out?
-  footer_note: Made of open source goodness
+  footer_note_html: Made of %{link}.
+  footer_link: open source goodness
