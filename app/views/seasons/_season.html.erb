@@ -24,7 +24,7 @@
           <p>
             <%= t(:season_far, distance: @season_distance, location: @location) %>
           </p>
-          <%= render 'seasons/form', season: Season.new(produce: season.produce) if current_user %>
+          <%= render 'seasons/form', season: Season.new(produce: season.produce) if current_user.try(:confirmed?) %>
         <% end %>
         </div>
         <div class="row mb-4">
@@ -36,7 +36,7 @@
           <% end %>
         </p>
         <%= render @vouch if @vouch %>
-        <%= render 'vouches/form', vouch: @vouch, season: @season if current_user && current_user != @season.user %>
+        <%= render 'vouches/form', vouch: @vouch, season: @season if current_user.try(:confirmed?) && current_user != @season.user %>
       </div>
     </div>
   </div>

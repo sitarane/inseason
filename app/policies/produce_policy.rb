@@ -1,6 +1,6 @@
 class ProducePolicy < ApplicationPolicy
   def update?
-    return false unless user
+    return false unless user.try(:confirmed?)
     record.user == user
   end
   def edit?

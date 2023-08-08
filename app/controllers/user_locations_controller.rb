@@ -7,7 +7,7 @@ class UserLocationsController < ApplicationController
     location = Geocoder.search(params[:location]).first
     respond_to do |format|
       if location
-        # current_uset.update(location: location) if current_user
+        # current_user.update(location: location) if current_user
         session[:location] = location_hash(location)
         format.html { redirect_to user_location_path }
       else

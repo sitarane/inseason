@@ -34,14 +34,20 @@
       </div>
     <% else %>
       <% if params[:query] %>
-        <p><%= t(
-                 :search_fail_html,
-                 query: params[:query],
-                 link: link_to(
-                   t(:create_it),
-                   new_produce_path(name: params[:query].try(:capitalize))
-                 )
-               ) %></p>
+        <p>
+          <%= t(:search_fail_html, query: params[:query]) %>
+        </p>
+        <% if current_user.try(:confirmed?) %>
+          <p>
+            <%= t(
+                  :would_you_like_to_html,
+                  link: link_to(
+                    t(:create_it),
+                    new_produce_path(name: params[:query].try(:capitalize))
+                  )
+                ) %>
+          </p>
+        <% end %>
       <% end %>
     <% end %>
   </div>

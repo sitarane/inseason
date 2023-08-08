@@ -17,7 +17,7 @@ class ApplicationPolicy
   end
 
   def create?
-    user.present?
+    user.try(:confirmed?)
   end
 
   def new?
