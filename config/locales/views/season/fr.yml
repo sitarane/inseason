@@ -2,6 +2,5 @@ fr:
   trustworthiness: Degré de confiance
   confirmed: Cette saison a été confirmée par d'autres utilisateurs
   unconfirmed: Cette saison n'est pas encore confirmée par d'autres utilisateurs
-  season_far:  >-
-    Cette saison a été enregistrée à %{distance} km de %{location}.
-    Si vous connaissez la saison locale, pourriez-vous l'ajouter ?
+  season_far: Cette saison a été enregistrée à %{distance} km de %{location}.
+  add_local_season: Si vous connaissez la saison locale, pourriez-vous l'ajouter ?

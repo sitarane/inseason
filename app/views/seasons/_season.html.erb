@@ -21,10 +21,11 @@
       <h3><%= t :trustworthiness %></h3>
       <div class="row mb-4">
         <% if @season_distance && @season_distance > 100 %>
-          <p>
-            <%= t(:season_far, distance: @season_distance, location: @location) %>
-          </p>
-          <%= render 'seasons/form', season: Season.new(produce: season.produce) if current_user.try(:confirmed?) %>
+          <p> <%= t(:season_far, distance: @season_distance, location: @location) %> </p>
+          <% if current_user.try(:confirmed?) %>
+            <p> <%= t :add_local_season %> </p>
+            <%= render 'seasons/form', season: Season.new(produce: season.produce) %>
+          <% end %>
         <% end %>
         </div>
         <div class="row mb-4">
