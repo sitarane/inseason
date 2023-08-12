@@ -31,6 +31,6 @@
     <%= render @season %>
 <% else %>
   <h3><%= t(:no_season_nearby, location: @location) %></h3>
-  <%= render 'seasons/form', season: Season.new(produce: produce) if current_user %>
+  <%= render 'seasons/form', season: Season.new(produce: produce) if current_user.try(:confirmed?) %>
 </div>
 <% end %>
