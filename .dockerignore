@@ -15,6 +15,7 @@ production.yml
 !/log/.keep
 !/tmp/.keep
 
+/test/*
 
 # Ignore uploaded files in development
 /storage/*

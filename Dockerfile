@@ -1,23 +1,38 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.1
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs postgresql-client libvips
-RUN npm install -g yarn
+FROM ruby:3.1.4-alpine AS builder
+RUN apk update && apk add --no-cache \
+      vips-dev \
+      build-base \
+      postgresql-dev \
+      nodejs \
+      npm \
+      yarn \
+      tzdata
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 COPY . /app
-
 RUN rails assets:precompile
 
-# Add a script to be executed every time the container starts.
+# FROM builder AS dev
+FROM builder AS dev
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
-
-# Configure the main process to run when running the image
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
-# FROM ruby:3.1-alpine AS prod
+FROM ruby:3.1.4-alpine AS prod
+RUN apk update && apk add --no-cache \
+  postgresql-dev \
+  vips-dev \
+  tzdata
+WORKDIR /app
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+COPY . /app
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+CMD ["rails", "server", "-b", "0.0.0.0"]
