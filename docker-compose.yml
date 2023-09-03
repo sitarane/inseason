@@ -28,7 +28,9 @@ services:
     ports:
       - "1080:1080"
   test:
-    build: .
+    build:
+      context: .
+      target: dev
     volumes:
       - .:/app
       - gems:/usr/local/bundle
