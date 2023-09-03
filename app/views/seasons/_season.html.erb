@@ -1,5 +1,6 @@
 <%= turbo_frame_tag "season_form" do %>
   <%= turbo_stream.remove "delete-produce" %>
+  <%= turbo_stream.remove "no-season-title" %>
   <div id="<%= dom_id season %>">
     <div id="months-list" class="d-flex">
       <% months_list.each do |month| %>
