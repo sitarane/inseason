@@ -1,4 +1,8 @@
 <%= turbo_frame_tag "location_form" do %>
-  <span><%= t(:in) + " " + @location%>.</span>
+  <% if @location %>
+    <span><%= t(:in) + " " + @location%>.</span>
+  <% else %>
+    <span><%= t(:no_location) %></span>
+  <% end %>
   <%= link_to t(:change), edit_user_location_path, class: 'btn btn-light btn-sm' %>
 <% end %>

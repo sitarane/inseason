@@ -8,4 +8,5 @@ en:
   destroy_confirm: Delete this produce?
   search: Search
   in: in
+  no_location: We don't know where you are.
   change: Change
