@@ -4,7 +4,7 @@ class Produce < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  translates :name
+  translates :name, fallbacks: { en: :fr, fr: :en }
 
   validates :name, presence: true, uniqueness: true
   belongs_to :user
