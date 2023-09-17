@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "location_form" do %>
   <div class="row">
-    <%= form_with url: user_location_path, method: :put, class: "col-md-6" do |form| %>
+    <%= form_with url: user_location_path, method: :put, data: { turbo_frame: "_top" }, class: "col-md-6" do |form| %>
       <div class="input-group">
         <%= form.text_field :location, class: "form-control", placeholder: "New location" %>
         <%= form.submit class: 'btn btn-success' %>

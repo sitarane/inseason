@@ -16,10 +16,10 @@
                 },
                 class: "btn btn-danger",
                 id: "delete-produce" %>
-          <% end %>
-        </div>
+        <% end %>
+      </div>
       <% if produce.seasons.any? %>
-        <p><%= t(:cant_destroy_produce) %></p>
+        <p id='cant-destroy-produce'><%= t(:cant_destroy_produce) %></p>
       <% end %>
     <% end %>
   </div>
