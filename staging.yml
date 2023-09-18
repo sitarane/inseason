@@ -5,25 +5,26 @@ volumes:
   redis-data:
 
 services:
-  db:
-    image: postgres:15
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    env_file: .env
-
   web:
     image: sitarane/inseason:0.14
     volumes:
       - storage:/app/storage
       - log:/app/log
     ports:
-      - "3001:3000"
+      - "3002:3000"
     depends_on:
       - db
       - redis
     env_file: .env
     environment:
-      RAILS_ENV: production
+      RAILS_ENV: staging
+      SECRET_KEY_BASE: 914b724963902578d48d8d7b004292991904a71221c52e5595075f97d8b713667a69e2563f2933d3a8e8debf3ea32bbe76fbd7705450e303976a97ff681ba661
+
+  db:
+    image: postgres:15
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file: .env
 
   redis:
     image: redis:7-alpine

@@ -28,3 +28,5 @@ logs:
 	docker-compose logs -f
 pid:
 	docker-compose run --rm web rm /app/tmp/pids/server.pid
+cache:
+	docker-compose run --rm web rails dev:cache

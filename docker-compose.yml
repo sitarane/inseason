@@ -1,6 +1,7 @@
 volumes:
   db-data:
   gems:
+  redis-data:
 
 services:
   db:
@@ -8,6 +9,13 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     env_file: .env
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save 60 1 --loglevel warning --maxmemory-policy volatile-ttl
+    volumes:
+      - redis-data:/data
+
   web:
     build:
       context: .
@@ -20,13 +28,16 @@ services:
     depends_on:
       - maildev
       - db
+      - redis
     env_file: .env
     stdin_open: true
     tty: true
+
   maildev:
     image: maildev/maildev
     ports:
       - "1080:1080"
+
   test:
     build:
       context: .
@@ -42,6 +53,7 @@ services:
     env_file: .env
     stdin_open: true
     tty: true
+
   chrome-server:
     image: selenium/standalone-chrome
     ports:
