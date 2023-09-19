@@ -1,5 +1,5 @@
 class Vouch < ApplicationRecord
-  belongs_to :season
+  belongs_to :season, touch: true
   belongs_to :user
 
   validates :value, inclusion: [true, false]

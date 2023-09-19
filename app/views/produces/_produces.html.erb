@@ -4,7 +4,9 @@
     <div class="row mb-4">
   <% end %>
     <div class="col-md-4">
-      <%= render 'produce_card', produce: produce %>
+      <% cache produce do %>
+        <%= render 'produce_card', produce: produce %>
+      <% end %>
     </div>
   <% if (counter + 1 ) % 3 == 0 %>
     </div>

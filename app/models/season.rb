@@ -1,5 +1,5 @@
 class Season < ApplicationRecord
-  belongs_to :produce
+  belongs_to :produce, touch: true
   belongs_to :user
   has_many :vouches, dependent: :destroy
   has_many :users, through: :vouches

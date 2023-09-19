@@ -1,4 +1,6 @@
-<%= render @produce %>
+<% cache @produce do %>
+  <%= render @produce %>
+<% end %>
 
 <%= link_to t(
       :back_to_models,
