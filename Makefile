@@ -6,6 +6,8 @@ console:
 	docker-compose run --rm web rails console
 bash:
 	docker-compose run --rm web bash
+sh:
+	docker-compose run --rm web sh
 web:
 	docker-compose run --rm --service-ports web
 down:
