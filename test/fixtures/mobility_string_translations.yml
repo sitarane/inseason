@@ -1,23 +1,23 @@
 apple_en_translation:
-  translatable_id: 1
-  translatable_type: Produce
-  locale: en
-  key: name
-  value: Apple
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:apple) %>
+  translatable_type: "Produce"
+  locale: "en"
+  key: "name"
+  value: "Apple"
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
 
 apple_fr_translation:
-  translatable_id: 1
-  translatable_type: Produce
-  locale: fr
-  key: name
-  value: Pomme
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:apple) %>
+  translatable_type: "Produce"
+  locale: "fr"
+  key: "name"
+  value: "Pomme"
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
 
 apple_en_wikilink_translation:
-  translatable_id: 1
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:apple_wiki_link) %>
   translatable_type: Link
   locale: en
   key: url
@@ -26,7 +26,7 @@ apple_en_wikilink_translation:
   updated_at: <%= Time.now %>
 
 apple_fr_wikilink_translation:
-  translatable_id: 1
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:apple_wiki_link) %>
   translatable_type: Link
   locale: fr
   key: url
