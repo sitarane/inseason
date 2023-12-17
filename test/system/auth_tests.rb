@@ -7,17 +7,25 @@ class SeasonsTest < ApplicationSystemTestCase
     sign_in users(:alice)
   end
 
-  # test 'create a produce and a season' do
-  #   visit root_url
-  #   fill_in "query", with: "lychee"
-  #   click_on "Search"
-  #   assert_text "Produce was successfully created."
-  #   assert_selector "h1", text: "Space beetroots"
-  #   select 'Early February', from: 'Start time'
-  #   select 'Late March', from: 'End time'
-  #   click_on "Create Season"
-  #   assert_selector 'div#in-season'
-  # end
+  test 'create a produce and a season' do
+    visit root_url
+    fill_in "query", with: "Space beetroot"
+    click_on "Search"
+    assert_text "We don't have a produce called Space beetroot."
+    assert_link "create it"
+
+    # NEED TO MOCK WIKIPEDIA CALLS
+
+    # click_on "create it"
+    # assert_selector "h1", text: "New Produce"
+    # assert_selector "input", text:
+    # assert_text "Produce was successfully created."
+    # assert_selector "h1", text: "Space beetroots"
+    # select 'Early February', from: 'Start time'
+    # select 'Late March', from: 'End time'
+    # click_on "Create Season"
+    # assert_selector 'div#in-season'
+  end
 
   test 'vote on season' do
     visit produce_url produces :apple

@@ -1,5 +1,5 @@
 require "test_helper"
-# require 'minitest/autorun'
+require 'minitest/autorun'
 
 class ProducesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -12,36 +12,36 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     @no_season = produces :no_link
   end
 
+
+
   test "should get index" do
     get produces_url
     assert_response :success
   end
 
-test "should get new" do
-  get new_produce_url
-  assert_response :success
-end
+  test "should get new" do
+    get new_produce_url
+    assert_response :success
+  end
 
-  # test "wikipedia new" do
-  #   fake_wiki_page = MiniTest::Mock.new
-  #   fake_wiki_page.expect :title, "Fake title"
-    
-  #   fake_wiki_client = MiniTest::Mock.new
-  #   fake_wiki_client.expect :find, fake_wiki_page, ['fake name']
+  test "wikipedia new" do
+    Wikipedia::Client.stub :new, fake_wiki_client do
+      get new_produce_url, params: { name: 'fake thing'}
+    end
+    assert_response :success
+    assert_select 'input#produce_name', value: 'Fake thing'
+  end
 
+  # test "should create produce from input" do
   #   Wikipedia::Client.stub :new, fake_wiki_client do
-  #     get new_produce_url, params: { name: 'fake name'}
+  #     assert_difference("Produce.count") do
+  #       post produces_url,
+  #         params: { produce: { name: 'Potato', user_id: @user.id } }
+  #     end
   #   end
-  #   assert_response :success
-  # end
-
-  # test "should create produce" do
-  #   assert_difference("Produce.count") do
-  #     post produces_url, params: { produce: { name: 'Potato', user_id: @user.id } }
-  #   end
-
+  #
   #   assert_redirected_to produce_url(Produce.last, locale: :en)
-
+  #
   #   # Don't create a link
   #   assert Produce.last.links.empty?
   # end
