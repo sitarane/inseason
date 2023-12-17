@@ -8,7 +8,7 @@ class AnonTests < ApplicationSystemTestCase
       assert_selector "h2", text: "Apple"
       click_on "Apple"
       assert_selector "h1", text: "Apple"
-      click_on "Back to produces"
+      click_on "Back to produce"
       assert_selector "h1", text: "In season now"
       assert_selector "h2", text: "Apple"
     end
