@@ -7,14 +7,14 @@ services:
   db:
     image: postgres:15
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data:Z
     env_file: .env
 
   redis:
     image: redis:7-alpine
     command: redis-server --save 60 1 --loglevel warning --maxmemory-policy volatile-ttl
     volumes:
-      - redis-data:/data
+      - redis-data:/data:Z
 
   web:
     build:
@@ -22,7 +22,7 @@ services:
       target: dev
     volumes:
       - .:/app:z
-      - gems:/usr/local/bundle
+      - gems:/usr/local/bundle:Z
     ports:
       - "3000:3000"
     depends_on:
@@ -43,8 +43,8 @@ services:
       context: .
       target: dev
     volumes:
-      - .:/app
-      - gems:/usr/local/bundle
+      - .:/app:z
+      - gems:/usr/local/bundle:Z
     depends_on:
       - db
       - chrome-server

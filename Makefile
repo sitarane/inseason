@@ -1,34 +1,34 @@
 .PHONY: test
 
 sandbox:
-	docker-compose run --rm web rails console --sandbox
+	podman-compose run --rm web rails console --sandbox
 console:
-	docker-compose run --rm web rails console
+	podman-compose run --rm web rails console
 bash:
-	docker-compose run --rm web bash
+	podman-compose run --rm web bash
 sh:
-	docker-compose run --rm web sh
+	podman-compose run --rm web sh
 web:
-	docker-compose run --rm --service-ports web
+	podman-compose run --rm --service-ports web
 down:
-	docker-compose down
+	podman-compose down
 restart:
-	docker-compose restart
+	podman-compose restart
 dbm:
-	docker-compose run --rm web rails db:migrate
+	podman-compose run --rm web rails db:migrate
 dbmt:
-	docker-compose run --rm web rails db:migrate RAILS_ENV=test
+	podman-compose run --rm web rails db:migrate RAILS_ENV=test
 bundle:
-	docker-compose run --rm web bundle install
+	podman-compose run --rm web bundle install
 test:
-	docker-compose run --rm test rails test $(f)
+	podman-compose run --rm test rails test $(f)
 system-test:
-	docker-compose run --rm test rails test:system
+	podman-compose run --rm test rails test:system
 routes:
-	docker-compose run --rm web rails routes
+	podman-compose run --rm web rails routes
 logs:
-	docker-compose logs -f
+	podman-compose logs -f
 pid:
-	docker-compose run --rm web rm /app/tmp/pids/server.pid
+	podman-compose run --rm web rm /app/tmp/pids/server.pid
 cache:
-	docker-compose run --rm web rails dev:cache
+	podman-compose run --rm web rails dev:cache
