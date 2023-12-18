@@ -1,4 +1,5 @@
 require "application_system_test_case"
+require 'minitest/autorun'
 
 class SeasonsTest < ApplicationSystemTestCase
   include Devise::Test::IntegrationHelpers
@@ -13,18 +14,19 @@ class SeasonsTest < ApplicationSystemTestCase
     click_on "Search"
     assert_text "We don't have a produce called Space beetroot."
     assert_link "create it"
-
-    # NEED TO MOCK WIKIPEDIA CALLS
-
-    # click_on "create it"
-    # assert_selector "h1", text: "New Produce"
-    # assert_selector "input", text:
-    # assert_text "Produce was successfully created."
-    # assert_selector "h1", text: "Space beetroots"
-    # select 'Early February', from: 'Start time'
-    # select 'Late March', from: 'End time'
-    # click_on "Create Season"
-    # assert_selector 'div#in-season'
+    Wikipedia::Client.stub :new, fake_wiki_client do
+      click_on "create it"
+    end
+    assert_selector "h1", text: "New produce"
+    Wikipedia::Client.stub :new, fake_wiki_client do
+      click_on "Create Produce"
+    end
+    assert_text "Produce was successfully created."
+    assert_selector "h1", text: "Space beetroot"
+    select 'Early February', from: 'Start time'
+    select 'Late March', from: 'End time'
+    click_on "Create Season"
+    assert_selector 'div#in-season'
   end
 
   test 'vote on season' do
