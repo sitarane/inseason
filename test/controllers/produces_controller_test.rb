@@ -12,8 +12,6 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     @no_season = produces :no_link
   end
 
-
-
   test "should get index" do
     get produces_url
     assert_response :success
@@ -24,7 +22,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "wikipedia new" do
+  test "should populate #new with wiki page data" do
     Wikipedia::Client.stub :new, fake_wiki_client do
       get new_produce_url, params: { name: 'fake thing'}
     end
@@ -32,58 +30,62 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'input#produce_name', value: 'Fake thing'
   end
 
-  # test "should create produce from input" do
-  #   Wikipedia::Client.stub :new, fake_wiki_client do
-  #     assert_difference("Produce.count") do
-  #       post produces_url,
-  #         params: { produce: { name: 'Potato', user_id: @user.id } }
-  #     end
-  #   end
-  #
-  #   assert_redirected_to produce_url(Produce.last, locale: :en)
-  #
-  #   # Don't create a link
-  #   assert Produce.last.links.empty?
-  # end
+  test "should create produce from input" do
+    assert_difference("Produce.count") do
+      Wikipedia::Client.stub :new, fake_wiki_client do
+        post produces_url,
+          params: { produce: { name: 'Potato', user_id: @user.id } }
+      end
+    end
 
-  # test "should create produce with picture" do
-  #   picture = fixture_file_upload('test/fixtures/files/apple.jpg')
-  #   params = {
-  #     produce: {
-  #       name: 'Potato',
-  #       user_id: @user.id,
-  #       picture: picture
-  #     }
-  #   }
-  #   assert_difference("Produce.count") do
-  #     post produces_url, params: params
-  #   end
+    assert_redirected_to produce_url(Produce.last, locale: :en)
 
-  #   assert_redirected_to produce_url(Produce.last, locale: :en)
-  # end
+    # Don't create a link
+    assert Produce.last.links.empty?
+  end
 
-  # test "should create produce with wikipedia link" do
-  #   params = {
-  #     produce: {
-  #       name: 'Potato',
-  #       user_id: @user.id,
-  #       links_attributes: {
-  #         0 => {
-  #           from: :wikipedia,
-  #           url: 'https://en.wikipedia.org/wiki/Apple'
-  #           }
-  #         }
-  #       }
-  #     }
+  test "should create produce with picture" do
+    picture = fixture_file_upload('test/fixtures/files/apple.jpg')
+    params = {
+      produce: {
+        name: 'Potato',
+        user_id: @user.id,
+        picture: picture
+      }
+    }
+    assert_difference("Produce.count") do
+      Wikipedia::Client.stub :new, fake_wiki_client do
+        post produces_url, params: params
+      end
+    end
 
-  #   assert_difference("Produce.count") do
-  #     post produces_url, params: params
-  #   end
+    assert_redirected_to produce_url(Produce.last, locale: :en)
+  end
 
-  #   assert_redirected_to produce_url(Produce.last, locale: :en)
+  test "should create produce with wikipedia link" do
+    params = {
+      produce: {
+        name: 'Potato',
+        user_id: @user.id,
+        links_attributes: {
+          0 => {
+            from: :wikipedia,
+            url: 'https://en.wikipedia.org/wiki/Apple'
+            }
+          }
+        }
+      }
 
-  #   assert Produce.last.links.any?
-  # end
+    assert_difference("Produce.count") do
+      Wikipedia::Client.stub :new, fake_wiki_client do
+        post produces_url, params: params
+      end
+    end
+
+    assert_redirected_to produce_url(Produce.last, locale: :en)
+
+    assert Produce.last.links.any?
+  end
 
   test "should show produce" do
     get produce_url(@produce)
@@ -170,6 +172,4 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to produces_url(locale: :en)
   end
-
-
 end
