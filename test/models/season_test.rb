@@ -32,6 +32,22 @@ class SeasonTest < ActiveSupport::TestCase
     assert_not invalid_season.valid?
   end
 
+  test "only start_time negative is invalid" do
+    @apples_in_poland.start_time = -1
+    assert_not @apples_in_poland.valid?
+  end
+
+  test "only end_time negative is invalid" do
+    @apples_in_poland.end_time = -1
+    assert_not @apples_in_poland.valid?
+  end
+
+  test "start_time and end_time have invalid negative values" do
+    @apples_in_poland.start_time = -4
+    @apples_in_poland.end_time = -4
+    assert_not @apples_in_poland.valid?
+  end
+
   test '#score' do
     assert @apples_in_poland.vouches.upvoted.count == 9
     assert @apples_in_poland.vouches.downvoted.count == 2

@@ -8,8 +8,16 @@ class Season < ApplicationRecord
   validates :latitude, :longitude, :start_time, :end_time, presence: true
   validates :latitude, inclusion: { in: -90..90 }
   validates :longitude, inclusion: { in: -180..180 }
+  with_options if: :no_season? do |unseason|
+    unseason.validates :start_time, numericality: { equal_to: -1 }
+    unseason.validates :end_time, numericality: { equal_to: -1 }
+  end
 
   reverse_geocoded_by :latitude, :longitude
+
+  def no_season?
+    end_time&.<(0) || start_time&.<(0)
+  end
 
   def confirmed?
     if vouches.count > 10
