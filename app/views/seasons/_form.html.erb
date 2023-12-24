@@ -11,24 +11,39 @@
         </ul>
       </div>
     <% end %>
-
     <div class="row mb-3">
       <%= form.hidden_field :latitude, value: @latitude %>
       <%= form.hidden_field :longitude, value: @longitude %>
       <%= form.hidden_field :user_id, value: current_user.id %>
-      <div class="col">
+      <div class="col-sm">
         <%= form.label :start_time, class: "form-label" %>
         <%= form.select :start_time, seasons_time_pairs, {}, { class: "form-select" } %>
       </div>
 
-      <div class="col">
+      <div class="col-sm">
         <%= form.label :end_time, class: "form-label" %>
         <%= form.select :end_time, seasons_time_pairs, {}, { class: "form-select" } %>
       </div>
     </div>
-
-    <div class="mb-3">
-      <%= form.submit class: "btn btn-primary" %>
+    <div class="d-flex justify-content-between mb-3">
+      <div>
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+      <div>
+        <%= button_to [season.produce, season],
+              params: { season: {
+                latitude: @latitude,
+                longitude: @longitude,
+                user_id: current_user.id,
+                start_time: -1,
+                end_time: -1
+              } },
+              class: "btn btn-danger" do %>
+          <%= "This produce has no season" %>
+          </br>
+          <%= "in #{@location}" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% end %>
