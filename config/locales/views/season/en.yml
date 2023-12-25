@@ -4,3 +4,4 @@ en:
   unconfirmed: This season is yet unconfirmed by other users.
   season_far: This season was recorded %{distance} km from %{location}.
   add_local_season: If you know the local season, could you add it?
+  doesnt_grow_here_html: This produce doesn't grow </br> in %{location}

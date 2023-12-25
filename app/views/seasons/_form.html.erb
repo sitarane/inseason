@@ -39,9 +39,7 @@
                 end_time: -1
               } },
               class: "btn btn-danger" do %>
-          <%= "This produce has no season" %>
-          </br>
-          <%= "in #{@location}" %>
+          <%= t(:doesnt_grow_here_html, location: @location) %>
         <% end %>
       </div>
     </div>
