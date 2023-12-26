@@ -17,6 +17,8 @@ RUN rails assets:precompile
 
 # FROM builder AS dev
 FROM builder AS dev
+RUN adduser -D sitarane
+USER sitarane
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
