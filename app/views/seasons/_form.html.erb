@@ -27,13 +27,14 @@
     </div>
     <div class="d-flex justify-content-between mb-3">
       <div>
-        <%= form.submit class: "btn btn-primary" %>
+        <%= form.submit class: "btn btn-primary", id: "add-season" %>
       </div>
       <div>
         <%= tag.button(
           t(:doesnt_grow_here_html, location: @location),
           type: "submit",
           form: "no_season",
+          id: "no-season",
           class: "btn btn-danger") %>
       </div>
     </div>

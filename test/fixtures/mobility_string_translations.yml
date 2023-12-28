@@ -33,3 +33,21 @@ apple_fr_wikilink_translation:
   value: https://fr.wikipedia.org/wiki/Pomme
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
+
+plum_en_translation:
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:no_season) %>
+  translatable_type: "Produce"
+  locale: "en"
+  key: "name"
+  value: "Plum"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+plum_fr_translation:
+  translatable_id: <%= ActiveRecord::FixtureSet.identify(:no_season) %>
+  translatable_type: "Produce"
+  locale: "fr"
+  key: "name"
+  value: "Prune"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
