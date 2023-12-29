@@ -11,3 +11,4 @@ en:
   no_location: We don't know where you are.
   change: Change
   osm_attribution_html: location provided by %{osm_link}.
+  information: information

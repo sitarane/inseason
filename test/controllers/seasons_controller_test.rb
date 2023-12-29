@@ -24,7 +24,23 @@ class SeasonsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Season.count") do
       post produce_seasons_url(@produce), params: params
     end
+    assert_response :redirect
+  end
 
+  test "should create non-season" do
+    params = {
+      season: {
+        start_time: -1,
+        end_time: -1,
+        latitude: @season.latitude,
+        longitude: @season.longitude,
+        produce_id: @season.produce_id,
+        user_id: @user.id
+      }
+    }
+    assert_difference("Season.count") do
+      post produce_seasons_url(@produce), params: params
+    end
     assert_response :redirect
   end
 end

@@ -11,24 +11,39 @@
         </ul>
       </div>
     <% end %>
-
     <div class="row mb-3">
       <%= form.hidden_field :latitude, value: @latitude %>
       <%= form.hidden_field :longitude, value: @longitude %>
       <%= form.hidden_field :user_id, value: current_user.id %>
-      <div class="col">
+      <div class="col-sm">
         <%= form.label :start_time, class: "form-label" %>
         <%= form.select :start_time, seasons_time_pairs, {}, { class: "form-select" } %>
       </div>
 
-      <div class="col">
+      <div class="col-sm">
         <%= form.label :end_time, class: "form-label" %>
         <%= form.select :end_time, seasons_time_pairs, {}, { class: "form-select" } %>
       </div>
     </div>
-
-    <div class="mb-3">
-      <%= form.submit class: "btn btn-primary" %>
+    <div class="d-flex justify-content-between mb-3">
+      <div>
+        <%= form.submit class: "btn btn-primary", id: "add-season" %>
+      </div>
+      <div>
+        <%= tag.button(
+          t(:doesnt_grow_here_html, location: @location),
+          type: "submit",
+          form: "no_season",
+          id: "no-season",
+          class: "btn btn-danger") %>
+      </div>
     </div>
+  <% end %>
+  <%= form_with(model: [season.produce, season], id: "no_season") do |form| %>
+    <%= form.hidden_field :latitude, value: @latitude %>
+    <%= form.hidden_field :longitude, value: @longitude %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :start_time, value: -1 %>
+    <%= form.hidden_field :end_time, value: -1 %>
   <% end %>
 <% end %>

@@ -11,3 +11,4 @@ fr:
   no_location: Nous ne pouvons pas vous localiser.
   change: Changer
   osm_attribution_html: location offerte par %{osm_link}.
+  information: information
