@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] || browser_language || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
-  
+
   def browser_language
     return nil if Rails.env.test?
     (extract_locales_from_accept_language_header & I18n.available_locales).first
@@ -34,10 +34,11 @@ class ApplicationController < ActionController::Base
 
   def set_location_from_ip
     if Rails.env.development?
-      location = Geocoder.search("Leipzig, Germany").first
+      location = nil #Geocoder.search("Leipzig, Germany").first
     else
       location = request.location
     end
+    return nil unless location
     session[:location] = location_hash(location)
   end
 
@@ -52,11 +53,14 @@ class ApplicationController < ActionController::Base
   end
 
   def load_location
+    return "Undefined" unless current_location
     current_location.transform_keys!(&:to_sym)
     if current_location[:state] && current_location[:country]
       @location = "#{current_location[:state]}, #{current_location[:country]}"
-    else
+    elsif current_location[:display_name]
       @location = current_location[:display_name]
+    else
+      @location = current_location[:latitude].to_f.round(1).to_s + ", " + current_location[:longitude].to_f.round(1).to_s
     end
   end
 end
