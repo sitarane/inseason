@@ -6,15 +6,19 @@ class ProducesController < ApplicationController
   # GET /produces or /produces.json
   def index
     # TODO Limit these
-    @in_season_produces = Produce.order("RANDOM()").in_season(
-      current_location[:latitude],
-      current_location[:longitude]
-    )
+    @in_season_produces = []
+    @unknow_season_produce = []
+    if current_location
+      @in_season_produces += Produce.order("RANDOM()").in_season(
+        current_location[:latitude],
+        current_location[:longitude]
+      )
 
-    @unknow_season_produce = Produce.order("RANDOM()").season_unknown(
-      current_location[:latitude],
-      current_location[:longitude]
-    )
+      @unknow_season_produce += Produce.order("RANDOM()").season_unknown(
+        current_location[:latitude],
+        current_location[:longitude]
+      )
+    end
 
     if params[:query].present?
       query = params[:query].downcase
