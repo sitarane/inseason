@@ -37,3 +37,5 @@ fr:
     saisons y ont été créées.
   no_season_nearby: Pas de saison enregistrée près de %{location}
   nothing_to_show: Rien à afficher.
+  enter_location: >-
+    Nous ne pouvons pas vous présenter de saisons sans connaitre votre position.

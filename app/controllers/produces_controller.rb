@@ -30,13 +30,15 @@ class ProducesController < ApplicationController
 
   # GET /produces/1 or /produces/1.json
   def show
-    coordinates = [current_location[:latitude], current_location[:longitude]]
-    @season = @produce.seasons.near(coordinates, 500).first
-    @latitude = current_location[:latitude].to_s
-    @longitude = current_location[:longitude].to_s
-    if @season
-      @season_distance = @season.distance_to(coordinates).round
-      @vouch = @season.vouches.find_by(user: current_user)
+    if current_location
+      coordinates = [current_location[:latitude], current_location[:longitude]]
+      @season = @produce.seasons.near(coordinates, 500).first
+      @latitude = current_location[:latitude].to_s
+      @longitude = current_location[:longitude].to_s
+      if @season
+        @season_distance = @season.distance_to(coordinates).round
+        @vouch = @season.vouches.find_by(user: current_user)
+      end
     end
   end
 

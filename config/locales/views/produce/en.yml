@@ -35,3 +35,4 @@ en:
     for it.
   no_season_nearby: No season recorded near %{location}
   nothing_to_show: Nothing to show.
+  enter_location: We can't show you seasons without your location.

@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "location_form" do %>
+  <div class="row">
+    <%= form_with url: user_location_path, method: :put, data: { turbo_frame: "_top" }, class: "col-md-6" do |form| %>
+      <div class="input-group">
+        <%= form.text_field :location, class: "form-control", placeholder: t(:your_location) %>
+        <%= form.submit class: 'btn btn-success' %>
+      </div>
+    <% end %>
+    <div class="col-md-6"> <%= t(:osm_attribution_html, osm_link: link_to('OpenStreetMap', 'https://www.openstreetmap.org/copyright', target: "_blank")) %> </div>
+  </div>
+<% end %>

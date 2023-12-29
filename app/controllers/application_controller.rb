@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_location
-    return "Undefined" unless current_location
+    return unless current_location
     current_location.transform_keys!(&:to_sym)
     if current_location[:state] && current_location[:country]
       @location = "#{current_location[:state]}, #{current_location[:country]}"

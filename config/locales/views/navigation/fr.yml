@@ -1,8 +1,6 @@
-
 fr:
   sign_in: Se connecter
   sign_out: Se déconnecter
   confirm_sign_out: Déconnexion ?
   footer_note_html: Fabriqué à base de %{link}.
   footer_link: logiciel libre
-  
