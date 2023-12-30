@@ -6,7 +6,7 @@ volumes:
 
 services:
   web:
-    image: sitarane/inseason:0.14
+    image: sitarane/inseason:0.16
     volumes:
       - storage:/app/storage
       - log:/app/log
