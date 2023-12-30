@@ -1,4 +1,5 @@
 en:
+  save: Save
   edit: Edit
   new_model: New %{model_name}
   editing_model: Editing %{model_name}
