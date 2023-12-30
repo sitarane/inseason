@@ -13,10 +13,10 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to season_path(@season) }
+        format.html { redirect_to produce_path(@produce) }
         format.json { render :show, status: :created, location: @season }
       else
-        format.html { redirect_to produces_url(@produce), status: :unprocessable_entity }
+        format.html { redirect_to produce_path(@produce), status: :unprocessable_entity }
         format.json { render json: @season.errors, status: :unprocessable_entity }
       end
     end

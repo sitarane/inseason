@@ -5,46 +5,8 @@
     <% if season.no_season? %>
       <div class="alert alert-info mb-3"> This produce was declared to have no season in <%= @location %> </div>
     <% else %>
-      <div id="months-list" class="d-flex">
-        <% months_list.each do |month| %>
-          <div class="small border-start border-end border-secondary text-center" style="width:<%=100.0/12%>%"><%= month %></div>
-        <% end %>
-      </div>
-      <div id="timeline" class="h-5rem d-flex mb-4">
-        <% if season.end_time > season.start_time %>
-          <div id="before-season" class="h-100 bg-secondary bg-gradient" style="width:<%=(season.start_time - 1).to_f * 100/52%>%;">&nbsp;</div>
-          <div id="in-season" class="h-100 bg-success bg-gradient" style="width:<%=( season.end_time - season.start_time + 1 ) * 100/52%>%;">&nbsp;</div>
-          <div id="after-season" class="h-100 bg-secondary bg-gradient flex-fill">&nbsp;</div>
-        <% else %>
-          <div id="in-season-first" class="h-100 bg-success bg-gradient" style="width:<%=( season.end_time ) * 100/52%>%;">&nbsp;</div>
-          <div id="after-season" class="h-100 bg-secondary bg-gradient flex-fill">&nbsp;</div>
-          <div id="in-season-second" class="h-100 bg-success bg-gradient" style="width:<%=( 52 - season.start_time + 1 ) * 100/52%>%;">&nbsp;</div>
-        <% end %>
-      </div>
+      <%= render 'seasons/timeline', season: @season %>
     <% end %>
-
-    <div class="row mb-4" id="trustworthiness">
-      <h3><%= t :trustworthiness %></h3>
-      <div class="row mb-4">
-        <% if @season_distance && @season_distance > 100 %>
-          <p> <%= t(:season_far, distance: @season_distance, location: @location) %> </p>
-          <% if current_user.try(:confirmed?) %>
-            <p> <%= t :add_local_season %> </p>
-            <%= render 'seasons/form', season: Season.new(produce: season.produce) %>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="row mb-4">
-        <p>
-          <% if season.confirmed? %>
-            <%= t(:confirmed, subject: season.no_season? ? t(:information) : Season.model_name.human.downcase) %>
-          <% else %>
-            <%= t(:unconfirmed, subject: season.no_season? ? t(:information) : Season.model_name.human.downcase) %>
-          <% end %>
-        </p>
-        <%= render @vouch if @vouch %>
-        <%= render 'vouches/form', vouch: @vouch, season: @season if current_user.try(:confirmed?) && current_user != @season.user %>
-      </div>
-    </div>
+    <%= render 'seasons/trustworthiness', season: @season %>
   </div>
 <% end %>
