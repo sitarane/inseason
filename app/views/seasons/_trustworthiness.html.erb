@@ -1,0 +1,23 @@
+<div class="row mb-4" id="trustworthiness">
+  <h3><%= t :trustworthiness %></h3>
+  <div class="row mb-4">
+    <% if @season_distance && @season_distance > 100 %>
+      <p> <%= t(:season_far, distance: @season_distance, location: @location) %> </p>
+      <% if current_user.try(:confirmed?) %>
+        <p> <%= t :add_local_season %> </p>
+        <%= render 'seasons/form', season: Season.new(produce: season.produce) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="row mb-4">
+    <p>
+      <% if season.confirmed? %>
+        <%= t(:confirmed, subject: season.no_season? ? t(:information) : Season.model_name.human.downcase) %>
+      <% else %>
+        <%= t(:unconfirmed, subject: season.no_season? ? t(:information) : Season.model_name.human.downcase) %>
+      <% end %>
+    </p>
+    <%= render @vouch if @vouch %>
+    <%= render 'vouches/form', vouch: @vouch, season: @season if current_user.try(:confirmed?) && current_user != @season.user %>
+  </div>
+</div>
