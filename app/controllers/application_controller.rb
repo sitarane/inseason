@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def set_location_from_ip
     if Rails.env.development?
-      location = nil #Geocoder.search("Leipzig, Germany").first
+      location = nil # simulates failed ip location
     else
       location = request.location
     end
