@@ -5,7 +5,9 @@
       <p> <%= t(:season_far, distance: @season_distance, location: @location) %> </p>
       <% if current_user.try(:confirmed?) %>
         <p> <%= t :add_local_season %> </p>
-        <%= render 'seasons/form', season: Season.new(produce: season.produce) %>
+        <% if current_user.try(:confirmed?) %>
+          <%= render 'seasons/form', season: Season.new(produce: season.produce), target: "_top" %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
