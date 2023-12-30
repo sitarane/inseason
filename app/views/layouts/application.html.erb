@@ -14,7 +14,13 @@
     <div class=container>
       <nav class='navbar d-flex py-3 mb-5 border-bottom'>
         <%= link_to 'In Season', root_path, class: 'navbar-brand' %>
-        <%= render partial: 'user_locations/change' %>
+        <div id="location-widget">
+          <% if @location %>
+            <%= render partial: 'user_locations/change' %>
+          <% else %>
+            <%= render partial: 'user_locations/form' %>
+          <% end %>
+        </div>
         <ul class='navbar-nav ms-auto d-flex hstack'>
           <li class='nav-item mx-2'>
             <% if I18n.locale == :en %>

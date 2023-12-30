@@ -1,4 +1,5 @@
 en:
+  save: Save
   edit: Edit
   new_model: New %{model_name}
   editing_model: Editing %{model_name}
@@ -8,7 +9,4 @@ en:
   destroy_confirm: Delete this produce?
   search: Search
   in: in
-  no_location: We don't know where you are.
-  change: Change
-  osm_attribution_html: location provided by %{osm_link}.
   information: information

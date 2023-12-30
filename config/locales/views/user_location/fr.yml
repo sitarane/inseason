@@ -1,0 +1,5 @@
+fr:
+  your_location: Où vous êtes
+  osm_attribution_html: Localisation offerte par %{osm_link}.
+  no_location: Nous ne pouvons pas vous localiser.
+  change: Changer

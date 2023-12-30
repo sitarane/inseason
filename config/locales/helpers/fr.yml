@@ -1,0 +1,8 @@
+fr:
+  helpers:
+    submit:
+      produce:
+        create: Créer un %{model}
+        update: Modifier ce %{model}
+      season:
+        create: Créer une %{model}

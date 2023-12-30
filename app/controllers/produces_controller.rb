@@ -6,15 +6,19 @@ class ProducesController < ApplicationController
   # GET /produces or /produces.json
   def index
     # TODO Limit these
-    @in_season_produces = Produce.order("RANDOM()").in_season(
-      current_location[:latitude],
-      current_location[:longitude]
-    )
+    @in_season_produces = []
+    @unknow_season_produce = []
+    if current_location
+      @in_season_produces += Produce.order("RANDOM()").in_season(
+        current_location[:latitude],
+        current_location[:longitude]
+      )
 
-    @unknow_season_produce = Produce.order("RANDOM()").season_unknown(
-      current_location[:latitude],
-      current_location[:longitude]
-    )
+      @unknow_season_produce += Produce.order("RANDOM()").season_unknown(
+        current_location[:latitude],
+        current_location[:longitude]
+      )
+    end
 
     if params[:query].present?
       query = params[:query].downcase
@@ -26,13 +30,15 @@ class ProducesController < ApplicationController
 
   # GET /produces/1 or /produces/1.json
   def show
-    coordinates = [current_location[:latitude], current_location[:longitude]]
-    @season = @produce.seasons.near(coordinates, 500).first
-    @latitude = current_location[:latitude].to_s
-    @longitude = current_location[:longitude].to_s
-    if @season
-      @season_distance = @season.distance_to(coordinates).round
-      @vouch = @season.vouches.find_by(user: current_user)
+    if current_location
+      coordinates = [current_location[:latitude], current_location[:longitude]]
+      @season = @produce.seasons.near(coordinates, 500).first
+      @latitude = current_location[:latitude].to_s
+      @longitude = current_location[:longitude].to_s
+      if @season
+        @season_distance = @season.distance_to(coordinates).round
+        @vouch = @season.vouches.find_by(user: current_user)
+      end
     end
   end
 
