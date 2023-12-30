@@ -1,2 +1,5 @@
 en:
   your_location: Your location
+  osm_attribution_html: Location provided by %{osm_link}.
+  no_location: We don't know where you are.
+  change: Change
