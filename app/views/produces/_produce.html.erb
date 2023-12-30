@@ -30,20 +30,26 @@
   <% end %>
 </div>
 <div class="row mb-4 highlight">
-<% if @location %>
-  <% if @season %>
-    <% cache @season do %>
-      <%= render @season %>
+  <div class="col">
+    <% if @location %>
+      <% if @season %>
+        <% cache @season do %>
+          <%= render @season %>
+        <% end %>
+      <% else %>
+        <h3 id="no-season-title"><%= t(:no_season_nearby, location: @location) %></h3>
+        <%= render 'seasons/form', season: Season.new(produce: produce) if current_user.try(:confirmed?) %>
+      <% end %>
+    <% else %>
+      <%= turbo_stream.remove "location-widget" %>
+      <div class="alert alert-warning mb-3 row"><%= t(:enter_location) %></div>
+      <div class="alert alert-info mb-3 row">
+        <div class="col-sm-2"></div>
+        <div class="col-8">
+          <%= render "user_locations/form" %>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
     <% end %>
-  <% else %>
-    <h3 id="no-season-title"><%= t(:no_season_nearby, location: @location) %></h3>
-    <%= render 'seasons/form', season: Season.new(produce: produce) if current_user.try(:confirmed?) %>
   </div>
-  <% end %>
-<% else %>
-  <%= turbo_stream.remove "location-widget" %>
-  <div class="alert alert-warning mb-3"><%= t(:enter_location) %></div>
-  <div class="mb-3">
-    <%= render "user_locations/form" %>
-  </div>
-<% end %>
+</div>
