@@ -24,6 +24,7 @@ services:
     env_file: .env
     environment:
       RAILS_ENV: production
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
