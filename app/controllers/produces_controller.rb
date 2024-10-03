@@ -2,6 +2,7 @@ class ProducesController < ApplicationController
   before_action :set_produce, only: %i[ show edit update destroy ]
   before_action :set_wiki_client, only: %i[new]
   before_action :authorize_produce
+  skip_before_action :authenticate_user!, only: %i[ show index ]
 
   # GET /produces or /produces.json
   def index

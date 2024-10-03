@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, unless: :devise_controller?
   # after_action :verify_policy_scoped, only: :index
 
-  before_action :authenticate_user!, except: %i[ show index ]
+  before_action :authenticate_user!
   before_action :load_location
 
   around_action :switch_locale

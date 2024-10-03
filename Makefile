@@ -23,7 +23,7 @@ bundle:
 test:
 	podman-compose run --rm test rails test $(f)
 system-test:
-	podman-compose run --rm test rails test:system
+	podman-compose run --rm test rails test test/system/*
 routes:
 	podman-compose run --rm web rails routes
 logs:
