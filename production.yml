@@ -10,9 +10,10 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     env_file: .env
+    restart: unless-stopped
 
   web:
-    image: sitarane/inseason:0.16
+    image: sitarane/inseason:0.17
     volumes:
       - storage:/app/storage
       - log:/app/log
@@ -31,3 +32,4 @@ services:
     command: redis-server --save 60 1 --loglevel warning --maxmemory-policy volatile-ttl
     volumes:
       - redis-data:/data
+    restart: unless-stopped
