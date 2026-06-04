@@ -23,5 +23,8 @@ module App
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Rails 7.1 migration required this:
+    config.add_autoload_paths_to_load_path = false
   end
 end
