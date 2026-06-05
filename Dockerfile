@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.1.4-alpine AS builder
+FROM ruby:3.4.9-alpine AS builder
 RUN apk update && apk add --no-cache \
       vips-dev \
       build-base \
@@ -7,7 +7,8 @@ RUN apk update && apk add --no-cache \
       nodejs \
       npm \
       yarn \
-      tzdata
+      tzdata\
+      yaml-dev
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
