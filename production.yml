@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   web:
-    image: sitarane/inseason:0.17
+    image: sitarane/inseason:0.18
     volumes:
       - storage:/app/storage
       - log:/app/log

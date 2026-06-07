@@ -24,7 +24,7 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
-FROM ruby:3.1.4-alpine AS prod
+FROM ruby:3.4.9-alpine AS prod
 RUN apk update && apk add --no-cache \
   postgresql-dev \
   vips-dev \
