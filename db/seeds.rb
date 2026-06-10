@@ -9,5 +9,5 @@
 user = User.new
 user.email = 'julienboyer@posteo.com'
 user.password = 'password'
+user.skip_confirmation!
 user.save!
-user.confirm
