@@ -83,10 +83,13 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'mail.gandi.net',
-    authentication: :login,
-    user_name: 'info@inseason.world',
-    password: ENV["EMAIL_PASSWORD"]
+    address:              'smtp.gmail.com',
+    port:                 587,
+    authentication:       :plain,
+    domain:               "inseason.world",
+    user_name:            'sitarane@gmail.com',
+    password:             ENV["EMAIL_PASSWORD"],
+    enable_starttls_auto: true
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
