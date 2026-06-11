@@ -24,7 +24,7 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
 
   test "should populate #new with wiki page data" do
     Wikipedia::Client.stub :new, fake_wiki_client do
-      get new_produce_url, params: { name: 'fake thing'}
+      get new_produce_url, params: { name: 'fake thing' }
     end
     assert_response :success
     assert_select 'input#produce_name', value: 'Fake thing'
