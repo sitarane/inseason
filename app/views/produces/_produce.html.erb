@@ -33,9 +33,7 @@
   <div class="col">
     <% if @location %>
       <% if @season %>
-        <% cache @season do %>
-          <%= render @season %>
-        <% end %>
+        <%= render @season %>
       <% else %>
         <h3 id="no-season-title"><%= t(:no_season_nearby, location: @location) %></h3>
         <% if current_user.try(:confirmed?) %>
