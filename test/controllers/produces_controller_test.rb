@@ -23,21 +23,24 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should populate #new with wiki page data" do
-    Wikipedia::Client.stub :new, fake_wiki_client do
+    client = full_wiki_client
+    Wikipedia::Client.stub :new, client do
       get new_produce_url, params: { name: 'fake thing' }
     end
+    client.verify
     assert_response :success
     assert_select 'input#produce_name', value: 'Fake thing'
   end
 
   test "should create produce from input" do
+    client = unused_wiki_client
     assert_difference("Produce.count") do
-      Wikipedia::Client.stub :new, fake_wiki_client do
+      Wikipedia::Client.stub :new, client do
         post produces_url,
           params: { produce: { name: 'Potato', user_id: @user.id } }
       end
     end
-
+    client.verify
     assert_redirected_to produce_url(Produce.last, locale: :en)
 
     # Don't create a link
@@ -53,12 +56,14 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
         picture: picture
       }
     }
+    client = unused_wiki_client
     assert_difference("Produce.count") do
-      Wikipedia::Client.stub :new, fake_wiki_client do
+      Wikipedia::Client.stub :new, client do
         post produces_url, params: params
       end
     end
 
+    client.verify
     assert_redirected_to produce_url(Produce.last, locale: :en)
   end
 
@@ -76,12 +81,14 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
         }
       }
 
+    client = unused_wiki_client
     assert_difference("Produce.count") do
-      Wikipedia::Client.stub :new, fake_wiki_client do
+      Wikipedia::Client.stub :new, client do
         post produces_url, params: params
       end
     end
 
+    client.verify
     assert_redirected_to produce_url(Produce.last, locale: :en)
 
     assert Produce.last.links.any?

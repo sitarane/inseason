@@ -26,7 +26,6 @@
             <%= image_tag produce.picture.variant(:thumb)  %>
           <% elsif @image_url %>
             <%= image_tag @image_url, class: "img-fluid" %>
-            <!-- THIS DOESN'T WORK -->
             <%= form.hidden_field :wiki_image, value: @image_url %>
           <% end %>
         </div>

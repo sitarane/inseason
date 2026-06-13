@@ -28,7 +28,7 @@ class ActiveSupport::TestCase
     ]
   )
 
-  def fake_wiki_client
+  def full_wiki_client
     fake_wiki_page = Minitest::Mock.new
     fake_wiki_page.expect :title, "Fake thing"
     fake_wiki_page.expect :fullurl, "https://en.wikipedia.org/wiki/Fake_thing"
@@ -37,10 +37,15 @@ class ActiveSupport::TestCase
     fake_wiki_page.expect :langlinks,
       { 'en' => 'Fake thing', 'fr' => 'Faux truc' }
     fake_wiki_page.expect :langlinks,
-        { 'en' => 'Fake thing', 'fr' => 'Faux truc' }
+      { 'en' => 'Fake thing', 'fr' => 'Faux truc' }
 
     client = Minitest::Mock.new
     client.expect :find, fake_wiki_page, ['fake thing']
+    client
+  end
+
+  def unused_wiki_client
+    client = Minitest::Mock.new
     client
   end
 end
