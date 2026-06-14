@@ -37,3 +37,6 @@
 
 # Manually added
 .env
+
+# Aider
+.aider*
