@@ -14,11 +14,11 @@ class SeasonsTest < ApplicationSystemTestCase
     click_on "Search"
     assert_text "We don't have a produce called Space beetroot."
     assert_link "create it"
-    Wikipedia::Client.stub :new, fake_wiki_client do
+    Wikipedia::Client.stub :new, full_wiki_client do
       click_on "create it"
     end
     assert_selector "h1", text: "New produce"
-    Wikipedia::Client.stub :new, fake_wiki_client do
+    Wikipedia::Client.stub :new, full_wiki_client do
       click_on "Create Produce"
     end
     assert_text "Produce was successfully created."

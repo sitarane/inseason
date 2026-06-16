@@ -11,6 +11,7 @@ en:
     mistaken.
   introduction_4: Please only add seasons you're quite sure about.
   produces:
+    default_image_path: /add_image_en.png
     create:
       notice: Produce was successfully created.
     update:
@@ -36,3 +37,4 @@ en:
   no_season_nearby: No season recorded near %{location}
   nothing_to_show: Nothing to show.
   enter_location: We can't show you seasons without your location.
+

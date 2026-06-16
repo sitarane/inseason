@@ -21,6 +21,8 @@ class ProducesController < ApplicationController
       )
     end
 
+    @default_image_path = I18n.t('produces.default_image_path')
+
     if params[:query].present?
       query = params[:query].downcase
       @other_produces = Produce.i18n { name.matches(query) }

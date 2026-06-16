@@ -12,6 +12,7 @@ fr:
   introduction_4: >-
     Merci de ne seulement ajouter des saisons dont vous êtes relativement sûr.
   produces:
+    default_image_path: /add_image_fr.png
     create:
       notice: Produit créé.
     update:
