@@ -15,6 +15,12 @@ class ProducesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get produces_url
     assert_response :success
+    assert_match "add_image_en.png", response.body # also check the default image is there
+  end
+
+  test "check the french default image is used with the french page" do
+    get produces_url(locale: :fr)
+    assert_match "add_image_fr.png", response.body
   end
 
   test "should get new" do

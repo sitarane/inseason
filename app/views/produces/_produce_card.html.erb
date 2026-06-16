@@ -8,7 +8,7 @@
     ) %>
   <% else %>
     <%= link_to(
-      image_tag("/add_image.png",
+      image_tag(@default_image_path,
                 style: "object-fit: cover; height: 300px;",
                 class: "card-img-top"),
       edit_produce_path(produce)
