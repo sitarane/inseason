@@ -4,7 +4,7 @@
     <div class="row mb-4">
   <% end %>
     <div class="col-md-4">
-      <% cache produce do %>
+      <% cache [produce, I18n.locale] do %>
         <%= render 'produce_card', produce: produce %>
       <% end %>
     </div>
