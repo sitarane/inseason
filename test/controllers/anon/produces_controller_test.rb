@@ -13,6 +13,23 @@ class AnonProducesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span', 'in New York, United States.'
   end
 
+  test "should not serve cached english content when locale is french" do
+    # Manually override the cache store for this specific test to enable caching
+    Rails.application.config.cache_store = ActiveSupport::Cache::MemoryStore.new
+
+    # 1. Populate the cache with English content
+    get produces_url
+    assert_response :success
+    assert_select 'h2', 'Plum'
+
+    # 2. Request the page in French
+    get produces_url, params: { locale: 'fr' }
+    assert_response :success
+
+    # 3. Assert that the English text is NOT present in the response.
+    assert_select 'h2', 'Prune'
+  end
+
   test "should not get new" do
     get new_produce_url
     assert_redirected_to new_user_session_path
