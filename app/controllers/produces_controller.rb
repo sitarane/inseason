@@ -9,6 +9,8 @@ class ProducesController < ApplicationController
     # TODO Limit these
     @in_season_produces = []
     @unknow_season_produce = []
+    @search_result = []
+
     if current_location
       @in_season_produces += Produce.order("RANDOM()").in_season(
         current_location[:latitude],
@@ -25,9 +27,7 @@ class ProducesController < ApplicationController
 
     if params[:query].present?
       query = params[:query].downcase
-      @other_produces = Produce.i18n { name.matches(query) }
-    else
-      @other_produces = Produce.order("RANDOM()").limit(20) - @in_season_produces - @unknow_season_produce
+      @search_result = Produce.i18n { name.matches(query) }
     end
   end
 

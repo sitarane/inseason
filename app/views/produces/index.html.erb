@@ -16,21 +16,14 @@
   </div>
 </div>
 
-<% if @in_season_produces.any? %>
-  <section id="in-season-now" class="mb-5">
-    <h1><%= t :in_season_now %></h1>
-    <%= render 'produces', produces: @in_season_produces %>
-  </section>
-<% end %>
-
 <section id="search" class="mb-5">
   <div class="row mb-3">
     <%= render 'search_form' %>
   </div>
   <div class="row">
-    <% if @other_produces.any? %>
+    <% if @search_result.any? %>
       <div id="produces">
-        <%= render 'produces', produces: @other_produces %>
+        <%= render 'produces', produces: @search_result %>
       </div>
     <% else %>
       <% if params[:query] %>
@@ -53,9 +46,16 @@
   </div>
 </section>
 
+<% if @in_season_produces.any? %>
+  <section id="in-season-now" class="mb-5">
+    <h1><%= t :in_season_now %></h1>
+    <%= render 'produces', produces: @in_season_produces %>
+  </section>
+<% end %>
+
 <% if @unknow_season_produce.any? %>
   <section id="season-unknown" class="row mb-5">
-    <h1><%= t :season_unknown %></h1>
+    <h1><%= t(:season_unknown, location: @location) %></h1>
     <%= render 'produces', produces: @unknow_season_produce %>
     <p><%= t :please_add_season %></p>
   </section>

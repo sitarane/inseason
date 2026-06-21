@@ -21,7 +21,7 @@ fr:
       notice: Produit supprimé.
   in_season_now: De saison maintenant
   other_produces: Autres produits
-  season_unknown: Saison inconnue
+  season_unknown: Saison inconnue à %{location}
   search_fail_html: >-
     Nous n'avont pas de produit appelé <strong>%{query}</strong>.
   would_you_like_to_html: Voulez-vous le %{link} ?
