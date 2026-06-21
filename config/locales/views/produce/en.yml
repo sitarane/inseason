@@ -20,7 +20,7 @@ en:
       notice: Produce was successfully destroyed.
   in_season_now: In season now
   other_produces: Other produce
-  season_unknown: Season unknown
+  season_unknown: Season unknown in %{location}
   search_fail_html: >-
     We don't have a produce called <strong>%{query}</strong>.
   would_you_like_to_html: Would you like to %{link}?

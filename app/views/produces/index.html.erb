@@ -55,7 +55,7 @@
 
 <% if @unknow_season_produce.any? %>
   <section id="season-unknown" class="row mb-5">
-    <h1><%= t :season_unknown %></h1>
+    <h1><%= t(:season_unknown, location: @location) %></h1>
     <%= render 'produces', produces: @unknow_season_produce %>
     <p><%= t :please_add_season %></p>
   </section>
