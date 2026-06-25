@@ -64,11 +64,11 @@ class SeasonTest < ActiveSupport::TestCase
     end
 
     @apples_in_mumbai.stub :score , 8 do
-      assert_not seasons(:apples_in_mumbai).confirmed?
+      assert_not @apples_in_mumbai.confirmed?
     end
 
     @apples_in_mumbai.stub :score , -2 do
-      assert_not seasons(:apples_in_mumbai).confirmed?
+      assert_not @apples_in_mumbai.confirmed?
     end
   end
 
