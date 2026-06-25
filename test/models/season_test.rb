@@ -55,8 +55,17 @@ class SeasonTest < ActiveSupport::TestCase
   end
 
   test '#confirmed' do
-    assert @apples_in_poland.confirmed?
-    assert_not seasons(:apples_in_mumbai).confirmed?
+    @apples_in_poland.stub :score , 12 do
+      assert @apples_in_poland.confirmed?
+    end
+
+    @apples_in_mumbai.stub :score , 8 do
+      assert_not seasons(:apples_in_mumbai).confirmed?
+    end
+
+    @apples_in_mumbai.stub :score , -2 do
+      assert_not seasons(:apples_in_mumbai).confirmed?
+    end
   end
 
   # ripe?
