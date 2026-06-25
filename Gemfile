@@ -74,7 +74,8 @@ group :development do
 end
 
 group :test do
-  gem "minitest", "~> 5.25" # Had to specify it otherwise it upgrades to 6 which doesn't have mocks
+  gem "minitest-mock"
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
