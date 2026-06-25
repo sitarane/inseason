@@ -20,21 +20,13 @@ class Season < ApplicationRecord
   end
 
   def confirmed?
-    if vouches.count > 10
-      score > 5
-    else
-      score > 0
-    end
+      score > 10
   end
 
   def score
     score = 0
     vouches.each do |vouch|
-      if vouch.value
-        score += 1
-      else
-        score -= 1
-      end
+      score += vouch.value ? 1 : -1 * vouch.user.multiplier
     end
     score
   end

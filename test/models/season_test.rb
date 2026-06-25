@@ -49,9 +49,13 @@ class SeasonTest < ActiveSupport::TestCase
   end
 
   test '#score' do
-    assert @apples_in_poland.vouches.upvoted.count == 9
-    assert @apples_in_poland.vouches.downvoted.count == 2
-    assert @apples_in_poland.score == 7
+    assert_equal 9, @apples_in_poland.vouches.upvoted.count
+    assert_equal 2, @apples_in_poland.vouches.downvoted.count
+    assert_equal 7, @apples_in_poland.score
+
+    assert_equal 0, @apples_in_mumbai.vouches.upvoted.count
+    assert_equal 2, @apples_in_mumbai.vouches.downvoted.count
+    assert_equal -2, @apples_in_mumbai.score
   end
 
   test '#confirmed' do

@@ -7,4 +7,9 @@ class User < ApplicationRecord
 
   has_many :vouches, dependent: :destroy
   has_many :seasons, through: :vouches
+
+  def multiplier
+    # WIP put some logic here
+    return 1
+  end
 end
