@@ -1,18 +1,20 @@
 <div class="d-flex" aria-label="Upvote season">
-  <%= button_to(
-        t(:upvote),
-        produce_vouches_path(season.produce),
-        {
-          params: {
-            vouch: {
-              value: true,
-              user_id: current_user.id,
-              season_id: season.id
-            }
-          },
-          class: 'btn btn-success me-2'
-        }
-      ) %>
+  <% unless season.confirmed? %>
+    <%= button_to(
+          t(:upvote),
+          produce_vouches_path(season.produce),
+          {
+            params: {
+              vouch: {
+                value: true,
+                user_id: current_user.id,
+                season_id: season.id
+              }
+            },
+            class: 'btn btn-success me-2'
+          }
+        ) %>
+  <% end %>
   <%= button_to(
         t(:downvote),
         produce_vouches_path(season.produce),
