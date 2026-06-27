@@ -12,4 +12,32 @@ class User < ApplicationRecord
     # WIP put some logic here
     return 1
   end
+
+  def karma
+    score = 0
+
+    # 1. Votes (Vouches)
+    vouches.each do |vouch|
+      if vouch.season.present?
+        if vouch.season.confirmed?
+          score += vouch.value ? 1 : -1
+        end
+      else
+        # Season was deleted
+        score += vouch.value ? -1 : 1
+      end
+    end
+
+    # 2. Owned Seasons: +3 if confirmed
+    # Need to add has_many seasons association
+    # seasons.each do |season|
+    #   score += 3 if season.confirmed?
+    # end
+
+    # 3. Owned Produces: +1 per produce
+    # Need to add has_many produces association
+    # score += produces.count # need to add has_many produces association
+
+    score
+  end
 end
