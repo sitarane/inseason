@@ -115,6 +115,11 @@ GEM
     drb (2.2.3)
     erb (6.0.4)
     erubi (1.13.1)
+    factory_bot (6.6.0)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     ffi (1.17.4-x86_64-linux-musl)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -304,6 +309,7 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
+  factory_bot_rails
   friendly_id (~> 5.4.0)
   geocoder
   image_processing (~> 1.2)
