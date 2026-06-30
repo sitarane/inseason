@@ -1,7 +1,7 @@
 class Season < ApplicationRecord
   belongs_to :produce, touch: true
   belongs_to :user
-  has_many :vouches, dependent: :destroy
+  has_many :vouches, dependent: :nullify
   has_many :users, through: :vouches
 
   validates :user, presence: true
