@@ -68,11 +68,16 @@ class UserTest < ActiveSupport::TestCase
   #   assert_equal -3, users(:alice).karma
   # end
 
-  # test "+1 per season for a produce you created" do
-  #   # Note: This test relies on fixtures (users(:john)).
-  #   assert_equal 2, users(:john).karma
-  # end
+  test "+1 per season for a produce you created" do
+    produce = create(:produce, user: @new_user)
+    @new_user.reload
+    assert_equal 0, @new_user.karma
+    season = create(:season, produce: produce)
+    @new_user.reload
+    assert_equal 1, @new_user.karma
+  end
 
+  # might have to nullify something here
   # test "-1 for produce that get deleted" do
   #   assert false
   # end

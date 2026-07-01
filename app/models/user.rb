@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :vouches, dependent: :destroy
   has_many :seasons, through: :vouches
+  has_many :produces
 
   def multiplier
     # WIP put some logic here
@@ -35,9 +36,11 @@ class User < ApplicationRecord
     # end
 
     # 3. Owned Produces: +1 per produce
-    # Need to add has_many produces association
-    # score += produces.count # need to add has_many produces association
-
+    produces.each do |produce|
+      produce.seasons.each do |season|
+        score += 1
+      end
+    end
     score
   end
 end
