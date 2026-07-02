@@ -9,8 +9,11 @@ class User < ApplicationRecord
   has_many :vouched_seasons, through: :vouches
   has_many :seasons
   has_many :produces
-  DELETED_SEASON_PENALTY = 3
-  DELETED_PRODUCE_PENALTY = 1
+
+
+  CONFIRMED_SEASON_KARMA = 3
+  DELETED_SEASON_KARMA = -3
+  DELETED_PRODUCE_KARMA = -1
 
   def multiplier
     # WIP put some logic here
@@ -34,10 +37,10 @@ class User < ApplicationRecord
 
     # 2. Owned Seasons: +3 if confirmed
     seasons.each do |season|
-      score += 3 if season.confirmed?
+      score += CONFIRMED_SEASON_KARMA if season.confirmed?
     end
 
-    # 3. Owned Produces: +1 per produce
+    # 3. Owned Produces: +1 per season
     produces.each do |produce|
       produce.seasons.each do |season|
         score += 1
@@ -45,10 +48,10 @@ class User < ApplicationRecord
     end
 
     # Penalty for owned seasons that got deleted
-    score -= seasons_deleted_count.to_i * DELETED_SEASON_PENALTY
+    score += seasons_deleted_count.to_i * DELETED_SEASON_KARMA
 
-    # Penalty for produces that got deleted
-    score -= produces_deleted_count.to_i * DELETED_PRODUCE_PENALTY
+    # Penalty for owned produces that got deleted
+    score += produces_deleted_count.to_i * DELETED_PRODUCE_KARMA
 
     score
   end
