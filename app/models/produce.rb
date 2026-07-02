@@ -15,6 +15,7 @@ class Produce < ApplicationRecord
   end
 
   after_create :make_sure_the_slug_is_english
+  after_destroy_commit :track_owner_penalty
 
   accepts_nested_attributes_for :links
 
@@ -52,5 +53,11 @@ class Produce < ApplicationRecord
 
   def has_season?(lat, lon)
     seasons.near([lat, lon], 500).any?
+  end
+
+  private
+
+  def track_owner_penalty
+    User.increment_counter(:produces_deleted_count, user_id) if user_id
   end
 end

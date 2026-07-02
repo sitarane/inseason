@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :seasons
   has_many :produces
   DELETED_SEASON_PENALTY = 3
+  DELETED_PRODUCE_PENALTY = 1
 
   def multiplier
     # WIP put some logic here
@@ -45,6 +46,9 @@ class User < ApplicationRecord
 
     # Penalty for owned seasons that got deleted
     score -= seasons_deleted_count.to_i * DELETED_SEASON_PENALTY
+
+    # Penalty for produces that got deleted
+    score -= produces_deleted_count.to_i * DELETED_PRODUCE_PENALTY
 
     score
   end

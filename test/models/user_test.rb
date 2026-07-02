@@ -76,8 +76,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, @new_user.karma
   end
 
-  # might have to nullify something here
-  # test "-1 for produce that get deleted" do
-  #   assert false
-  # end
+  test "-1 for produce that get deleted" do
+    produce = create(:produce)
+    user = produce.user
+    assert_equal 0, user.karma
+    produce.destroy
+    user.reload
+    assert_equal -1, user.karma
+  end
 end
