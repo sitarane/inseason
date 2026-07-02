@@ -14,6 +14,7 @@ class Season < ApplicationRecord
   end
 
   reverse_geocoded_by :latitude, :longitude
+  after_destroy_commit :track_creator_penalty
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
@@ -40,5 +41,11 @@ class Season < ApplicationRecord
       return false if current_week.between?(end_time, start_time)
       return true
     end
+  end
+
+  private
+
+  def track_creator_penalty
+    user&.increment!(:seasons_deleted_count)
   end
 end

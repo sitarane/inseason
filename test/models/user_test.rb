@@ -62,9 +62,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "-3 if a season you created gets deleted" do
-    season = create(:season, user: users(:alice))
+    season = create(:season, user: @new_user)
     season.destroy
-    assert_equal -3, users(:alice).karma
+    assert_equal -3, @new_user.karma
   end
 
   test "+1 per season for a produce you created" do
