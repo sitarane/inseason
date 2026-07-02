@@ -56,17 +56,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal -1, @new_user.karma
   end
 
-  # test "+3 if a season you created gets confirmed" do
-  #   # Note: This test relies on fixtures (users(:alice)). 
-  #   # Ensure your fixtures are loaded correctly in the test environment.
-  #   assert_equal 3, users(:alice).karma
-  # end
+  test "+3 if a season you created gets confirmed" do
+    season = create(:season, :confirmed, user: @new_user)
+    assert_equal 3, @new_user.karma
+  end
 
-  # test "-3 if a season you created gets deleted" do
-  #   season = create(:season, user: users(:alice))
-  #   season.destroy
-  #   assert_equal -3, users(:alice).karma
-  # end
+  test "-3 if a season you created gets deleted" do
+    season = create(:season, user: users(:alice))
+    season.destroy
+    assert_equal -3, users(:alice).karma
+  end
 
   test "+1 per season for a produce you created" do
     produce = create(:produce, user: @new_user)

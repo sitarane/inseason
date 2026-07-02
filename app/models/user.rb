@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable
 
   has_many :vouches, dependent: :destroy
-  has_many :seasons, through: :vouches
+  has_many :vouched_seasons, through: :vouches
+  has_many :seasons
   has_many :produces
 
   def multiplier
@@ -30,10 +31,9 @@ class User < ApplicationRecord
     end
 
     # 2. Owned Seasons: +3 if confirmed
-    # Need to add has_many seasons association
-    # seasons.each do |season|
-    #   score += 3 if season.confirmed?
-    # end
+    seasons.each do |season|
+      score += 3 if season.confirmed?
+    end
 
     # 3. Owned Produces: +1 per produce
     produces.each do |produce|
