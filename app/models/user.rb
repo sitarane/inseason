@@ -16,8 +16,7 @@ class User < ApplicationRecord
   DELETED_PRODUCE_KARMA = -1
 
   def multiplier
-    # WIP put some logic here
-    return 1
+    1 + (2 / (1 + Math.exp(-karma / 5.0)))
   end
 
   def karma
