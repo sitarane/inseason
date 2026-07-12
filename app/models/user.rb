@@ -10,13 +10,24 @@ class User < ApplicationRecord
   has_many :seasons
   has_many :produces
 
-
   CONFIRMED_SEASON_KARMA = 3
   DELETED_SEASON_KARMA = -3
   DELETED_PRODUCE_KARMA = -1
 
-  def multiplier
-    1 + (2 / (1 + Math.exp(-karma / 5.0)))
+  def multiplier(k: 0.1, nu: 1.5)
+    # return 1
+    numerator = 3.0
+    
+    # Calculate the inner part of the denominator: (3^nu - 1)
+    asymmetry_constant = (3.0**nu) - 1.0
+    
+    # Calculate the exponential decay: e^(-k * x)
+    exponential_term = Math.exp(-k * karma)
+    
+    # The denominator: (1 + constant * exponential)^(1/nu)
+    denominator = (1.0 + asymmetry_constant * exponential_term)**(1.0 / nu)
+    
+    numerator / denominator
   end
 
   def karma

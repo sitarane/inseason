@@ -23,3 +23,6 @@ production.yml
 
 # Uncomment to reinstall all modules on build
 # node_modules/
+
+# Aider
+.aider*
