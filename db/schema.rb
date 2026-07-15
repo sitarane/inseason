@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_02_010000) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_03_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -96,6 +96,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_010000) do
   create_table "seasons", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "end_time"
+    t.boolean "is_confirmed", default: false, null: false
     t.float "latitude"
     t.float "longitude"
     t.bigint "produce_id", null: false
