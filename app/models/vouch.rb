@@ -5,6 +5,7 @@ class Vouch < ApplicationRecord
   validates :value, inclusion: [true, false]
 
   after_save :delete_season, if: :should_delete_season?
+  after_save :update_season_confirmation_status
 
   scope :upvoted, -> { where(value: true) }
   scope :downvoted, -> { where(value: false) }
@@ -19,5 +20,12 @@ class Vouch < ApplicationRecord
 
   def delete_season
     season.destroy
+  end
+
+  private
+
+  def update_season_confirmation_status
+    new_status = season.score > 10
+    season.update_column(:is_confirmed, new_status) if season.is_confirmed != new_status
   end
 end
