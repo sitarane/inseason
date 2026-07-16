@@ -15,7 +15,9 @@ class Produce < ApplicationRecord
   end
 
   after_create :make_sure_the_slug_is_english
+  after_create_commit :recalculate_owner_karma
   after_destroy_commit :track_owner_penalty
+  after_destroy_commit :recalculate_owner_karma
 
   accepts_nested_attributes_for :links
 
@@ -59,5 +61,9 @@ class Produce < ApplicationRecord
 
   def track_owner_penalty
     User.increment_counter(:produces_deleted_count, user_id) if user_id
+  end
+
+  def recalculate_owner_karma
+    user&.recalculate_karma!
   end
 end

@@ -4,6 +4,9 @@ class Vouch < ApplicationRecord
 
   validates :value, inclusion: [true, false]
 
+  after_save_commit :recalculate_voter_karma
+  after_destroy_commit :recalculate_voter_karma
+
   after_save :reconcile_season_state
 
   scope :upvoted, -> { where(value: true) }
@@ -15,7 +18,12 @@ class Vouch < ApplicationRecord
 
   private
 
+  def recalculate_voter_karma
+    user&.recalculate_karma!
+  end
+
   def reconcile_season_state
+    return unless season # season could have been deleted
     if season.score <= -3
       season.destroy
     else

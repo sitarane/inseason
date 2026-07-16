@@ -15,6 +15,8 @@ class Season < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
   after_destroy_commit :track_creator_penalty
+  after_save_commit :recalculate_owner_and_voters_karma
+  after_destroy_commit :recalculate_owner_and_voters_karma
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
@@ -48,5 +50,13 @@ class Season < ApplicationRecord
 
   def track_creator_penalty
     user&.increment!(:seasons_deleted_count)
+  end
+
+  def recalculate_owner_and_voters_karma
+    user&.recalculate_karma!
+    produce&.user&.recalculate_karma!
+    if saved_change_to_is_confirmed?
+      vouches.each { |v| v.user&.recalculate_karma! }
+    end
   end
 end

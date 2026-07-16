@@ -30,6 +30,10 @@ class User < ApplicationRecord
     numerator / denominator
   end
 
+  def recalculate_karma!
+    update_column(:karma, karma)
+  end
+
   def karma
     score = 0
 
