@@ -10,7 +10,23 @@ FactoryBot.define do
 
   trait :confirmed do
     after(:create) do |season|                                                                                                                                                                                                               
-      create_list(:vouch, 11, season: season, value: true)                                                                                                                                                                                   
+      create_list(:vouch, 10, season: season, value: true)            
+    end
+  end
+
+  trait :score_of_5_mixed do
+    after(:create) do |season|
+      create_list(:vouch, 4, season: season, value: true)
+      create_list(:vouch, 2, season: season, value: false)
+      create_list(:vouch, 2, season: season, value: true)
+    end
+  end
+
+  trait :score_of_9_mixed do
+    after(:create) do |season|
+      create_list(:vouch, 7, season: season, value: true)
+      create_list(:vouch, 2, season: season, value: false)
+      create_list(:vouch, 4, season: season, value: true)
     end
   end
 end

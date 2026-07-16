@@ -25,6 +25,7 @@ class Season < ApplicationRecord
   end
 
   def score
+    reload
     score = 0
     vouches.each do |vouch|
       score += vouch.value ? 1 : -1 * vouch.user.multiplier

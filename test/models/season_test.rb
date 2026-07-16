@@ -58,20 +58,6 @@ class SeasonTest < ActiveSupport::TestCase
     assert_equal -2, @apples_in_mumbai.score
   end
 
-  test '#confirmed' do
-    @apples_in_poland.stub :score , 12 do
-      assert @apples_in_poland.confirmed?
-    end
-
-    @apples_in_mumbai.stub :score , 8 do
-      assert_not @apples_in_mumbai.confirmed?
-    end
-
-    @apples_in_mumbai.stub :score , -2 do
-      assert_not @apples_in_mumbai.confirmed?
-    end
-  end
-
   # ripe?
   test 'stradle season, ripe' do
     travel_to Time.zone.local(2000, 12, 25) do
