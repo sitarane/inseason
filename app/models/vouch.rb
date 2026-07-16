@@ -4,8 +4,7 @@ class Vouch < ApplicationRecord
 
   validates :value, inclusion: [true, false]
 
-  after_save :update_season_confirmation_status
-  after_save :delete_season, if: :should_delete_season?
+  after_save :reconcile_season_state
 
   scope :upvoted, -> { where(value: true) }
   scope :downvoted, -> { where(value: false) }
@@ -14,15 +13,15 @@ class Vouch < ApplicationRecord
     value ? I18n.t(:upvote_prefix) : I18n.t(:downvote_prefix)
   end
 
-  def should_delete_season?
-    season.score <= -3
-  end
-
-  def delete_season # consolidate with confirmation
-    season.destroy
-  end
-
   private
+
+  def reconcile_season_state
+    if season.score <= -3
+      season.destroy
+    else
+      update_season_confirmation_status
+    end
+  end
 
   def update_season_confirmation_status
     new_status = season.score >= 10
