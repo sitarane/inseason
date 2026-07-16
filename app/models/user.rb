@@ -31,10 +31,10 @@ class User < ApplicationRecord
   end
 
   def recalculate_karma!
-    update_column(:karma, karma)
+    update_column(:karma, calculate_karma)
   end
 
-  def karma
+  def calculate_karma
     score = 0
 
     # 1. Votes (Vouches)
