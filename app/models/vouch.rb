@@ -4,8 +4,8 @@ class Vouch < ApplicationRecord
 
   validates :value, inclusion: [true, false]
 
-  after_save_commit :recalculate_voter_karma
-  after_destroy_commit :recalculate_voter_karma
+  after_save :recalculate_voter_karma
+  after_destroy :recalculate_voter_karma
 
   after_save :reconcile_season_state
 
