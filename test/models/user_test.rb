@@ -5,16 +5,6 @@ class UserTest < ActiveSupport::TestCase
     @new_user = create(:user)
   end
 
-  # Multiplier
-
-  # test "#multiplier should be 1 by default" do
-    
-  # end
-
-  # test "#multiplier should be less than 3 even for high karma users"
-  
-  # test "#multiplier should be more than 0.3 for low karma users"
-
   # Karma
 
   test "#karma is zero for new users" do

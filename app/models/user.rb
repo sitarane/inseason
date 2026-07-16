@@ -31,6 +31,7 @@ class User < ApplicationRecord
   end
 
   def recalculate_karma!
+    # encapsulate in a "new_value"?
     update_column(:karma, calculate_karma)
   end
 
