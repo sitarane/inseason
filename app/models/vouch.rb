@@ -33,6 +33,7 @@ class Vouch < ApplicationRecord
 
   def update_season_confirmation_status
     new_status = season.score >= 10
-    season.update_column(:is_confirmed, new_status) if season.is_confirmed != new_status
+    return if season.is_confirmed == new_status
+    season.update!(is_confirmed: new_status)
   end
 end

@@ -48,6 +48,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "+3 if a season you created gets confirmed" do
     season = create(:season, :confirmed, user: @new_user)
+    @new_user.reload
     assert_equal 3, @new_user.karma
   end
 
