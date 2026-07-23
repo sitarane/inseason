@@ -15,9 +15,9 @@ class Produce < ApplicationRecord
   end
 
   after_create :make_sure_the_slug_is_english
-  after_create_commit :recalculate_owner_karma
-  after_destroy_commit :track_owner_penalty
-  after_destroy_commit :recalculate_owner_karma
+  after_create :recalculate_owner_karma
+  after_destroy :track_owner_penalty
+  after_destroy :recalculate_owner_karma
 
   accepts_nested_attributes_for :links
 
