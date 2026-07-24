@@ -1,6 +1,7 @@
 class Season < ApplicationRecord
   belongs_to :produce, touch: true
   belongs_to :user
+  before_destroy :capture_vouches_for_recalculation
   has_many :vouches, dependent: :nullify
   has_many :users, through: :vouches
 
@@ -14,9 +15,11 @@ class Season < ApplicationRecord
   end
 
   reverse_geocoded_by :latitude, :longitude
-  after_destroy :track_creator_penalty
+
   after_save :recalculate_owner_and_voters_karma
+
   after_destroy :recalculate_owner_and_voters_karma
+  after_destroy :track_creator_penalty
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
@@ -48,6 +51,10 @@ class Season < ApplicationRecord
 
   private
 
+  def capture_vouches_for_recalculation
+    @vouches_to_recalculate = vouches.to_a
+  end
+
   def track_creator_penalty
     user&.increment!(:seasons_deleted_count)
   end
@@ -55,8 +62,9 @@ class Season < ApplicationRecord
   def recalculate_owner_and_voters_karma
     user&.recalculate_karma!
     produce&.user&.recalculate_karma!
-    if saved_change_to_is_confirmed?
-      vouches.each { |v| v.user&.recalculate_karma! }
+    if saved_change_to_is_confirmed? || destroyed?
+      target_vouches = @vouches_to_recalculate || vouches
+      target_vouches.each { |v| v.user&.recalculate_karma!(self) }
     end
   end
 end

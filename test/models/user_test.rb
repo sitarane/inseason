@@ -43,6 +43,7 @@ class UserTest < ActiveSupport::TestCase
     season = create(:season)
     Vouch.create(value: true, user: @new_user, season: season)
     season.destroy
+    @new_user.reload
     assert_equal -1, @new_user.karma
   end
 

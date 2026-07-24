@@ -30,22 +30,24 @@ class User < ApplicationRecord
     numerator / denominator
   end
 
-  def recalculate_karma!
-    # encapsulate in a "new_value"?
-    update_column(:karma, calculate_karma)
+  def recalculate_karma!(target_record = nil)
+    update!(karma: calculate_karma(target_record))
   end
 
-  def calculate_karma
-    score = 0
+  private
 
-    # 1. Votes (Vouches)
+  def calculate_karma(target_record)
+    score = 0
+    # Vouches
     vouches.each do |vouch|
-      if vouch.season.present?
-        if vouch.season.confirmed?
+      season = target_record || vouch.season
+
+      if season.present? && !season.destroyed?
+        if season.confirmed?
           score += vouch.value ? 1 : -1
         end
       else
-        # Season was deleted
+        # Season was deleted (or is currently being destroyed)
         score += vouch.value ? -1 : 1
       end
     end

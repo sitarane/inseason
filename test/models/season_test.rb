@@ -88,4 +88,6 @@ class SeasonTest < ActiveSupport::TestCase
       assert_not @apples_in_poland.ripe?
     end
   end
+
+  # test track creator penalty increment
 end
