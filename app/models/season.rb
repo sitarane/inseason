@@ -18,8 +18,8 @@ class Season < ApplicationRecord
 
   after_save :recalculate_owner_and_voters_karma
 
-  after_destroy :recalculate_owner_and_voters_karma
   after_destroy :track_creator_penalty
+  after_destroy :recalculate_owner_and_voters_karma
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
