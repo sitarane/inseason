@@ -89,5 +89,10 @@ class SeasonTest < ActiveSupport::TestCase
     end
   end
 
-  # test track creator penalty increment
+  test 'seasons_deleted_count increments' do
+    season = create :season
+    user = season.user
+    season.destroy
+    assert_equal 1, user.seasons_deleted_count
+  end
 end

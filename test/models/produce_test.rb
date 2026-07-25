@@ -61,4 +61,11 @@ class ProduceTest < ActiveSupport::TestCase
   test 'apple has season in Poland' do
     assert @produce.has_season?(50,17)
   end
+
+  test 'produces_deleted_count increments' do
+    produce = create :produce
+    user = produce.user
+    produce.destroy
+    assert_equal 1, user.produces_deleted_count
+  end
 end
