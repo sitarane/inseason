@@ -60,7 +60,7 @@ class Produce < ApplicationRecord
   private
 
   def track_owner_penalty
-    User.increment_counter(:produces_deleted_count, user_id) if user_id
+    user&.increment!(:produces_deleted_count)
   end
 
   def recalculate_owner_karma
