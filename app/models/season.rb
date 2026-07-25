@@ -61,6 +61,10 @@ class Season < ApplicationRecord
   end
 
   def notify_karma_manager
-    Karma::Manager.handle_season_change(self)
+    if destroyed? && @vouches_to_recalculate.present?
+      Karma::Manager.handle_season_destruction(self, @vouches_to_recalculate)
+    else
+      Karma::Manager.handle_season_change(self)
+    end
   end
 end

@@ -21,10 +21,22 @@ module Karma
       recalculate_user(season.produce.user)
       
       # If season is confirmed/unconfirmed, recalculate voters
-      if season.saved_change_to_is_confirmed? || season.destroyed?
+      if season.saved_change_to_is_confirmed?
         season.vouches.each do |vouch|
           recalculate_user(vouch.user)
         end
+      end
+    end
+
+    def self.handle_season_destruction(season, vouches)
+      # Recalculate owner
+      recalculate_user(season.user)
+      # Recalculate produce owner
+      recalculate_user(season.produce.user)
+      
+      # Recalculate voters using the captured list before they were nullified
+      vouches.each do |vouch|
+        recalculate_user(vouch.user)
       end
     end
 
