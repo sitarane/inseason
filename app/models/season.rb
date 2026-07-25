@@ -16,10 +16,11 @@ class Season < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
 
-  after_save :recalculate_owner_and_voters_karma
-
+  after_save :notify_karma_manager
   after_destroy :track_creator_penalty
-  after_destroy :recalculate_owner_and_voters_karma
+  after_destroy :notify_karma_manager
+
+  after_destroy :capture_vouches_for_recalculation
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
@@ -59,12 +60,7 @@ class Season < ApplicationRecord
     user&.increment!(:seasons_deleted_count)
   end
 
-  def recalculate_owner_and_voters_karma
-    user&.recalculate_karma!
-    produce&.user&.recalculate_karma!
-    if saved_change_to_is_confirmed? || destroyed?
-      target_vouches = @vouches_to_recalculate || vouches
-      target_vouches.each { |v| v.user&.recalculate_karma!(self) }
-    end
+  def notify_karma_manager
+    Karma::Manager.handle_season_change(self)
   end
 end

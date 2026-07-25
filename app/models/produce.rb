@@ -24,8 +24,6 @@ class Produce < ApplicationRecord
   validates :user, presence: true
 
   def make_sure_the_slug_is_english
-    # This is ugly. But friendly_id behaves unexpectedly when I try to use
-    # a setter method before the produce is saved
     self.slug = nil
     I18n.with_locale(:en) do
       self.save
@@ -64,6 +62,6 @@ class Produce < ApplicationRecord
   end
 
   def recalculate_owner_karma
-    user&.recalculate_karma!
+    Karma::Manager.recalculate_user(user)
   end
 end

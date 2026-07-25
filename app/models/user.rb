@@ -10,66 +10,13 @@ class User < ApplicationRecord
   has_many :seasons
   has_many :produces
 
-  CONFIRMED_SEASON_KARMA = 3
-  DELETED_SEASON_KARMA = -3
-  DELETED_PRODUCE_KARMA = -1
+  validates :email, presence: true, uniqueness: true
 
-  def multiplier(k: 0.1, nu: 1.5)
-    # return 1
-    numerator = 3.0
-    
-    # Calculate the inner part of the denominator: (3^nu - 1)
-    asymmetry_constant = (3.0**nu) - 1.0
-    
-    # Calculate the exponential decay: e^(-k * x)
-    exponential_term = Math.exp(-k * karma)
-    
-    # The denominator: (1 + constant * exponential)^(1/nu)
-    denominator = (1.0 + asymmetry_constant * exponential_term)**(1.0 / nu)
-    
-    numerator / denominator
+  def multiplier
+    Karma::Calculator.multiplier_for(self)
   end
 
-  def recalculate_karma!(target_record = nil)
-    update!(karma: calculate_karma(target_record))
-  end
-
-  private
-
-  def calculate_karma(target_record)
-    score = 0
-    # Vouches
-    vouches.each do |vouch|
-      season = target_record || vouch.season
-
-      if season.present? && !season.destroyed?
-        if season.confirmed?
-          score += vouch.value ? 1 : -1
-        end
-      else
-        # Season was deleted (or is currently being destroyed)
-        score += vouch.value ? -1 : 1
-      end
-    end
-
-    # 2. Owned Seasons: +3 if confirmed
-    seasons.each do |season|
-      score += CONFIRMED_SEASON_KARMA if season.confirmed?
-    end
-
-    # 3. Owned Produces: +1 per season
-    produces.each do |produce|
-      produce.seasons.each do |season|
-        score += 1
-      end
-    end
-
-    # Penalty for owned seasons that got deleted
-    score += seasons_deleted_count.to_i * DELETED_SEASON_KARMA
-
-    # Penalty for owned produces that got deleted
-    score += produces_deleted_count.to_i * DELETED_PRODUCE_KARMA
-
-    score
+  def recalculate_karma!
+    Karma::Manager.recalculate_user(self)
   end
 end

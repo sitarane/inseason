@@ -4,10 +4,9 @@ class Vouch < ApplicationRecord
 
   validates :value, inclusion: [true, false]
 
-  after_save :recalculate_voter_karma
-  after_destroy :recalculate_voter_karma
-
   after_save :reconcile_season_state
+  after_save :notify_karma_manager
+  after_destroy :notify_karma_manager
 
   scope :upvoted, -> { where(value: true) }
   scope :downvoted, -> { where(value: false) }
@@ -18,8 +17,8 @@ class Vouch < ApplicationRecord
 
   private
 
-  def recalculate_voter_karma
-    user&.recalculate_karma!
+  def notify_karma_manager
+    Karma::Manager.handle_vouch_change(self)
   end
 
   def reconcile_season_state
