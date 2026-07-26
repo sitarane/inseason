@@ -19,7 +19,6 @@ class Season < ApplicationRecord
   after_save :notify_karma_manager
   after_destroy :track_creator_penalty
   after_destroy :notify_karma_manager
-  after_destroy :capture_vouches_for_recalculation
 
   def no_season?
     end_time&.<(0) || start_time&.<(0)
