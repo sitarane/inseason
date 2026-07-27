@@ -55,8 +55,8 @@ apple_season = Season.create!(
   user: admin,
   latitude: 52.0, # Berlin
   longitude: 13.0,
-  start_time: 130, # May
-  end_time: 180    # June
+  start_time: 19, # May
+  end_time: 25    # June
 )
 voters.first(15).each { |v| Vouch.create!(season: apple_season, user: v, value: true) }
 
@@ -66,8 +66,8 @@ strawberry_season = Season.create!(
   user: admin,
   latitude: 52.0, # Berlin
   longitude: 13.0,
-  start_time: 160, # June
-  end_time: 190    # July
+  start_time: 24, # June
+  end_time: 30    # July
 )
 voters[15..17].each { |v| Vouch.create!(season: strawberry_season, user: v, value: true) }
 voters[18..20].each { |v| Vouch.create!(season: strawberry_season, user: v, value: false) }
@@ -78,10 +78,10 @@ blueberry_season = Season.create!(
   user: voters.first,
   latitude: 52.0, # Berlin
   longitude: 13.0,
-  start_time: 280, # October
-  end_time: 310    # November
+  start_time: 41, # October
+  end_time: 45    # November
 )
-voters[21..23].each do |v| 
+voters[21..22].each do |v| 
   Vouch.create!(season: blueberry_season, user: v, value: false) 
 end
 
@@ -91,8 +91,8 @@ peach_season = Season.create!(
   user: voters.second,
   latitude: -21.0, # Reunion
   longitude: 55.5,
-  start_time: 350, # December
-  end_time: 30    # February
+  start_time: 49, # December
+  end_time: 5    # February
 )
 voters[24..26].each { |v| Vouch.create!(season: peach_season, user: v, value: true) }
 
@@ -102,8 +102,8 @@ cherry_season = Season.create!(
   user: voters.first,
   latitude: 52.0, # Berlin
   longitude: 13.0,
-  start_time: 120, # May
-  end_time: 125    # May (very short)
+  start_time: 19, # May
+  end_time: 22    # May (very short)
 )
 
 puts "Adding links..."
