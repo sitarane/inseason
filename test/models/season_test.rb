@@ -48,7 +48,9 @@ class SeasonTest < ActiveSupport::TestCase
     assert_not @apples_in_poland.valid?
   end
 
-  test '#score' do
+  # Score
+
+  test 'score values' do
     assert_equal 9, @apples_in_poland.vouches.upvoted.count
     assert_equal 2, @apples_in_poland.vouches.downvoted.count
     assert_equal 7, @apples_in_poland.score
@@ -56,6 +58,46 @@ class SeasonTest < ActiveSupport::TestCase
     assert_equal 0, @apples_in_mumbai.vouches.upvoted.count
     assert_equal 2, @apples_in_mumbai.vouches.downvoted.count
     assert_equal -2, @apples_in_mumbai.score
+  end
+
+  test 'upvotes by a high karma user gets the score up faster' do
+    user = create(:user)
+    season = create :season
+    assert_equal 0, season.score
+    create(:vouch, user: user, season: season)
+    assert_equal 1, season.score
+    user.update!(karma: 10)
+    assert season.score > 1.3
+  end
+
+  test 'downvotes by a high karma user gets the score down faster' do
+    user = create(:user)
+    season = create :season
+    assert_equal 0, season.score
+    create(:vouch, user: user, season: season, value: false)
+    assert_equal -1, season.score
+    user.update!(karma: 10)
+    assert season.score < - 1.3
+  end
+
+  test 'upvotes by low karma user has little effect on score' do
+    user = create(:user)
+    season = create :season
+    assert_equal 0, season.score
+    create(:vouch, user: user, season: season)
+    assert_equal 1, season.score
+    user.update!(karma: -10)
+    assert season.score < 0.8
+  end
+
+  test 'dowvotes by low karma user has little effect on score' do
+    user = create(:user)
+    season = create :season
+    assert_equal 0, season.score
+    create(:vouch, user: user, season: season, value: false)
+    assert_equal -1, season.score
+    user.update!(karma: -10)
+    assert season.score > -0.8
   end
 
   # ripe?
