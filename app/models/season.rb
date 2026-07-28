@@ -48,6 +48,20 @@ class Season < ApplicationRecord
     end
   end
 
+  def reconcile_after_vouch_change!
+    if score <= -3
+      destroy
+    else
+      update_confirmation_status!
+    end
+  end
+
+  def update_confirmation_status!
+    is_high_score = score >= 10
+    return if is_confirmed == is_high_score
+    update!(is_confirmed: is_high_score)
+  end
+
   private
 
   def capture_vouches_for_recalculation
